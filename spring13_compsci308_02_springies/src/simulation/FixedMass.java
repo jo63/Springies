@@ -7,6 +7,7 @@ package simulation;
  * @author junho
  *
  */
+asdflka;lskdjfl;askjdflj
 public class FixedMass extends Mass {
 
 	/**
