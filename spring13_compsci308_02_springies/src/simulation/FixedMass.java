@@ -11,6 +11,7 @@ asdflka;lskdjfl;askjdflj
 public class FixedMass extends Mass {
 
 	/**
+	 * asdfal;sdfjkal;ksdg
 	 * @param x
 	 * @param y
 	 * @param mass
