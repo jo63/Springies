@@ -9,12 +9,14 @@ import util.Vector;
 
 /**
  * @author junho
+ * ryan
  *
  */
 public class Muscle extends Spring {
 
 	private double myAmplitude;
-	
+	private double initLength;
+	private double myLength;
 	/**
 	 * @param start
 	 * @param end
@@ -24,6 +26,8 @@ public class Muscle extends Spring {
 	public Muscle(Mass start, Mass end, double length, double kVal, double amplitude) {
 		super(start, end, length, kVal);
 		myAmplitude = amplitude;
+		initLength = length;
+		myLength = length;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,12 +35,13 @@ public class Muscle extends Spring {
 	@Override
 	public void update (double elapsedTime, Dimension bounds) {
 		
-		super.getStart().applyForce(new Vector());
-		//super.getStart().update(elapsedTime, bounds);
-		
+		setLength(elapsedTime);		
         super.update(elapsedTime, bounds);
     }
 	
-	
+	public void setLength(double time){
+		myLength = initLength*Math.sin(time)*myAmplitude;
+	}
+
 
 }

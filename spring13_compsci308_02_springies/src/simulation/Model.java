@@ -29,6 +29,7 @@ public class Model {
         myView = canvas;
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
+        myPhysics = new Physics();
     }
 
     /**

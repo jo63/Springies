@@ -8,7 +8,7 @@ public class Gravity {
 	
 	public Gravity()
 	{
-		myGravity = new Vector();
+		myGravity = new Vector(0,0);
 	}
 	public void setGravity(Vector gravity)
 	{
