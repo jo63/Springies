@@ -22,6 +22,7 @@ public class Mass extends Sprite {
     private double myMass;
     private Vector myAcceleration;
     private boolean isFixed;
+    private Physics myPhyics;
 
 
     /**
@@ -34,6 +35,11 @@ public class Mass extends Sprite {
         setFixed();
     }
 
+    public void setPhysics(Physics physics)
+    {
+    	myPhyics = physics;
+    }
+    
     private void setFixed()
     {
     	if(myMass < 0) isFixed = true;

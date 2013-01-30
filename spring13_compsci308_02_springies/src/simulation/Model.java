@@ -62,6 +62,7 @@ public class Model {
      * Add given mass to this simulation.
      */
     public void add (Mass mass) {
+    	
         myMasses.add(mass);
     }
     

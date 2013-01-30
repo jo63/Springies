@@ -28,7 +28,7 @@ public class Muscle extends Spring {
 		super(start, end, length, kVal);
 		myAmplitude = amplitude;
 		initLength = length;
-		myLength = length;
+		myLength = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -41,15 +41,7 @@ public class Muscle extends Spring {
     }
 	
 	public void setLength(double time){
-		myLength = initLength*Math.sin(time)*myAmplitude;
+		myLength = initLength+(Math.sin(time)*myAmplitude);
 	}
-
-
-	@Override
-	public void paint(Graphics2D pen) {
-		// TODO Auto-generated method stub
-		super.paint(pen);
-	}
-	
 
 }
