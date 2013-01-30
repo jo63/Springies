@@ -4,6 +4,7 @@
 package simulation;
 
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 
 import util.Vector;
 
@@ -43,5 +44,12 @@ public class Muscle extends Spring {
 		myLength = initLength*Math.sin(time)*myAmplitude;
 	}
 
+
+	@Override
+	public void paint(Graphics2D pen) {
+		// TODO Auto-generated method stub
+		super.paint(pen);
+	}
+	
 
 }
