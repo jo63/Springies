@@ -19,8 +19,6 @@ public class Factory {
 
     // mass IDs
     Map<Integer, Mass> myMasses = new HashMap<Integer, Mass>();
-    Physics myPhysics;
-
 
     /**
      * XXX.
@@ -54,7 +52,15 @@ public class Factory {
         double x = line.nextDouble();
         double y = line.nextDouble();
         double mass = line.nextDouble();
-        Mass result = new Mass(x, y, mass);
+        Mass result;
+        if(mass < 0 )
+        {
+        	result = new FixedMass(x,y,mass);
+        }
+        else
+        {
+        	 result = new Mass(x, y, mass);
+        }
         myMasses.put(id,  result);
         return result;
     }

@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.List;
 import java.util.ArrayList;
+
+import util.Vector;
 import view.Canvas;
 
 
@@ -18,6 +20,7 @@ public class Model {
     // simulation state
     private List<Mass> myMasses;
     private List<Spring> mySprings;
+    private Physics myPhysics;
 
     /**
      * Create a game of the given size with the given display for its shapes.
@@ -49,6 +52,7 @@ public class Model {
             s.update(elapsedTime, bounds);
         }
         for (Mass m : myMasses) {
+        	
             m.update(elapsedTime, bounds);
         }
     }
@@ -59,7 +63,15 @@ public class Model {
     public void add (Mass mass) {
         myMasses.add(mass);
     }
-
+    
+    public void add (Vector gravity) {
+        myPhysics.getGravity().setGravity(gravity);
+        myPhysics.print();
+    }
+    public void add (double viscosity) {
+        myPhysics.getViscosity().setViscosity(viscosity);
+        myPhysics.print();
+    }
     /**
      * Add given spring to this simulation.
      */

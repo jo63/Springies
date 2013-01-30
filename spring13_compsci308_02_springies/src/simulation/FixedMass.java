@@ -3,11 +3,13 @@
  */
 package simulation;
 
+import java.awt.Dimension;
+
 /**
  * @author junho
  *
  */
-asdflka;lskdjfl;askjdflj
+
 public class FixedMass extends Mass {
 
 	/**
@@ -21,4 +23,9 @@ public class FixedMass extends Mass {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void update(double elapsedTime, Dimension bounds) {
+		return;
+	}
+	
 }

@@ -20,6 +20,7 @@ import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
 import simulation.Factory;
+import simulation.LoadPhysicsConstants;
 import simulation.Model;
 
 
@@ -186,9 +187,12 @@ public class Canvas extends JComponent {
     // load model from file chosen by user
     private void loadModel () {
         Factory factory = new Factory();
+        LoadPhysicsConstants loadPhys = new LoadPhysicsConstants();
         int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
+            response = INPUT_CHOOSER.showOpenDialog(null);
+            loadPhys.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
         }
     }
 }

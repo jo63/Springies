@@ -1,20 +1,33 @@
 package simulation;
 
 import util.*;
-
+import physicsForces.*;
 
 public class Physics {
 
-	private Vector gravity;
-	private double viscosity;
+	private Gravity myGravity;
+	private Viscosity myViscosity;
 	//private centerOfMass = ??
 	//private wallRepulsion = ??
 	
 	public Physics()
 	{
-		gravity = new Vector(); //initial at -9.8? feet/s^2?
-		viscosity = 0;
 	}
 	
-	//public 
+	public Gravity getGravity()
+	{
+		return myGravity;
+	}
+	
+	public Viscosity getViscosity()
+	{
+		return myViscosity;
+	}
+	
+	public void print()
+	{
+		System.out.println("dir" + myGravity.getGravity().getDirection() + "magnitude" + myGravity.getGravity().getMagnitude());
+		System.out.println("viscosity" + myViscosity.getViscosity());
+	}
+	
 }
