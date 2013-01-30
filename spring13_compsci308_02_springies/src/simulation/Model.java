@@ -53,7 +53,6 @@ public class Model {
             s.update(elapsedTime, bounds);
         }
         for (Mass m : myMasses) {
-        	
             m.update(elapsedTime, bounds);
         }
     }
@@ -61,18 +60,17 @@ public class Model {
     /**
      * Add given mass to this simulation.
      */
-    public void add (Mass mass) {
-    	
+    public void add(Mass mass) {
+    	mass.setPhysics(myPhysics);
         myMasses.add(mass);
     }
-    
-    public void add (Vector gravity) {
-        myPhysics.getGravity().setGravity(gravity);
-        myPhysics.print();
+    public void setPhysics(Physics physics)
+    {
+    	myPhysics = physics;
     }
-    public void add (double viscosity) {
-        myPhysics.getViscosity().setViscosity(viscosity);
-        myPhysics.print();
+    public Physics getPhysics()
+    {
+    	return myPhysics;
     }
     /**
      * Add given spring to this simulation.

@@ -190,10 +190,9 @@ public class Canvas extends JComponent {
         LoadPhysicsConstants loadPhys = new LoadPhysicsConstants();
         int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
-            factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
+        	mySimulation.setPhysics(loadPhys.loadModel(INPUT_CHOOSER.getSelectedFile()));
             response = INPUT_CHOOSER.showOpenDialog(null);
-            
-            //loadPhys.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
+            factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
         }
     }
 }

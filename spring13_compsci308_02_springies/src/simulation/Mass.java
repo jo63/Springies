@@ -52,6 +52,7 @@ public class Mass extends Sprite {
     public void update (double elapsedTime, Dimension bounds) {
     	if(isFixed) return; //if isFixed = true, don't update. 
         applyForce(getBounce(bounds));
+        applyForce(myPhyics.getGravity().getGravity());
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
         myAcceleration.reset();
