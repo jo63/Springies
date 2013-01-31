@@ -45,6 +45,11 @@ public class Mass extends Sprite {
     	if(myMass < 0) isFixed = true;
     }
     
+    public double getMass()
+    {
+    	return myMass;
+    }
+    
     /**
      * XXX.
      */
