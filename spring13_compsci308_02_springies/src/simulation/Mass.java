@@ -37,7 +37,6 @@ public class Mass extends Sprite {
 
     public void setPhysics(Physics physics)
     {
-    	
     	myPhyics = physics;
     	myPhyics.getViscosity().setDirection(this.getVelocity().getDirection());
     }
@@ -56,6 +55,7 @@ public class Mass extends Sprite {
         applyForce(getBounce(bounds));
         applyForce(myPhyics.getGravity().getGravity());
         applyForce(myPhyics.getViscosity().getViscosity());
+        
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
         myAcceleration.reset();
@@ -87,7 +87,6 @@ public class Mass extends Sprite {
         return new Location(getX(), getY()).distance(new Location(other.getX(), other.getY()));
     }
 
-
     // check for move out of bounds
     private Vector getBounce (Dimension bounds) {
         final double IMPULSE_MAGNITUDE = 2;
@@ -98,13 +97,17 @@ public class Mass extends Sprite {
         else if (getRight() > bounds.width) {
             impulse = new Vector(LEFT_DIRECTION, IMPULSE_MAGNITUDE);
         }
+        
+        if (getBottom() >= bounds.height ) {
+        
+            impulse = new Vector(UP_DIRECTION, IMPULSE_MAGNITUDE);
+        }
         if (getTop() < 0) {
             impulse = new Vector(DOWN_DIRECTION, IMPULSE_MAGNITUDE);
         }
-        else if (getBottom() > bounds.height) {
-            impulse = new Vector(UP_DIRECTION, IMPULSE_MAGNITUDE);
-        }
-        impulse.scale(getVelocity().getRelativeMagnitude(impulse));
+        //impulse scale angle calculation is off. 
+        	impulse.scale(getVelocity().getRelativeMagnitude(impulse));
         return impulse;
     }
 }
+

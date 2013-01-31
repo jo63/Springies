@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
+import physicsForces.CenterOfMass;
 import util.Vector;
 
 
@@ -23,6 +23,7 @@ public class LoadPhysicsConstants {
     private static final String CENTERMASS_KEYWORD = "centermass";
     private static final String WALL_KEYWORD = "wall";
     private Physics myPhysics;
+    private Factory myFactory;
 
     /**
      * XXX.
@@ -30,7 +31,7 @@ public class LoadPhysicsConstants {
      */
     public Physics loadModel (File modelFile) {
     	myPhysics = new Physics();
-    	
+    	//myFactory = factory; //for later 
         try {
             Scanner input = new Scanner(modelFile);
             while (input.hasNext()) {
@@ -42,6 +43,10 @@ public class LoadPhysicsConstants {
                     }
                     else if (VISCOSITY_KEYWORD.equals(type)) {
                         myPhysics.getViscosity().setViscosity((viscosityCommand(line)));
+                    }
+                    else if(CENTERMASS_KEYWORD.equals(type))
+                    {
+                    	//myPhysics.getCenterMass().setCenterMass(centerMassCommand(line));
                     }
                 }
             }
@@ -65,6 +70,11 @@ public class LoadPhysicsConstants {
     private Vector viscosityCommand(Scanner line)
     {
     	return new Vector(0,line.nextDouble());
+    }
+    
+    private CenterOfMass centerMassCommand(Scanner line)
+    {
+    	return new CenterOfMass();
     }
     
     

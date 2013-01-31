@@ -12,25 +12,36 @@ public class CenterOfMass {
 	private Point myCenterOfMass;
 	private double myMagnitude;
 	private double myExponent;
+
+	
+	public CenterOfMass()
+	{
+		myMagnitude = 0;
+		myExponent = 0;
+	}
 	
 	public CenterOfMass(int magnitude, int exponent)
 	{
 		myMagnitude = magnitude;
 		myExponent = exponent;
-	
-		//;lkasdjf;lkajsdlf;j;lakjsdf;l
 	}
 	public double getExponent()
 	{
 		return myExponent;
 	}
-	
-	public void calculateCenterOfMassPosistion(List<Mass> massList)
+	public void setExponent(double exponent)
+	{
+		myExponent = exponent;
+	}
+	public void setMagnitude(double magnitude)
+	{
+		myMagnitude = magnitude;
+	}
+	public void setCenterMassPosition(List<Mass> massList)
 	{
 		myCenterOfMass = new Point(calculateXCenterOfMass(massList), calculateYCenterOfMass(massList));
 	}
-	
-	public int calculateXCenterOfMass(List<Mass> massList)
+	private int calculateXCenterOfMass(List<Mass> massList)
 	{
 		double totalMass = 0.0;
 		double massSum = 0.0;
@@ -42,7 +53,7 @@ public class CenterOfMass {
 		return (int)(massSum/totalMass);
 	}
 	
-	public int calculateYCenterOfMass(List<Mass> massList)
+	private int calculateYCenterOfMass(List<Mass> massList)
 	{
 		double totalMass = 0.0;
 		double massSum = 0.0;
@@ -58,6 +69,7 @@ public class CenterOfMass {
 	{
 		return new Location(myCenterOfMass.getX(), myCenterOfMass.getY()).distance(mass.getX(), mass.getY());
 	}
+	
 	public void applyForce(Mass mass)
 	{
 		double distFromCenterOfMass = distance(mass);

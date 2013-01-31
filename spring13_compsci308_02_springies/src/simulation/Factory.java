@@ -26,8 +26,12 @@ public class Factory {
 	/**
 	 * XXX.
 	 */
+	public Map<Integer, Mass> getMasses()
+	{
+		return myMasses;
+	}
+	
 	public void loadModel (Model model, File modelFile) {
-		Vector foo  = new Vector();
 		try {
 			Scanner input = new Scanner(modelFile);
 			while (input.hasNext()) {

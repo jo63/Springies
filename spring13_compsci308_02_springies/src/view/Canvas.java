@@ -176,23 +176,24 @@ public class Canvas extends JComponent {
             public void mousePressed (MouseEvent e) {
                 myLastMousePosition = e.getPoint();
             }
-
             @Override
             public void mouseReleased (MouseEvent e) {
                 myLastMousePosition = NO_MOUSE_PRESSED;
             }
         });
     }
-
+    
     // load model from file chosen by user
     private void loadModel () {
         Factory factory = new Factory();
         LoadPhysicsConstants loadPhys = new LoadPhysicsConstants();
         int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
+        	
         	mySimulation.setPhysics(loadPhys.loadModel(INPUT_CHOOSER.getSelectedFile()));
             response = INPUT_CHOOSER.showOpenDialog(null);
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
+            
         }
     }
 }
