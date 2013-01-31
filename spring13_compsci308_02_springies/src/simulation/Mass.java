@@ -32,19 +32,14 @@ public class Mass extends Sprite {
         super(DEFUALT_IMAGE, new Location(x, y), DEFAULT_SIZE);
         myMass = mass;
         myAcceleration = new Vector();
-        setFixed();
+
     }
 
     public void setPhysics(Physics physics)
     {
     	myPhyics = physics;
     }
-    
-    private void setFixed()
-    {
-    	if(myMass < 0) isFixed = true;
-    }
-    
+
     public double getMass()
     {
     	return myMass;
@@ -55,7 +50,7 @@ public class Mass extends Sprite {
      */
     @Override
     public void update (double elapsedTime, Dimension bounds) {
-    	if(isFixed) return; //if isFixed = true, don't update. 
+    	
         applyForce(getBounce(bounds));
         applyForce(myPhyics.getGravity().getGravity());
         // convert force back into Mover's velocity
