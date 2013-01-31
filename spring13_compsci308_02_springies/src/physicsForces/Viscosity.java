@@ -6,27 +6,24 @@ import util.Vector;
 public class Viscosity {
 
 	
-	private double myViscosity;
+	private Vector myViscosity;
 	
-	public Viscosity(double viscosity)
+	public Viscosity(Vector viscosity)
 	{
 		setViscosity(viscosity);
 	}
 
-	public double getViscosity() {
+	public Vector getViscosity() {
 		return myViscosity;
 	}
 
-	public void setViscosity(double myViscosity) {
-		this.myViscosity = myViscosity;
+	public void setViscosity(Vector Viscosity) {
+		this.myViscosity = Viscosity;
 	}
 	
-	public void applyForce(Mass mass)
+	public void setDirection(double direction)
 	{
-		Vector velocity = mass.getVelocity();
-		velocity.negate();
-		velocity.scale(myViscosity);
-		
+		double mag = myViscosity.getMagnitude();
+		myViscosity = new Vector(direction, mag);
 	}
-	
 }

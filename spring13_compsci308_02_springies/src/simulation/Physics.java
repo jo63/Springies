@@ -13,7 +13,7 @@ public class Physics {
 	public Physics()
 	{
 		myGravity = new Gravity();
-		myViscosity = new Viscosity(0);
+		myViscosity = new Viscosity(new Vector());
 	}
 	
 	public Gravity getGravity()

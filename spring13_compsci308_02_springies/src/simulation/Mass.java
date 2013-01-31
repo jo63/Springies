@@ -37,7 +37,9 @@ public class Mass extends Sprite {
 
     public void setPhysics(Physics physics)
     {
+    	
     	myPhyics = physics;
+    	myPhyics.getViscosity().setDirection(this.getVelocity().getDirection());
     }
 
     public double getMass()
@@ -53,6 +55,7 @@ public class Mass extends Sprite {
     	
         applyForce(getBounce(bounds));
         applyForce(myPhyics.getGravity().getGravity());
+        applyForce(myPhyics.getViscosity().getViscosity());
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
         myAcceleration.reset();

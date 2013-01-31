@@ -62,9 +62,9 @@ public class LoadPhysicsConstants {
         return new Vector(direction, magnitude);
     }
     
-    private double viscosityCommand(Scanner line)
+    private Vector viscosityCommand(Scanner line)
     {
-    	return line.nextDouble();
+    	return new Vector(0,line.nextDouble());
     }
     
     
