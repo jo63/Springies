@@ -54,6 +54,7 @@ public class Model {
         }
         for (Mass m : myMasses) {
             m.update(elapsedTime, bounds);
+            //myPhysics.setpoo(myMasses)
         }
     }
 
