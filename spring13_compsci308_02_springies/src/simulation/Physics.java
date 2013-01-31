@@ -1,5 +1,7 @@
 package simulation;
 
+import java.awt.Point;
+
 import util.*;
 import physicsForces.*;
 
@@ -18,14 +20,16 @@ public class Physics {
 		
 	}
 	
+	public CenterOfMass getCenterOfMass()
+	{
+		return myCenterMass;
+	}
+	
 	public Gravity getGravity()
 	{
 		return myGravity;
 	}
-	public CenterOfMass getCenterMass()
-	{
-		return myCenterMass;
-	}
+
 	public Viscosity getViscosity()
 	{
 		return myViscosity;

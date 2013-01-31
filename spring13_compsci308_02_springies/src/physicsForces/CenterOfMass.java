@@ -76,6 +76,8 @@ public class CenterOfMass {
 		double xDiff = Math.abs(myCenterOfMass.getX() - mass.getX());
 		double yDiff = Math.abs(myCenterOfMass.getY() - mass.getY());
 		//figure out magnitude of force to apply
-		mass.applyForce(new Vector((int)(Math.tan((xDiff)/(yDiff))), myMagnitude/Math.pow(distFromCenterOfMass,myExponent)));
+		double angle = (Math.tan((xDiff)/(yDiff)));
+		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass,myExponent);
+		mass.applyForce(new Vector(angle, magnitude));
 	}
 }

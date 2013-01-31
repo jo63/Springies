@@ -21,8 +21,7 @@ public class Mass extends Sprite {
 
     private double myMass;
     private Vector myAcceleration;
-    private boolean isFixed;
-    private Physics myPhyics;
+    private Physics myPhysics;
 
 
     /**
@@ -34,11 +33,25 @@ public class Mass extends Sprite {
         myAcceleration = new Vector();
 
     }
+	public double distance()
+	{
+		return new Location(myPhysics.getCenterOfMass().getX(), myPhysics.getCenterOfMass().getY()).distance(getX(),getY());
+	}
+	
+	
+
+    public double getAngleForCOM()
+    {
+		double distFromCenterOfMass = distance();
+		double xDiff = Math.abs(myPhysics.getCenterOfMass().getX() - getX());
+		double yDiff = Math.abs(myPhysics.getCenterOfMass().getY())- getY();
+		return (Math.tan((xDiff)/(yDiff)));
+    }
 
     public void setPhysics(Physics physics)
     {
-    	myPhyics = physics;
-    	myPhyics.getViscosity().setDirection(this.getVelocity().getDirection());
+    	myPhysics = physics;
+    	myPhysics.getViscosity().setDirection(this.getVelocity().getDirection());
     }
 
     public double getMass()
@@ -53,8 +66,10 @@ public class Mass extends Sprite {
     public void update (double elapsedTime, Dimension bounds) {
     	
         applyForce(getBounce(bounds));
-        applyForce(myPhyics.getGravity().getGravity());
-        applyForce(myPhyics.getViscosity().getViscosity());
+        applyForce(myPhysics.getGravity().getGravity());
+        applyForce(myPhysics.getViscosity().getViscosity());
+    	double magnitude = myPhysics.getCenterOfMass().getMagnitude()/Math.pow(distFromCenterOfMass,myExponent);
+        applyForce(new Vector(getAngleForCOM, ))
         
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
