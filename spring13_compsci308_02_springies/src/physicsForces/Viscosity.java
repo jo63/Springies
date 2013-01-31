@@ -1,13 +1,16 @@
 package physicsForces;
 
+import simulation.Mass;
+import util.Vector;
+
 public class Viscosity {
 
 	
 	private double myViscosity;
 	
-	public Viscosity()
+	public Viscosity(double viscosity)
 	{
-		myViscosity = 0;
+		setViscosity(viscosity);
 	}
 
 	public double getViscosity() {
@@ -16,6 +19,14 @@ public class Viscosity {
 
 	public void setViscosity(double myViscosity) {
 		this.myViscosity = myViscosity;
+	}
+	
+	public void applyForce(Mass mass)
+	{
+		Vector velocity = mass.getVelocity();
+		velocity.negate();
+		velocity.scale(myViscosity);
+		
 	}
 	
 }
