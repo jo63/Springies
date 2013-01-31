@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import util.Vector;
+
 
 /**
  * XXX
@@ -25,6 +27,7 @@ public class Factory {
 	 * XXX.
 	 */
 	public void loadModel (Model model, File modelFile) {
+		Vector foo  = new Vector();
 		try {
 			Scanner input = new Scanner(modelFile);
 			while (input.hasNext()) {
