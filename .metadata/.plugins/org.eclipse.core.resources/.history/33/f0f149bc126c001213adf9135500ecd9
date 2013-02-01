@@ -54,11 +54,7 @@ public class Model {
         }
         for (Mass m : myMasses) {
             m.update(elapsedTime, bounds);
-<<<<<<< HEAD
-            
-=======
-            myPhysics.getCenterOfMass().setCenterMassPosition(myMasses);
->>>>>>> a82f03315a35f9bf747f1b4e550d062db2d29207
+            //myPhysics.setpoo(myMasses)
         }
     }
 
