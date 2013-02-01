@@ -29,11 +29,16 @@ public class CenterOfMass {
 	{
 		return myExponent;
 	}
-	public void setExponent(double exponent)
+	public void setMagEx(double[] values)
+	{
+		setMagnitude(values[0]);
+		setExponent(values[1]);
+	}
+	private void setExponent(double exponent)
 	{
 		myExponent = exponent;
 	}
-	public void setMagnitude(double magnitude)
+	private void setMagnitude(double magnitude)
 	{
 		myMagnitude = magnitude;
 	}

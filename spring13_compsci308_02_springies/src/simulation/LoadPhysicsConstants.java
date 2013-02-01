@@ -46,7 +46,7 @@ public class LoadPhysicsConstants {
                     }
                     else if(CENTERMASS_KEYWORD.equals(type))
                     {
-                    	//myPhysics.getCenterMass().setCenterMass(centerMassCommand(line));
+                    	myPhysics.getCenterOfMass().setMagEx(centerMassCommand(line));
                     }
                 }
             }
@@ -72,9 +72,12 @@ public class LoadPhysicsConstants {
     	return new Vector(0,line.nextDouble());
     }
     
-    private CenterOfMass centerMassCommand(Scanner line)
+    private double[] centerMassCommand(Scanner line)
     {
-    	return new CenterOfMass();
+    	double[] values = new double[2];
+    	values[0] = line.nextDouble();
+    	values[1] = line.nextDouble();
+    	return values;
     }
     
     
