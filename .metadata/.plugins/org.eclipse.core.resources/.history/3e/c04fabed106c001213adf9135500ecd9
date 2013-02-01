@@ -37,14 +37,6 @@ public class CenterOfMass {
 	{
 		myMagnitude = magnitude;
 	}
-	public double getMagnitude()
-	{
-		return myMagnitude;
-	}
-	public Point getCenterOfMassPosition()
-	{
-		return myCenterOfMass;
-	}
 	public void setCenterMassPosition(List<Mass> massList)
 	{
 		myCenterOfMass = new Point(calculateXCenterOfMass(massList), calculateYCenterOfMass(massList));

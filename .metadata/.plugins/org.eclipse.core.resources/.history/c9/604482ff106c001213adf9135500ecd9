@@ -37,7 +37,7 @@ public class CenterOfMass {
 	{
 		myMagnitude = magnitude;
 	}
-	public double getMagnitude()
+	public double getMgnitude()
 	{
 		return myMagnitude;
 	}

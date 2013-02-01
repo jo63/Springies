@@ -33,7 +33,7 @@ public class Mass extends Sprite {
         myAcceleration = new Vector();
 
     }
-	public double distanceFromCenterOfMass()
+	public double distance()
 	{
 		return new Location(myPhysics.getCenterOfMass().getCenterOfMassPosition().getX(), myPhysics.getCenterOfMass().getCenterOfMassPosition().getY()).distance(getX(),getY());
 	}
@@ -42,7 +42,7 @@ public class Mass extends Sprite {
 
     public double getAngleForCOM()
     {
-		double distFromCenterOfMass = distanceFromCenterOfMass();
+		double distFromCenterOfMass = distance();
 		double xDiff = Math.abs(myPhysics.getCenterOfMass().getCenterOfMassPosition().getX() - getX());
 		double yDiff = Math.abs(myPhysics.getCenterOfMass().getCenterOfMassPosition().getY())- getY();
 		return (Math.tan((xDiff)/(yDiff)));
@@ -68,8 +68,8 @@ public class Mass extends Sprite {
         applyForce(getBounce(bounds));
         applyForce(myPhysics.getGravity().getGravity());
         applyForce(myPhysics.getViscosity().getViscosity());
-    	double magnitude = myPhysics.getCenterOfMass().getMagnitude()/Math.pow(distanceFromCenterOfMass(),myPhysics.getCenterOfMass().getExponent());
-        applyForce(new Vector(getAngleForCOM(), magnitude));
+    	double magnitude = myPhysics.getCenter1OfMass().getMagnitude()/Math.pow(distFromCenterOfMass,myExponent);
+        applyForce(new Vector(getAngleForCOM, ))
         
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
