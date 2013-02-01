@@ -43,9 +43,9 @@ public class Mass extends Sprite {
     public double getAngleForCOM()
     {
 		double distFromCenterOfMass = distanceFromCenterOfMass();
-		double xDiff = Math.abs(myPhysics.getCenterOfMass().getCenterOfMassPosition().getX() - getX());
-		double yDiff = Math.abs(myPhysics.getCenterOfMass().getCenterOfMassPosition().getY())- getY();
-		return (Math.tan((xDiff)/(yDiff)));
+		double xDiff = getX() - myPhysics.getCenterOfMass().getCenterOfMassPosition().getX();
+		double yDiff = getY() - myPhysics.getCenterOfMass().getCenterOfMassPosition().getY();
+		return 180 + Math.toDegrees((Math.tan((yDiff)/(xDiff)))); //why 180?
     }
 
     public void setPhysics(Physics physics)

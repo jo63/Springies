@@ -49,17 +49,14 @@ public class Model {
      */
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
+        myPhysics.getCenterOfMass().setCenterMassPosition(myMasses);
         for (Spring s : mySprings) {
             s.update(elapsedTime, bounds);
         }
         for (Mass m : myMasses) {
             m.update(elapsedTime, bounds);
-<<<<<<< HEAD
-            
-=======
-            myPhysics.getCenterOfMass().setCenterMassPosition(myMasses);
->>>>>>> a82f03315a35f9bf747f1b4e550d062db2d29207
         }
+       
     }
 
     /**

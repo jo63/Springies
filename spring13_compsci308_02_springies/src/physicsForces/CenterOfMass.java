@@ -60,7 +60,7 @@ public class CenterOfMass {
 		double massSum = 0.0;
 		for(Mass mass : massList)
 		{
-			massSum += mass.getX()*mass.getMass();
+			massSum += mass.getX()*Math.abs(mass.getMass());
 			totalMass += mass.getMass();
 		}
 		return (int)(massSum/totalMass);
@@ -72,7 +72,7 @@ public class CenterOfMass {
 		double massSum = 0.0;
 		for(Mass mass : massList)
 		{
-			massSum += mass.getY()*mass.getMass();
+			massSum += mass.getY()*Math.abs(mass.getMass());
 			totalMass += mass.getMass();
 		}
 		return (int)(massSum/totalMass);
