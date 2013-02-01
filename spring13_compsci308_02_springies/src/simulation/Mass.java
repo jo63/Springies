@@ -3,6 +3,8 @@ package simulation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
+
 import util.Location;
 import util.Pixmap;
 import util.Sprite;
@@ -42,10 +44,15 @@ public class Mass extends Sprite {
 
     public double getAngleForCOM()
     {
-		double distFromCenterOfMass = distanceFromCenterOfMass();
-		double xDiff = getX() - myPhysics.getCenterOfMass().getCenterOfMassPosition().getX();
-		double yDiff = getY() - myPhysics.getCenterOfMass().getCenterOfMassPosition().getY();
-		return 180 + Math.toDegrees((Math.tan((yDiff)/(xDiff)))); //why 180?
+    	Point CM = myPhysics.getCenterOfMass().getCenterOfMassPosition();
+    	/*Point M = new Point((int)this.getX(),(int)this.getY());
+    	Vector v1 = new Vector(M, CM);
+    	Vector v2 = new Vector(M, new Point(CM.x, M.y));*/
+    	double xDiff = CM.getX() - getX();
+    	double yDiff = CM.getY()- getY();
+    	
+    	
+    	return Vector.angleBetween(xDiff,yDiff);
     }
 
     public void setPhysics(Physics physics)

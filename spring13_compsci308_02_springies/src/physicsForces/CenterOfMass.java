@@ -1,5 +1,6 @@
 package physicsForces;
 
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.List;
 
@@ -61,9 +62,14 @@ public class CenterOfMass {
 		for(Mass mass : massList)
 		{
 			massSum += mass.getX()*Math.abs(mass.getMass());
-			totalMass += mass.getMass();
+			totalMass += Math.abs(mass.getMass());
 		}
 		return (int)(massSum/totalMass);
+	}
+	
+	public void draw(Graphics2D lolz)
+	{
+		lolz.drawOval(myCenterOfMass.x, myCenterOfMass.y, 25, 25);
 	}
 	
 	private int calculateYCenterOfMass(List<Mass> massList)
@@ -73,7 +79,7 @@ public class CenterOfMass {
 		for(Mass mass : massList)
 		{
 			massSum += mass.getY()*Math.abs(mass.getMass());
-			totalMass += mass.getMass();
+			totalMass += Math.abs(mass.getMass());
 		}
 		return (int)(massSum/totalMass);
 	}

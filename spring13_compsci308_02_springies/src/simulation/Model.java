@@ -42,6 +42,8 @@ public class Model {
         for (Mass m : myMasses) {
             m.paint(pen);
         }
+        
+        myPhysics.getCenterOfMass().draw(pen);
     }
 
     /**
