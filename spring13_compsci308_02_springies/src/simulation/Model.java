@@ -75,7 +75,6 @@ public class Model {
     {
     	myPhysics = physics;
     	myPhysics.getCenterOfMass().setCanvas(myView);
-    	
     }
     public Physics getPhysics()
     {

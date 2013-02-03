@@ -36,7 +36,7 @@ public class WallRepulsion extends CenterOfMass {
 	public WallRepulsion(int magnitude, int exponent) {
 		super(magnitude, exponent);
 		bounds = super.myCanvas.getSize();
-		initializeVectorMap();
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -84,9 +84,10 @@ public class WallRepulsion extends CenterOfMass {
 	@Override
 	public void applyForce(Mass mass)
 	{
+		initializeVectorMap();
 		double distFromWall = distance(mass)/50; //need an offset?
 		
-		myVectors.get(myID-1).
+		mass.applyForce(myVectors.get(myID-1));
 		
 		//mass.applyForce(new Vector(angle, magnitude));
 	}
