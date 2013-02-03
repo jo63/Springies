@@ -21,6 +21,7 @@ public class Model {
     private List<Mass> myMasses;
     private List<Spring> mySprings;
     private Physics myPhysics;
+    private Environment myEnvironment;
 
     /**
      * Create a game of the given size with the given display for its shapes.
@@ -30,6 +31,7 @@ public class Model {
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
+        myEnvironment = new Environment();
     }
 
     /**
@@ -51,10 +53,12 @@ public class Model {
      */
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
-        myPhysics.getCenterOfMass().setCenterMassPosition(myMasses);
+        myEnvironment.setEnvironment(myPhysics, myMasses);
+        
         for (Spring s : mySprings) {
             s.update(elapsedTime, bounds);
         }
+        
         for (Mass m : myMasses) {
             m.update(elapsedTime, bounds);
         }
@@ -65,12 +69,13 @@ public class Model {
      * Add given mass to this simulation.
      */
     public void add(Mass mass) {
-    	mass.setPhysics(myPhysics);
         myMasses.add(mass);
     }
     public void setPhysics(Physics physics)
     {
     	myPhysics = physics;
+    	myPhysics.getCenterOfMass().setCanvas(myView);
+    	
     }
     public Physics getPhysics()
     {

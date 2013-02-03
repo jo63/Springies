@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import physicsForces.CenterOfMass;
+import physicsForces.Gravity;
+import physicsForces.Viscosity;
+import physicsForces.WallRepulsion;
 import util.Vector;
 
 
@@ -39,14 +42,18 @@ public class LoadPhysicsConstants {
                 if (line.hasNext()) {
                     String type = line.next();
                     if (GRAVITY_KEYWORD.equals(type)) {
-                        myPhysics.getGravity().setGravity((gravityCommand(line)));
+                        myPhysics.setGravity((gravityCommand(line)));
                     }
                     else if (VISCOSITY_KEYWORD.equals(type)) {
-                        myPhysics.getViscosity().setViscosity((viscosityCommand(line)));
+                        myPhysics.setViscosity((viscosityCommand(line)));
+                    }
+                    else if(WALL_KEYWORD.equals(type))
+                    {
+                    	myPhysics.setCenterMassMagEx(centerMassCommand(line));
                     }
                     else if(CENTERMASS_KEYWORD.equals(type))
                     {
-                    	myPhysics.getCenterOfMass().setMagEx(centerMassCommand(line));
+                    	myPhysics.addWall(wallRepulsionCommand(line));
                     }
                 }
             }
@@ -61,15 +68,15 @@ public class LoadPhysicsConstants {
     }
 
     // create gravity from formatted data
-    private Vector gravityCommand (Scanner line) {
+    private Gravity gravityCommand (Scanner line) {
         double direction = line.nextDouble();
         double magnitude = line.nextDouble();
-        return new Vector(direction, magnitude);
+        return new Gravity(new Vector(direction, magnitude));
     }
     
-    private Vector viscosityCommand(Scanner line)
+    private Viscosity viscosityCommand(Scanner line)
     {
-    	return new Vector(0,line.nextDouble());
+    	return new Viscosity(new Vector(0,line.nextDouble()));
     }
     
     private double[] centerMassCommand(Scanner line)
@@ -78,6 +85,17 @@ public class LoadPhysicsConstants {
     	values[0] = line.nextDouble();
     	values[1] = line.nextDouble();
     	return values;
+    }
+    private WallRepulsion wallRepulsionCommand(Scanner line)
+    {
+    	WallRepulsion wall = new WallRepulsion();
+    	double[] values = new double[3];
+    	values[0] = line.nextDouble();
+    	values[1] = line.nextDouble();
+    	values[2] = line.nextDouble();
+    	wall.setValues(values);
+    	
+    	return wall;
     }
     
     

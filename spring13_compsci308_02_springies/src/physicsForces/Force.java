@@ -13,6 +13,7 @@ import util.Vector;
  */
 public abstract class Force extends Vector {
 
+	
 	/**
 	 * 
 	 */
@@ -20,8 +21,7 @@ public abstract class Force extends Vector {
 		// TODO Auto-generated constructor stub
 	}
 
-	public abstract Vector getForce();
+	public abstract Vector getForce(); //return the force vector
 	
-
 
 }

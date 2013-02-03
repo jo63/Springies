@@ -1,20 +1,22 @@
 package physicsForces;
 
+import simulation.Mass;
 import util.Vector;
 
-public class Gravity extends Force{
-	private static final int MY_DIRECTION = 90;
+public class Gravity extends Vector{
 	
-	public Gravity()
+	
+	public Gravity(Vector gravity)
 	{
-		
+		super(gravity);
 	}
-	public void setGravity(Vector gravity)
+
+//	public Vector getForce()
+//	{
+//		return this;
+//	}
+	public void applyForce(Mass mass)
 	{
-		myGravity = gravity; 
-	}
-	public Vector getGravity()
-	{
-		return myGravity;
+		mass.applyForce(this);
 	}
 }

@@ -3,27 +3,25 @@ package physicsForces;
 import simulation.Mass;
 import util.Vector;
 
-public class Viscosity {
-
-	
-	private Vector myViscosity;
+public class Viscosity extends Vector{
 	
 	public Viscosity(Vector viscosity)
 	{
-		setViscosity(viscosity);
+		super(viscosity);
 	}
-
-	public Vector getViscosity() {
-		return myViscosity;
-	}
-
-	public void setViscosity(Vector Viscosity) {
-		this.myViscosity = Viscosity;
+//
+//	public Vector getViscosity() {
+//		return this;
+//	}
+//	
+	private void setDirection(Mass mass)
+	{
+		this.setDirection(mass.getVelocity().getDirection());
 	}
 	
-	public void setDirection(double direction)
+	public void applyForce(Mass mass)
 	{
-		double mag = myViscosity.getMagnitude();
-		myViscosity = new Vector(direction, mag);
+		setDirection(mass);
+		mass.applyForce(this);
 	}
 }
