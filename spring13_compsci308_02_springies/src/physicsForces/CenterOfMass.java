@@ -12,11 +12,18 @@ import view.Canvas;
 public class CenterOfMass {
 	private static int DISTANCE_OFFSET = 100;
 	private Point myCenterOfMass;
-	protected double myMagnitude;
-	protected double myExponent;
-	protected Canvas myCanvas;
+	private double myMagnitude;
+	private double myExponent;
+	private Canvas myCanvas;
 
-	
+	public double getMagnitude()
+	{
+		return myMagnitude;
+	}
+	public Canvas getCanvas()
+	{
+		return myCanvas;
+	}
 	public CenterOfMass()
 	{
 		myMagnitude = 0;
@@ -44,7 +51,7 @@ public class CenterOfMass {
 	{
 		myExponent = exponent;
 	}
-	private void setMagnitude(double magnitude)
+	public void setMagnitude(double magnitude)
 	{
 		myMagnitude = magnitude;
 	}
