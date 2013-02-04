@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 #centermass 50 2
 #gravity 90 1
 wall 2 50 2
+=======
+#centermass 50 2
+#gravity 90 1
+wall 2 50 2
+>>>>>>> 4b25da81619278f280c8adb21abff57e88a7ec6d
