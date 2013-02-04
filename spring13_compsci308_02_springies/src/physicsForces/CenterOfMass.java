@@ -1,5 +1,6 @@
 package physicsForces;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.List;
@@ -15,6 +16,7 @@ public class CenterOfMass {
 	private double myMagnitude;
 	private double myExponent;
 	private Canvas myCanvas;
+	
 
 	public double getMagnitude()
 	{
@@ -40,7 +42,7 @@ public class CenterOfMass {
 	{
 		myCanvas = canvas;
 	}
-	
+
 	public void setValues(double[] values)
 	{
 		setMagnitude(values[0]);
@@ -73,7 +75,7 @@ public class CenterOfMass {
 	
 	public void draw(Graphics2D lolz)
 	{
-		lolz.drawOval(myCenterOfMass.x, myCenterOfMass.y, 25, 25);
+		//lolz.drawOval(myCenterOfMass.x, myCenterOfMass.y, 25, 25);
 	}
     private double getAngleForCOM(Mass mass)
     {
