@@ -47,11 +47,11 @@ public class LoadPhysicsConstants {
                     else if (VISCOSITY_KEYWORD.equals(type)) {
                         myPhysics.setViscosity((viscosityCommand(line)));
                     }
-                    else if(WALL_KEYWORD.equals(type))
+                    else if(CENTERMASS_KEYWORD.equals(type))
                     {
                     	myPhysics.setCenterMassMagEx(centerMassCommand(line));
                     }
-                    else if(CENTERMASS_KEYWORD.equals(type))
+                    else if(WALL_KEYWORD.equals(type))
                     {
                     	myPhysics.addWall(wallRepulsionCommand(line));
                     }

@@ -17,7 +17,8 @@ public class Muscle extends Spring {
 
 	private double myAmplitude;
 	private double initLength;
-	private double myLength;
+	//private double myLength;
+	private double time;
 	/**
 	 * @param start
 	 * @param end
@@ -35,13 +36,14 @@ public class Muscle extends Spring {
 	
 	@Override
 	public void update (double elapsedTime, Dimension bounds) {
-		
-		setLength(elapsedTime);		
+		time += elapsedTime;
+		System.out.println("elapsed time" + time);
+		setLength();		
         super.update(elapsedTime, bounds);
     }
 	
-	public void setLength(double time){
-		myLength = initLength+(Math.sin(time)*myAmplitude);
+	public void setLength(){
+		myLength = Math.abs(initLength+(Math.sin(time)*myAmplitude)); //ask brandon whats going on here
 	}
 
 }

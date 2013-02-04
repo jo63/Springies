@@ -21,7 +21,7 @@ public class Spring extends Sprite {
 
     private Mass myStart;
     private Mass myEnd;
-    private double myLength;
+    protected double myLength; //change this
     private double myK;
 
     /**
