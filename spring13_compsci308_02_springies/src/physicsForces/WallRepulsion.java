@@ -88,7 +88,7 @@ public class WallRepulsion extends CenterOfMass {
 		double distFromWall = distance(mass)/50; //need an offset?
 		Vector v = myVectors.get(myID-1);
 		v.setMagnitude(v.getMagnitude()/distFromWall);
-		mass.applyForce(v);
+		mass.applyForce(v); //?? 
 		
 		//mass.applyForce(new Vector(angle, magnitude));
 	}
