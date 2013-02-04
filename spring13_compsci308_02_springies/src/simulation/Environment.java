@@ -15,6 +15,7 @@ public class Environment {
 //		myPhysics = physics;
 //		myMasses = masses;
 	}
+	
 
 	public void setEnvironment(Physics physics, List<Mass> masses)
 	{
