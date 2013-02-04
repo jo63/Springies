@@ -2,10 +2,7 @@ package simulation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import physicsForces.CenterOfMass;
 import physicsForces.Gravity;
 import physicsForces.Viscosity;
 import physicsForces.WallRepulsion;
@@ -26,7 +23,6 @@ public class LoadPhysicsConstants {
     private static final String CENTERMASS_KEYWORD = "centermass";
     private static final String WALL_KEYWORD = "wall";
     private Physics myPhysics;
-    private Factory myFactory;
 
     /**
      * XXX.

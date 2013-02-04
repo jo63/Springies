@@ -1,13 +1,10 @@
 package simulation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import physicsForces.WallRepulsion;
 
 public class Environment {
-	private Physics myPhysics;
-	private List<Mass> myMasses;
 	
 	public Environment() {
 		// TODO Auto-generated constructor stub
