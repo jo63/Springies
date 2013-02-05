@@ -1,5 +1,6 @@
 package simulation;
 
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -23,13 +24,15 @@ public class LoadPhysicsConstants {
     private static final String CENTERMASS_KEYWORD = "centermass";
     private static final String WALL_KEYWORD = "wall";
     private Physics myPhysics;
+    private Dimension myBounds;
 
     /**
      * XXX.
      * Could refactor this so that it uses a for loop instead of multiple if statements
      */
-    public Physics loadModel (File modelFile) {
+    public Physics loadModel (File modelFile, Dimension bounds) {
     	myPhysics = new Physics();
+    	myBounds = bounds;
     	//myFactory = factory; //for later 
         try {
             Scanner input = new Scanner(modelFile);
@@ -84,12 +87,13 @@ public class LoadPhysicsConstants {
     }
     private WallRepulsion wallRepulsionCommand(Scanner line)
     {
-    	WallRepulsion wall = new WallRepulsion();
-    	double[] values = new double[3];
-    	values[0] = line.nextDouble();
-    	values[1] = line.nextDouble();
-    	values[2] = line.nextDouble();
-    	wall.setValues(values);
+    
+    	//double[] values = new double[3];
+    	double id = line.nextDouble();
+    	double magnitude = line.nextDouble();
+    	double exponent = line.nextDouble();
+    	WallRepulsion wall = new WallRepulsion(id, magnitude, exponent, myBounds);
+    	//wall.setValues(values);
     	
     	return wall;
     }

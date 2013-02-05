@@ -26,16 +26,18 @@ public class WallRepulsion extends CenterOfMass {
     
     private Map<Integer,Vector> myVectors;
 	private int myID;
-	private Dimension bounds;
+	private Dimension myBounds;
 	
 
 	public WallRepulsion() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public WallRepulsion(int magnitude, int exponent) {
+	public WallRepulsion(double id, double magnitude, double exponent, Dimension bounds) {		
 		super(magnitude, exponent);
-		bounds = super.getCanvas().getSize();
+		System.out.println(id);
+		myID = (int) id;
+		myBounds = bounds;
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -46,7 +48,7 @@ public class WallRepulsion extends CenterOfMass {
 		
 		for(int i = 0; i< DIRECTIONS.length;i++)
 		{
-			map.put(i, new Vector(DIRECTIONS[i], super.getMagnitude()));
+			map.put(i+1, new Vector(DIRECTIONS[i], getMagnitude()));
 		}
 //		map.put(1, new Vector(DOWN_DIRECTION,myMagnitude));
 //		map.put(2, new Vector(LEFT_DIRECTION,myMagnitude));
@@ -57,24 +59,24 @@ public class WallRepulsion extends CenterOfMass {
 		
 	}
 	
-	@Override
-	public void setValues(double[] values)
-	{
-		myID = (int)values[0];
-		
-		super.setValues( new double[] { 
-				values[1],
-				values[2]
-			});	
-	}
+//	@Override
+//	public void setValues(double[] values)
+//	{
+//		myID = (int)values[0];
+//		
+//		super.setValues( new double[] { 
+//				values[1],
+//				values[2]
+//			});	
+//	}
 	
 	private double distance(Mass mass)
 	{
 		switch(myID)
 		{	
 		case 1: return mass.getY();  //top
-		case 2: return bounds.getWidth() - mass.getX(); //right
-		case 3: return bounds.getHeight() - mass.getY(); //bottom
+		case 2: return myBounds.getWidth() - mass.getX(); //right
+		case 3: return myBounds.getHeight() - mass.getY(); //bottom
 		case 4: return mass.getX(); //left
 		default: break;
 		}
@@ -86,7 +88,7 @@ public class WallRepulsion extends CenterOfMass {
 	{
 		initializeVectorMap();
 		double distFromWall = distance(mass)/50; //need an offset?
-		Vector v = myVectors.get(myID-1);
+		Vector v = myVectors.get(myID);
 		v.setMagnitude(v.getMagnitude()/distFromWall);
 		mass.applyForce(v); //?? 
 		

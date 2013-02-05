@@ -32,7 +32,7 @@ public class CenterOfMass {
 		myExponent = 0;
 	}
 	
-	public CenterOfMass(int magnitude, int exponent)
+	public CenterOfMass(double magnitude, double exponent)
 	{
 		myMagnitude = magnitude;
 		myExponent = exponent;
