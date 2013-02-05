@@ -89,7 +89,7 @@ public class LoadPhysicsConstants {
     {
     
     	//double[] values = new double[3];
-    	double id = line.nextDouble();
+    	int id = line.nextInt();
     	double magnitude = line.nextDouble();
     	double exponent = line.nextDouble();
     	WallRepulsion wall = new WallRepulsion(id, magnitude, exponent, myBounds);

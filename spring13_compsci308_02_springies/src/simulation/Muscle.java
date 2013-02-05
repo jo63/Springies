@@ -33,10 +33,10 @@ public class Muscle extends Spring {
 	
 	@Override
 	public void update (double elapsedTime, Dimension bounds) {
+		super.update(elapsedTime, bounds);
 		time += elapsedTime;
 		System.out.println("elapsed time" + time);
 		setLength();		
-        super.update(elapsedTime, bounds);
     }
 	
 	public void setLength(){
