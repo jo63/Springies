@@ -21,7 +21,7 @@ public class Spring extends Sprite {
 
     private Mass myStart;
     private Mass myEnd;
-    protected double myLength; //change this
+    private double myLength; //change this
     private double myK;
 
     /**
@@ -43,15 +43,18 @@ public class Spring extends Sprite {
     {
     	return myEnd;
     }
-    public void setStart(Mass _start)
+    public void setStart(Mass start)
     {
-    	myStart = _start;
+    	myStart = start;
     }
-    public void setEnd(Mass _end)
+    public void setEnd(Mass end)
     {
-    	myEnd = _end;
+    	myEnd = end;
     }
-
+    public void setLength(double length)
+    {
+    	myLength = length;
+    }
     /**
      * XXX.
      */

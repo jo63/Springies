@@ -3,7 +3,7 @@ package physicsForces;
 import simulation.Mass;
 import util.Vector;
 
-public class Viscosity extends Vector{
+public class Viscosity extends Force{
 	
 	public Viscosity(Vector viscosity)
 	{
@@ -14,14 +14,17 @@ public class Viscosity extends Vector{
 //		return this;
 //	}
 //	
-	private void setDirection(Mass mass)
+	public void massInitialize(Mass mass)
 	{
-		this.setDirection(mass.getVelocity().getDirection());
+		if(mass.getAcceleration().getDirection() != 0)
+		{
+			this.setDirection(-mass.getAcceleration().getDirection());
+		}
+		
 	}
 	
-	public void applyForce(Mass mass)
+	public Vector returnForce()
 	{
-		setDirection(mass);
-		mass.applyForce(this);
+		return this;
 	}
 }

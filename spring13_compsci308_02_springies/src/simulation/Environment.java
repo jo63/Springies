@@ -1,33 +1,27 @@
 package simulation;
 
 import java.util.List;
-
-import physicsForces.WallRepulsion;
+import physicsForces.Force;
+import physicsForces.Gravity;
+import util.Vector;
 
 public class Environment {
 	
 	public Environment() {
 		// TODO Auto-generated constructor stub
 		
-//		myPhysics = physics;
-//		myMasses = masses;
 	}
 	
-
-	public void setEnvironment(Physics physics, List<Mass> masses)
+	public Vector getEnvironmentVector(Physics physics, Mass m)
 	{
-		
-		physics.getCenterOfMass().setCenterMassPosition(masses);
-		for(Mass m : masses)
+		Vector result = new Vector();
+		for(Force force : physics.getForces().values())
 		{
-			for(WallRepulsion wall : physics.getWalls())
-			{
-				wall.applyForce(m);
-			}
-			
-			physics.getGravity().applyForce(m);
-			physics.getViscosity().applyForce(m);
-			physics.getCenterOfMass().applyForce(m);
+			force.massInitialize(m);
+
+			result.sum(force.returnForce());
 		}
+		
+		return result;
 	}
 }

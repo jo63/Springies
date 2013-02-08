@@ -1,27 +1,17 @@
-/**
- * 
- */
 package physicsForces;
 
-import java.awt.geom.Point2D;
-
+import simulation.Mass;
 import util.Vector;
 
-/**
- * @author Kevin & Ryan
- *
- */
-public abstract class Force extends Vector {
+public abstract class Force extends Vector{
 
-	
-	/**
-	 * 
-	 */
-	public Force() {
-		// TODO Auto-generated constructor stub
+	public Force(Vector vector) {
+		super(vector);
 	}
-
-	public abstract Vector getForce(); //return the force vector
-	
+	public abstract Vector returnForce();
+	public void massInitialize(Mass mass)
+	{
+		
+	}
 
 }

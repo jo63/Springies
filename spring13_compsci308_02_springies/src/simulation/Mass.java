@@ -39,13 +39,16 @@ public class Mass extends Sprite {
     {
     	return myMass;
     }
+    public Vector getAcceleration()
+    {
+    	return myAcceleration;
+    }
     
     /**
      * XXX.
      */
     @Override
     public void update (double elapsedTime, Dimension bounds) {
-    	
         applyForce(getBounce(bounds));
 
         // convert force back into Mover's velocity

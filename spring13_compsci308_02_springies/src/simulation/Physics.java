@@ -1,65 +1,49 @@
 package simulation;
 
-import java.util.ArrayList;
+import java.awt.Dimension;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import util.*;
-import physicsForces.*;
+import physicsForces.CenterOfMass;
+import physicsForces.Force;
+import physicsForces.WallRepulsion;
 
 public class Physics {
 
-	//list of forces
-	//private Map<String, Force> myForces;
-	private Gravity myGravity;
-	private Viscosity myViscosity;
-	private CenterOfMass myCenterMass;
-	private List<WallRepulsion> myWalls;
+	private Map<String, Force> myForces;
+	private WallRepulsion myWall = new WallRepulsion();
 	
 	public Physics()
 	{
-		//myForces = new HashMap<String , Force>();
-		myGravity = new Gravity(new Vector());
-		myViscosity = new Viscosity(new Vector());
-		myCenterMass = new CenterOfMass();
-		myWalls = new ArrayList<WallRepulsion>();
-	}
-	public void setGravity(Gravity gravity)
-	{
-		myGravity = gravity;
-	}
-	public void setViscosity(Viscosity viscosity)
-	{
-		myViscosity = viscosity;
-	}
-	public void setCenterMassMagEx(double[] values)
-	{
-		myCenterMass.setValues(values);
-	}
-	public void addWall(WallRepulsion wall)
-	{
-		myWalls.add(wall);
-	}
-	public CenterOfMass getCenterOfMass()
-	{
-		return myCenterMass;
-	}
-	
-	public void addForce(String ID, Force force)
-	{
-		//myForces.put(ID, force);
+		myForces = new HashMap<String, Force>();
 	}
 
-	public Viscosity getViscosity()
+	public void addForce(String forceType, Force force)
 	{
-		return myViscosity;
+		myForces.put(forceType, force);
 	}
-	public Gravity getGravity()
+	
+	public Map<String, Force> getForces()
 	{
-		return myGravity;
+		return myForces;
 	}
-	public List<WallRepulsion> getWalls()
+	
+	public WallRepulsion getWall()
 	{
-		return myWalls;
+		return myWall;
+	}
+	public void update(List<Mass> massList, Dimension bounds)
+	{
+		if((myForces.get("centermass")) != null)
+		{
+			((CenterOfMass)(myForces.get("centermass"))).setCenterMassPosition(massList);
+		}
+		if((myForces.get("wall")) != null)
+		{
+			((WallRepulsion)(myForces.get("wall"))).setBounds(bounds);
+		}
 	}
 	
 }

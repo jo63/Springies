@@ -3,7 +3,7 @@ package physicsForces;
 import simulation.Mass;
 import util.Vector;
 
-public class Gravity extends Vector{
+public class Gravity extends Force{
 	
 	
 	public Gravity(Vector gravity)
@@ -11,12 +11,10 @@ public class Gravity extends Vector{
 		super(gravity);
 	}
 
-//	public Vector getForce()
-//	{
-//		return this;
-//	}
-	public void applyForce(Mass mass)
-	{
-		mass.applyForce(this);
+	@Override
+	public Vector returnForce() {
+		return this;
 	}
+
+
 }

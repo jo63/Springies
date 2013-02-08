@@ -10,56 +10,39 @@ import util.Location;
 import util.Vector;
 import view.Canvas;
 
-public class CenterOfMass {
-	private static int DISTANCE_OFFSET = 100;
+public class CenterOfMass extends Force{
+
 	private Point myCenterOfMass;
 	private double myMagnitude;
 	private double myExponent;
-	private Canvas myCanvas;
-	
+	private double distFromCenterOfMass;
+	private double COMAngle; 
 
-	public double getMagnitude()
-	{
-		return myMagnitude;
-	}
-	public Canvas getCanvas()
-	{
-		return myCanvas;
-	}
 	public CenterOfMass()
 	{
+		super(new Vector(0,0));
 		myMagnitude = 0;
 		myExponent = 0;
 	}
-	
+
 	public CenterOfMass(double magnitude, double exponent)
 	{
+		super(new Vector(0,0));
 		myMagnitude = magnitude;
 		myExponent = exponent;
 	}
 
-	public void setCanvas(Canvas canvas) //kinda messed up...need to change
+	public double getExponent()
 	{
-		myCanvas = canvas;
-	}
-
-	public void setValues(double[] values)
-	{
-		setMagnitude(values[0]);
-		setExponent(values[1]);
-	}
-	
-	private void setExponent(double exponent)
-	{
-		myExponent = exponent;
-	}
-	public void setMagnitude(double magnitude)
-	{
-		myMagnitude = magnitude;
+		return myExponent;
 	}
 
 	public void setCenterMassPosition(List<Mass> massList)
 	{
+		if(massList == null)
+		{
+			return;
+		}
 		double totalMass = 0;
 		double massXSum = 0;
 		double massYSum = 0;
@@ -72,32 +55,27 @@ public class CenterOfMass {
 		}
 		myCenterOfMass = new Point((int)(massXSum/totalMass), (int)(massYSum/totalMass));
 	}
-	
-	public void draw(Graphics2D lolz)
+
+	public void massInitialize(Mass mass)
 	{
-		//lolz.drawOval(myCenterOfMass.x, myCenterOfMass.y, 25, 25);
+		distance(mass);
+		getAngleForCOM(mass);
 	}
-    private double getAngleForCOM(Mass mass)
+    private void getAngleForCOM(Mass mass)
     {
-    	/*Point M = new Point((int)this.getX(),(int)this.getY());
-    	Vector v1 = new Vector(M, CM);
-    	Vector v2 = new Vector(M, new Point(CM.x, M.y));*/
     	double xDiff = myCenterOfMass.x - mass.getX();
     	double yDiff = myCenterOfMass.y - mass.getY();
     		
-    	return Vector.angleBetween(xDiff,yDiff);
+    	COMAngle = Vector.angleBetween(xDiff,yDiff);
     }
 
-	private double distance(Mass mass)
+	private void distance(Mass mass)
 	{
-		return new Location(myCenterOfMass.x, myCenterOfMass.y).distance(mass.getX(), mass.getY());
+		distFromCenterOfMass = new Location(myCenterOfMass.x, myCenterOfMass.y).distance(mass.getX(), mass.getY());
 	}
-	public void applyForce(Mass mass)
+	public Vector returnForce()
 	{
-		double distFromCenterOfMass = distance(mass)/DISTANCE_OFFSET;
-		double angle = getAngleForCOM(mass);
-		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass,myExponent);
-		mass.applyForce(new Vector(angle, magnitude));
+		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass/100,myExponent);
+		return new Vector(COMAngle, magnitude);
 	}
-
 }

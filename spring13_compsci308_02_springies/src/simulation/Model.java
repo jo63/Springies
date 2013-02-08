@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.util.List;
 import java.util.ArrayList;
 
+import physicsForces.CenterOfMass;
+
 import view.Canvas;
 
 
@@ -44,7 +46,7 @@ public class Model {
             m.paint(pen);
         }
         
-        myPhysics.getCenterOfMass().draw(pen);
+      //  myPhysics.getCenterOfMass().draw(pen);
     }
 
     /**
@@ -52,13 +54,14 @@ public class Model {
      */
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
-        myEnvironment.setEnvironment(myPhysics, myMasses);
+        myPhysics.update(myMasses, bounds);
         
         for (Spring s : mySprings) {
             s.update(elapsedTime, bounds);
         }
         
         for (Mass m : myMasses) {
+            m.applyForce(myEnvironment.getEnvironmentVector(myPhysics,m));
             m.update(elapsedTime, bounds);
         }
        
@@ -73,7 +76,7 @@ public class Model {
     public void setPhysics(Physics physics)
     {
     	myPhysics = physics;
-    	myPhysics.getCenterOfMass().setCanvas(myView);
+    	//myPhysics.getCenterOfMass().setCanvas(myView);
     }
     public Physics getPhysics()
     {

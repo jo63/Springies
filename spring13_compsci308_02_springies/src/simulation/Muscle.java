@@ -26,7 +26,7 @@ public class Muscle extends Spring {
 		super(start, end, length, kVal);
 		myAmplitude = amplitude;
 		initLength = length;
-		myLength = 0;
+
 		// TODO Auto-generated constructor stub
 	}
 
@@ -35,12 +35,11 @@ public class Muscle extends Spring {
 	public void update (double elapsedTime, Dimension bounds) {
 		super.update(elapsedTime, bounds);
 		time += elapsedTime;
-		System.out.println("elapsed time" + time);
 		setLength();		
     }
 	
 	public void setLength(){
-		myLength = Math.abs(initLength+(Math.sin(time)*myAmplitude)); //ask brandon whats going on here
+		super.setLength(initLength+(Math.sin(time)*myAmplitude));
 	}
 
 }
