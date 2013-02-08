@@ -75,7 +75,8 @@ public class LoadPhysicsConstants {
     
     private Viscosity viscosityCommand(Scanner line)
     {
-    	return new Viscosity(new Vector(0,line.nextDouble()));
+    	double magnitude = line.nextDouble();
+    	return new Viscosity(new Vector(0,line.nextDouble()), magnitude);
     }
     
     private double[] centerMassCommand(Scanner line)

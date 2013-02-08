@@ -22,12 +22,12 @@ public class Environment {
 		{
 			for(WallRepulsion wall : physics.getWalls())
 			{
-				wall.applyForce(m);
+				m.applyForce(wall.applyForce());
 			}
 			
-			physics.getGravity().applyForce(m);
-			physics.getViscosity().applyForce(m);
-			physics.getCenterOfMass().applyForce(m);
+			m.applyForce(physics.getGravity().applyForce());
+			m.applyForce(physics.getViscosity().applyForce());
+			m.applyForce(physics.getCenterOfMass().applyForce());
 		}
 	}
 }

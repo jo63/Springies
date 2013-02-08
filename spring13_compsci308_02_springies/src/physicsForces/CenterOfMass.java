@@ -16,6 +16,8 @@ public class CenterOfMass {
 	private double myMagnitude;
 	private double myExponent;
 	private Canvas myCanvas;
+	private double distanceFromCenter;
+	private double angleFromCenter;
 	
 
 	public double getMagnitude()
@@ -92,12 +94,18 @@ public class CenterOfMass {
 	{
 		return new Location(myCenterOfMass.x, myCenterOfMass.y).distance(mass.getX(), mass.getY());
 	}
-	public void applyForce(Mass mass)
+	
+	public void initializeMass(Mass mass)
 	{
-		double distFromCenterOfMass = distance(mass)/DISTANCE_OFFSET;
-		double angle = getAngleForCOM(mass);
+		distanceFromCenter = distance(mass);
+		angleFromCenter = getAngleForCOM(mass);
+	}
+	public Vector applyForce()
+	{
+		double distFromCenterOfMass = distanceFromCenter/DISTANCE_OFFSET;
+		double angle = angleFromCenter;
 		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass,myExponent);
-		mass.applyForce(new Vector(angle, magnitude));
+		return new Vector(angle, magnitude);
 	}
 
 }
