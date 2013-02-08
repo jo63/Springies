@@ -16,10 +16,9 @@ public class Viscosity extends Force{
 //	
 	public void massInitialize(Mass mass)
 	{
-		if(mass.getAcceleration().getDirection() != 0)
-		{
-			this.setDirection(-mass.getAcceleration().getDirection());
-		}
+			this.setDirection(mass.getAcceleration().getDirection()+180);
+
+		
 		
 	}
 	
