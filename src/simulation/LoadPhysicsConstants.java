@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import physicsForces.CenterOfMass;
 import physicsForces.Gravity;
 import physicsForces.Viscosity;
 import physicsForces.WallRepulsion;
@@ -24,15 +26,13 @@ public class LoadPhysicsConstants {
     private static final String CENTERMASS_KEYWORD = "centermass";
     private static final String WALL_KEYWORD = "wall";
     private Physics myPhysics;
-    private Dimension myBounds;
 
     /**
      * XXX.
      * Could refactor this so that it uses a for loop instead of multiple if statements
      */
-    public Physics loadModel (File modelFile, Dimension bounds) {
+    public Physics loadModel (File modelFile) {
     	myPhysics = new Physics();
-    	myBounds = bounds;
     	//myFactory = factory; //for later 
         try {
             Scanner input = new Scanner(modelFile);
@@ -41,18 +41,18 @@ public class LoadPhysicsConstants {
                 if (line.hasNext()) {
                     String type = line.next();
                     if (GRAVITY_KEYWORD.equals(type)) {
-                        myPhysics.setGravity((gravityCommand(line)));
+                        myPhysics.addForce(type, (gravityCommand(line)));
                     }
                     else if (VISCOSITY_KEYWORD.equals(type)) {
-                        myPhysics.setViscosity((viscosityCommand(line)));
+                        myPhysics.addForce(type, (viscosityCommand(line)));
                     }
                     else if(CENTERMASS_KEYWORD.equals(type))
                     {
-                    	myPhysics.setCenterMassMagEx(centerMassCommand(line));
+                    	myPhysics.addForce(type, centerMassCommand(line));
                     }
                     else if(WALL_KEYWORD.equals(type))
                     {
-                    	myPhysics.addWall(wallRepulsionCommand(line));
+                    	myPhysics.addForce(type, wallRepulsionCommand(line, myPhysics.getWall()));
                     }
                 }
             }
@@ -75,29 +75,24 @@ public class LoadPhysicsConstants {
     
     private Viscosity viscosityCommand(Scanner line)
     {
+    	return new Viscosity(new Vector(0,line.nextDouble()));
+    }
+    
+    private CenterOfMass centerMassCommand(Scanner line)
+    {
     	double magnitude = line.nextDouble();
-    	return new Viscosity(new Vector(0,line.nextDouble()), magnitude);
+    	double exponent = line.nextDouble();
+    	return new CenterOfMass(magnitude, exponent);
     }
-    
-    private double[] centerMassCommand(Scanner line)
+    private WallRepulsion wallRepulsionCommand(Scanner line, WallRepulsion wall)
     {
-    	double[] values = new double[2];
-    	values[0] = line.nextDouble();
-    	values[1] = line.nextDouble();
-    	return values;
-    }
-    private WallRepulsion wallRepulsionCommand(Scanner line)
-    {
-    
-    	//double[] values = new double[3];
     	int id = line.nextInt();
     	double magnitude = line.nextDouble();
     	double exponent = line.nextDouble();
-    	WallRepulsion wall = new WallRepulsion(id, magnitude, exponent, myBounds);
-    	//wall.setValues(values);
+
+    	wall.addWall(id, magnitude, exponent);
     	
     	return wall;
     }
-    
     
 }
