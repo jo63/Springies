@@ -5,6 +5,7 @@ import util.Vector;
 
 public class Gravity extends Vector{
 	
+	
 	public Gravity(Vector gravity)
 	{
 		super(gravity);
@@ -14,8 +15,8 @@ public class Gravity extends Vector{
 //	{
 //		return this;
 //	}
-	public Vector applyForce()
+	public void applyForce(Mass mass)
 	{
-		return this;
+		mass.applyForce(this);
 	}
 }

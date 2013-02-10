@@ -39,10 +39,6 @@ public class Mass extends Sprite {
     {
     	return myMass;
     }
-    public Vector getAcceleration()
-    {
-    	return myAcceleration;
-    }
     
     /**
      * XXX.

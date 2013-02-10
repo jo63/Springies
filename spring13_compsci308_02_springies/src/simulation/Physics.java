@@ -19,7 +19,7 @@ public class Physics {
 	{
 		//myForces = new HashMap<String , Force>();
 		myGravity = new Gravity(new Vector());
-		myViscosity = new Viscosity(new Vector(), 0);
+		myViscosity = new Viscosity(new Vector());
 		myCenterMass = new CenterOfMass();
 		myWalls = new ArrayList<WallRepulsion>();
 	}
