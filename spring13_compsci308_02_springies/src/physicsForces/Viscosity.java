@@ -4,24 +4,27 @@ import simulation.Mass;
 import util.Vector;
 
 public class Viscosity extends Vector{
+	private double _Maginitude;
 	
-	public Viscosity(Vector viscosity)
+	public Viscosity(Vector viscosity, double magnitude)
 	{
 		super(viscosity);
+		_Maginitude = magnitude;
 	}
 //
 //	public Vector getViscosity() {
 //		return this;
 //	}
 //	
-	private void setDirection(Mass mass)
+	public void initializeMass(Mass mass)
 	{
-		this.setDirection(mass.getVelocity().getDirection());
+		if(mass.getAcceleration().getDirection() != 0)
+			this.setDirection(-mass.getAcceleration().getDirection());
+		this.scale(_Maginitude);
 	}
 	
-	public void applyForce(Mass mass)
+	public Vector applyForce()
 	{
-		setDirection(mass);
-		mass.applyForce(this);
+		return this;
 	}
 }

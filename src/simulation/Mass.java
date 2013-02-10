@@ -49,7 +49,6 @@ public class Mass extends Sprite {
      */
     @Override
     public void update (double elapsedTime, Dimension bounds) {
-    	
         applyForce(getBounce(bounds));
 
         // convert force back into Mover's velocity

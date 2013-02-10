@@ -3,19 +3,18 @@ package physicsForces;
 import simulation.Mass;
 import util.Vector;
 
-public class Gravity extends Vector{
+public class Gravity extends Force{
+	
 	
 	public Gravity(Vector gravity)
 	{
 		super(gravity);
 	}
 
-//	public Vector getForce()
-//	{
-//		return this;
-//	}
-	public Vector applyForce()
-	{
+	@Override
+	public Vector returnForce() {
 		return this;
 	}
+
+
 }
