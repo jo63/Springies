@@ -21,7 +21,7 @@ public class Spring extends Sprite {
 
     private Mass myStart;
     private Mass myEnd;
-    private double myLength; //change this
+    private double myLength; 
     private double myK;
 
     /**
@@ -42,6 +42,10 @@ public class Spring extends Sprite {
     public Mass getEnd()
     {
     	return myEnd;
+    }
+    public double getLength()
+    {
+    	return myLength;
     }
     public void setStart(Mass start)
     {
@@ -73,7 +77,7 @@ public class Spring extends Sprite {
         double dy = myStart.getY() - myEnd.getY();
         // apply hooke's law to each attached mass
         Vector force = new Vector(Vector.angleBetween(dx, dy), 
-                                  myK * (myLength - Vector.distanceBetween(dx, dy)));
+                                  myK * (getLength() - Vector.distanceBetween(dx, dy)));
         myStart.applyForce(force);
         force.negate();
         myEnd.applyForce(force);

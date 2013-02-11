@@ -13,7 +13,7 @@ import java.awt.Dimension;
 public class Muscle extends Spring {
 
 	private double myAmplitude;
-	private double initLength;
+	//private double initLength;
 	//private double myLength;
 	private double time;
 	/**
@@ -25,7 +25,7 @@ public class Muscle extends Spring {
 	public Muscle(Mass start, Mass end, double length, double kVal, double amplitude) {
 		super(start, end, length, kVal);
 		myAmplitude = amplitude;
-		initLength = length;
+		//initLength = length;
 
 		// TODO Auto-generated constructor stub
 	}
@@ -33,13 +33,13 @@ public class Muscle extends Spring {
 	
 	@Override
 	public void update (double elapsedTime, Dimension bounds) {
-		super.update(elapsedTime, bounds);
 		time += elapsedTime;
-		setLength();		
+		super.update(elapsedTime, bounds);
+				
     }
-	
-	public void setLength(){
-		super.setLength(initLength+(Math.sin(time)*myAmplitude));
+	public double getLength()
+	{
+		 return super.getLength()+(Math.sin(time)*myAmplitude);
 	}
 
 }

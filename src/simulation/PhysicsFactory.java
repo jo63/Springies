@@ -33,7 +33,7 @@ public class PhysicsFactory extends Factory{
      */
     public Physics loadModel (File modelFile) {
     	myPhysics = new Physics();
-    	//myFactory = factory; //for later 
+    	
         try {
             Scanner input = new Scanner(modelFile);
             while (input.hasNext()) {
