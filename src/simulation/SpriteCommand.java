@@ -2,19 +2,17 @@ package simulation;
 
 
 import java.util.Scanner;
-import simulation.*;
+
 
 import util.Sprite;
 
 public abstract class SpriteCommand {
 	private Factory myFactory;
 	
-	public SpriteCommand(Factory factory)
-	{
-		myFactory = factory;
-	}
+
 	
 	public abstract Sprite getCommand(Scanner line);
+	
 	public Factory getFactory()
 	{
 		return myFactory;

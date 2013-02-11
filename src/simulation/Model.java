@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import physicsForces.CenterOfMass;
+import physicsForces.Force;
 
 import view.Canvas;
 
@@ -74,6 +75,20 @@ public class Model {
     public void add(Mass mass) {
         myMasses.add(mass);
     }
+    /**
+     * Add given spring to this simulation.
+     */
+    public void add (Spring spring) {
+        mySprings.add(spring);
+    }
+    /**
+     * Add given force to this simulation's physics.
+     */
+    public void add(String type, Force force)
+    {
+    	myPhysics.addForce(type, force);
+    }
+    
     public void setPhysics(Physics physics)
     {
     	myPhysics = physics;
@@ -83,10 +98,6 @@ public class Model {
     {
     	return myPhysics;
     }
-    /**
-     * Add given spring to this simulation.
-     */
-    public void add (Spring spring) {
-        mySprings.add(spring);
-    }
+
+
 }

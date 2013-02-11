@@ -31,7 +31,7 @@ public class PhysicsFactory extends Factory{
      * XXX.
      * Could refactor this so that it uses a for loop instead of multiple if statements
      */
-    public Physics loadModel (File modelFile) {
+    public Physics loadModel (Model model, File modelFile) {
     	myPhysics = new Physics();
     	
         try {
