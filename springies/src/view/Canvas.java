@@ -19,6 +19,8 @@ import java.util.TreeSet;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
+import javax.swing.event.MouseInputAdapter;
+
 import simulation.SpriteFactory;
 import simulation.PhysicsFactory;
 import simulation.Model;
@@ -57,6 +59,8 @@ public class Canvas extends JComponent {
     private int myLastKeyPressed;
     private Point myLastMousePosition;
     private Set<Integer> myKeys;
+    
+    private int mouseClick = MouseEvent.BUTTON1;
 
 
     /**
@@ -111,6 +115,11 @@ public class Canvas extends JComponent {
     public Point getLastMousePosition () {
         return myLastMousePosition;
     }
+    
+    public int getMouseButton()
+    {
+    	return mouseClick;
+    }
 
     /**
      * Start the animation.
@@ -151,37 +160,47 @@ public class Canvas extends JComponent {
     private void setInputListeners () {
         // initialize input state
         myLastKeyPressed = NO_KEY_PRESSED;
-        myKeys = new TreeSet<Integer>();
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed (KeyEvent e) {
-                myLastKeyPressed = e.getKeyCode();
                 myKeys.add(e.getKeyCode());
             }
             @Override
             public void keyReleased (KeyEvent e) {
-                myLastKeyPressed = NO_KEY_PRESSED;
-                myKeys.remove((Integer)e.getKeyCode());
+                myKeys.remove(e.getKeyCode());
             }
         });
-        myLastMousePosition = NO_MOUSE_PRESSED;
+        
+        myLastMousePosition = new Point();
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
-            public void mouseDragged (MouseEvent e) {
+            public void mouseMoved (MouseEvent e) {
                 myLastMousePosition = e.getPoint();
             }
         });
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed (MouseEvent e) {
-                myLastMousePosition = e.getPoint();
-            }
-            @Override
-            public void mouseReleased (MouseEvent e) {
-                myLastMousePosition = NO_MOUSE_PRESSED;
-            }
-        });
+        mouseClick = MouseEvent.NOBUTTON;
+        addMouseListener(
+        		new MouseInputAdapter() {
+        			@Override
+        			public void mousePressed(MouseEvent e)
+        			{
+        				mouseClick = e.getButton();
+        			}
+        			
+        			@Override
+        			public void mouseReleased(MouseEvent e)
+        			{
+        				mouseClick = e.NOBUTTON;
+        			}	
+				}
+        		);
     }
+    
+    public boolean isKeyContained(int key)
+    {
+    	return myKeys.contains(key);
+    }
+    
     
     // load model from file chosen by user
     private void loadModel () {
