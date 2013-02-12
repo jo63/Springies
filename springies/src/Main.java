@@ -15,6 +15,7 @@ public class Main {
     public static final String TITLE = "Springies!";
 
     //fooclad boom boom 
+    // hi
     private Main () {
         // does not make sense to construct this class
     }
