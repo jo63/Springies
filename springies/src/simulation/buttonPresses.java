@@ -1,7 +1,8 @@
 package simulation;
 
 import java.awt.event.KeyEvent;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFileChooser;
 
 public class buttonPresses {
@@ -21,17 +22,38 @@ public class buttonPresses {
 	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
 	private static final int TOGGLE_WALL_FOUR = KeyEvent.VK_4;
 	
+	//private Set<Integer> myKeysPressed;
 	
-	
-	public buttonPresses()
+	public buttonPresses(HashSet<Integer> keysPressed)
 	{
-		
+		HashSet<Integer> myKeysPressed = keysPressed;
+		performAction(myKeysPressed);
 	}
 	
-	public void update()
+	public void performAction(HashSet<Integer> keysPressed)
 	{
-		
+		for(Integer key : keysPressed)
+		{
+			loadAssembly(key);
+		}
 	}
+	
+	private void loadAssembly(Integer key)
+	{
+		if(key == LOAD_ASSEMBLY)
+		{
+			loadModel();
+		}
+	}
+	
+	private void clearModel(Integer key)
+	{
+		if(key == CLEAR_ASSEMBLY)
+		{
+			//clear the assembly
+		}
+	}
+	
 	
 	private void loadModel () {
         SpriteFactory factory = new SpriteFactory();
