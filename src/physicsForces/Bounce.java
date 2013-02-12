@@ -31,6 +31,6 @@ public class Bounce extends Force {
 	            this.setMagnitude(IMPULSE_MAGNITUDE);
 	        }
 	        //impulse scale angle calculation is off. 
-	        	this.scale(m.getVelocity().getRelativeMagnitude(this));
+	        this.scale(m.getVelocity().getRelativeMagnitude(this));
 	}
 }

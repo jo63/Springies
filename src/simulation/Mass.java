@@ -50,6 +50,8 @@ public class Mass extends Sprite {
     @Override
     public void update (double elapsedTime, Dimension bounds) {
     	
+    	applyForce(getBounce(bounds));
+    	 
         // convert force back into Mover's velocity
         getVelocity().sum(myAcceleration);
         myAcceleration.reset();
@@ -82,6 +84,27 @@ public class Mass extends Sprite {
     }
 
     // check for move out of bounds
+    private Vector getBounce (Dimension bounds) {
+        final double IMPULSE_MAGNITUDE = 2;
+        Vector impulse = new Vector();
+        if (getLeft() < 0) {
+            impulse = new Vector(RIGHT_DIRECTION, IMPULSE_MAGNITUDE);
+        }
+        else if (getRight() > bounds.width) {
+            impulse = new Vector(LEFT_DIRECTION, IMPULSE_MAGNITUDE);
+        }
+        
+        if (getBottom() >= bounds.height) {
+        
+            impulse = new Vector(UP_DIRECTION, IMPULSE_MAGNITUDE);
+        }
+        if (getTop() < 0) {
+            impulse = new Vector(DOWN_DIRECTION, IMPULSE_MAGNITUDE);
+        }
+        //impulse scale angle calculation is off. 
+        	impulse.scale(getVelocity().getRelativeMagnitude(impulse));
+        return impulse;
+    }
     
 
 }

@@ -66,5 +66,10 @@ public class WallRepulsion extends CenterOfMass {
 		this.reset();
 		distance(mass);
 	}
+	
+	public Vector returnForce()
+	{
+		return this;
+	}
 
 }

@@ -3,6 +3,8 @@ package simulation;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import physicsForces.CenterOfMass;
@@ -25,65 +27,34 @@ public class PhysicsFactory extends Factory{
     private static final String VISCOSITY_KEYWORD = "viscosity";
     private static final String CENTERMASS_KEYWORD = "centermass";
     private static final String WALL_KEYWORD = "wall";
-    private Physics myPhysics;
+    
+    
+    private Map<String, PhysicsCommand> physicsCreator = new HashMap<String, PhysicsCommand>();
 
-    /**
-     * XXX.
-     * Could refactor this so that it uses a for loop instead of multiple if statements
-     */
-    public Physics loadModel (Model model, File modelFile) {
-    	myPhysics = new Physics();
-    	
-        try {
-            Scanner input = new Scanner(modelFile);
-            while (input.hasNext()) {
-                Scanner line = new Scanner(input.nextLine());
-                if (line.hasNext()) {
-                    String type = line.next();
-                    if (GRAVITY_KEYWORD.equals(type)) {
-                        myPhysics.addForce(type, (gravityCommand(line)));
-                    }
-                    else if (VISCOSITY_KEYWORD.equals(type)) {
-                        myPhysics.addForce(type, (viscosityCommand(line)));
-                    }
-                    else if(CENTERMASS_KEYWORD.equals(type))
-                    {
-                    	myPhysics.addForce(type, centerMassCommand(line));
-                    }
-                    else if(WALL_KEYWORD.equals(type))
-                    {
-                    	myPhysics.addForce(type, wallRepulsionCommand(line, myPhysics.getWall()));
-                    }
-                }
+    
+    @Override
+	public void initMaps() {
+    	physicsCreator.put(GRAVITY_KEYWORD, new GravityCommand());
+    	physicsCreator.put(VISCOSITY_KEYWORD, new ViscosityCommand());
+    	physicsCreator.put(CENTERMASS_KEYWORD, new CenterOfMassCommand());
+		
+	}
+    @Override
+    public void create(Model model, Scanner line)
+    {
+    	if (line.hasNext()) {
+            String type = line.next();
+            if(physicsCreator.containsKey(type))
+            {
+            	model.add(type, physicsCreator.get(type).getCommand(line));
             }
-            input.close();
+            else if(WALL_KEYWORD.equals(type))
+            {
+            	model.add(type, wallRepulsionCommand(line, model.getPhysics().getWall())); //need to fix
+            }
         }
-        catch (FileNotFoundException e) {
-            // should not happen because File came from user selection
-            e.printStackTrace();
-        }
-        
-        return myPhysics;
-    }
-
-    // create gravity from formatted data
-    private Gravity gravityCommand (Scanner line) {
-        double direction = line.nextDouble();
-        double magnitude = line.nextDouble();
-        return new Gravity(new Vector(direction, magnitude));
     }
     
-    private Viscosity viscosityCommand(Scanner line)
-    {
-    	return new Viscosity(new Vector(0,line.nextDouble()));
-    }
-    
-    private CenterOfMass centerMassCommand(Scanner line)
-    {
-    	double magnitude = line.nextDouble();
-    	double exponent = line.nextDouble();
-    	return new CenterOfMass(magnitude, exponent);
-    }
     private WallRepulsion wallRepulsionCommand(Scanner line, WallRepulsion wall)
     {
     	int id = line.nextInt();
@@ -94,5 +65,7 @@ public class PhysicsFactory extends Factory{
     	
     	return wall;
     }
+
+	
     
 }

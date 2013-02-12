@@ -19,7 +19,7 @@ public class Physics {
 	public Physics()
 	{
 		myForces = new HashMap<String, Force>();
-		addBounce();
+		//addBounce();
 		
 	}
 	private void addBounce()
@@ -29,6 +29,7 @@ public class Physics {
 	}
 	public void addForce(String forceType, Force force)
 	{
+		//if(!(force instanceof WallRepulsion)) 
 		myForces.put(forceType, force);
 	}
 	
@@ -43,7 +44,6 @@ public class Physics {
 	}
 	public void update(List<Mass> massList, Dimension bounds)
 	{
-		((Bounce)(myForces.get("bounce"))).setBounds(bounds);
 		if((myForces.get("centermass")) != null)
 		{
 			((CenterOfMass)(myForces.get("centermass"))).setCenterMassPosition(massList);

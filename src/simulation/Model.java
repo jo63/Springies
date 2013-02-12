@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import physicsForces.CenterOfMass;
 import physicsForces.Force;
 
+import util.Sprite;
 import view.Canvas;
 
 
@@ -23,7 +24,7 @@ public class Model {
     private List<Mass> myMasses;
     private List<Spring> mySprings;
     private Physics myPhysics;
-    private Environment myEnvironment;
+
     
     /**
      * Create a game of the given size with the given display for its shapes.
@@ -33,7 +34,6 @@ public class Model {
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
-        myEnvironment = new Environment();
     }
 
     /**
@@ -69,16 +69,23 @@ public class Model {
        
     }
 
+    public void add(Sprite sprite)
+    {
+    	if(sprite instanceof Mass)
+    		add((Mass)sprite);
+    	else if(sprite instanceof Spring)
+    		add((Spring)sprite);
+    }
     /**
      * Add given mass to this simulation.
      */
-    public void add(Mass mass) {
+    private void add(Mass mass) {
         myMasses.add(mass);
     }
     /**
      * Add given spring to this simulation.
      */
-    public void add (Spring spring) {
+    private void add(Spring spring) {
         mySprings.add(spring);
     }
     /**
@@ -92,7 +99,6 @@ public class Model {
     public void setPhysics(Physics physics)
     {
     	myPhysics = physics;
-    	//myPhysics.getCenterOfMass().setCanvas(myView);
     }
     public Physics getPhysics()
     {
