@@ -2,7 +2,14 @@ package simulation;
 
 import java.awt.event.KeyEvent;
 
+import javax.swing.JFileChooser;
+
 public class buttonPresses {
+	
+    private static final JFileChooser INPUT_CHOOSER = 
+	            new JFileChooser(System.getProperties().getProperty("user.dir"));
+	 
+	private Model mySimulation;
 	
 	private static final int LOAD_ASSEMBLY = KeyEvent.VK_N;
 	private static final int CLEAR_ASSEMBLY = KeyEvent.VK_C;
@@ -20,4 +27,20 @@ public class buttonPresses {
 	{
 		
 	}
+	
+	public void update()
+	{
+		
+	}
+	
+	private void loadModel () {
+        SpriteFactory factory = new SpriteFactory();
+        int response = INPUT_CHOOSER.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+        	response = INPUT_CHOOSER.showOpenDialog(null);
+            factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
+            
+        }
+       
+    }
 }
