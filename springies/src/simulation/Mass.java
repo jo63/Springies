@@ -22,9 +22,7 @@ public class Mass extends Sprite {
 
     private double myMass;
     private Vector myAcceleration;
-    
-
-
+   
     /**
      * XXX.
      */

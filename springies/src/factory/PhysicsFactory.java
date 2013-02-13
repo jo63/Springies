@@ -38,8 +38,8 @@ public class PhysicsFactory extends Factory{
     	physicsCreator.put(GRAVITY_KEYWORD, new GravityCommand());
     	physicsCreator.put(VISCOSITY_KEYWORD, new ViscosityCommand());
     	physicsCreator.put(CENTERMASS_KEYWORD, new CenterOfMassCommand());
-		
 	}
+    
     @Override
     public void create(Model model, Scanner line)
     {

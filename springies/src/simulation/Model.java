@@ -5,6 +5,8 @@ import java.awt.Graphics2D;
 import java.util.List;
 import java.util.ArrayList;
 
+import controller.ButtonController;
+
 import physicsForces.CenterOfMass;
 import physicsForces.Force;
 
@@ -24,6 +26,7 @@ public class Model {
     private List<Mass> myMasses;
     private List<Spring> mySprings;
     private Physics myPhysics;
+    private ButtonController myController;
 
     
     /**
@@ -34,8 +37,20 @@ public class Model {
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
+        myController = new ButtonController();
     }
-
+    public void setPhysics(Physics physics)
+    {
+    	myPhysics = physics;
+    }
+    public Physics getPhysics()
+    {
+    	return myPhysics;
+    }
+    public Canvas getCanvas()
+    {
+    	return myView;
+    }
     /**
      * Draw all elements of the simulation.
      */
@@ -56,6 +71,8 @@ public class Model {
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
         myPhysics.update(myMasses, bounds);
+        myController.setModel(this);
+        myController.performAction();
         
         for (Spring s : mySprings) {
             s.update(elapsedTime, bounds);
@@ -95,15 +112,10 @@ public class Model {
     {
     	myPhysics.addForce(type, force);
     }
-    
-    public void setPhysics(Physics physics)
+    public void clear()
     {
-    	myPhysics = physics;
+    	myMasses = new ArrayList<Mass>();
+        mySprings = new ArrayList<Spring>();
     }
-    public Physics getPhysics()
-    {
-    	return myPhysics;
-    }
-
 
 }

@@ -35,10 +35,13 @@ public class Force extends Vector{
 		return this;
 	}
 	public void massInitialize(Mass mass){}
-	
 	public void toggleForce()
 	{
 		isValid = !isValid;
+	}
+	public boolean isValid()
+	{
+		return isValid;
 	}
 
 }
