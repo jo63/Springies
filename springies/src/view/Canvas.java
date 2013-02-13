@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JComponent;
@@ -73,7 +74,9 @@ public class Canvas extends JComponent {
         // prepare to receive input
         setFocusable(true);
         requestFocus();
+        myKeys = new HashSet<Integer>();
         setInputListeners();
+        
     }
 
     /**
@@ -101,12 +104,18 @@ public class Canvas extends JComponent {
     public int getLastKeyPressed () {
         return myLastKeyPressed;
     }
+    
+    public boolean isKeyContained(int key)
+    {
+    	return myKeys.contains(key);
+    }
+    
 
     /**
      * Returns all keys currently pressed by the user.
      */
-    public Collection<Integer> getKeysPressed () {
-        return Collections.unmodifiableSet(myKeys);
+    public Set<Integer> getKeysPressed () {
+        return myKeys;
     }
 
     /**
@@ -196,12 +205,6 @@ public class Canvas extends JComponent {
         		);
     }
     
-    public boolean isKeyContained(int key)
-    {
-    	return myKeys.contains(key);
-    }
-    
-    
     // load model from file chosen by user
     private void loadModel () {
         SpriteFactory factory = new SpriteFactory();
@@ -216,6 +219,12 @@ public class Canvas extends JComponent {
         }
        
     }
-    
-    //newWindow(){ mySimulation.add(new Mass(INPUT_CHOOSER(getData)) }
+	public void loadAssembly() {
+        SpriteFactory factory = new SpriteFactory();
+        int response = INPUT_CHOOSER.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {
+        	response = INPUT_CHOOSER.showOpenDialog(null);
+            factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile()); //same simulation or should be passed in?
+        }
+    }
 }

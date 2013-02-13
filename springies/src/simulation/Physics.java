@@ -63,8 +63,8 @@ public class Physics {
 			{
 
 			}*/
-			//added check for valid force
-			if(force.forceValid()){
+
+			if(force.isValid()){
 				force.massInitialize(m);
 				result.sum(force.returnForce());
 			}
