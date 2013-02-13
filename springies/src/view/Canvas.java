@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -22,8 +23,7 @@ import javax.swing.JFileChooser;
 import javax.swing.Timer;
 import javax.swing.event.MouseInputAdapter;
 
-import simulation.SpriteFactory;
-import simulation.PhysicsFactory;
+import factory.*;
 import simulation.Model;
 
 
