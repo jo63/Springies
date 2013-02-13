@@ -40,5 +40,10 @@ public class Force extends Vector{
 	{
 		isValid = !isValid;
 	}
+	
+	public Boolean forceValid()
+	{
+		return isValid;
+	}
 
 }

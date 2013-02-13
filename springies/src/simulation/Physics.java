@@ -15,12 +15,12 @@ public class Physics {
 
 	private Map<String, Force> myForces;
 	private WallRepulsion myWall = new WallRepulsion();
-	
+
 	public Physics()
 	{
 		myForces = new HashMap<String, Force>();
 		//addBounce();
-		
+
 	}
 	private void addBounce()
 	{
@@ -32,12 +32,12 @@ public class Physics {
 		//if(!(force instanceof WallRepulsion)) 
 		myForces.put(forceType, force);
 	}
-	
+
 	public Map<String, Force> getForces()
 	{
 		return myForces;
 	}
-	
+
 	public WallRepulsion getWall()
 	{
 		return myWall;
@@ -53,7 +53,7 @@ public class Physics {
 			((WallRepulsion)(myForces.get("wall"))).setBounds(bounds);
 		}
 	}
-	
+
 	public Vector getEnvironmentVector(Mass m)
 	{
 		Vector result = new Vector();
@@ -61,12 +61,15 @@ public class Physics {
 		{
 			/*if(gravityOk && force instanceof Gravity)
 			{
-				
+
 			}*/
-			force.massInitialize(m);
-			result.sum(force.returnForce());
+			//added check for valid force
+			if(force.forceValid()){
+				force.massInitialize(m);
+				result.sum(force.returnForce());
+			}
 		}
-		
+
 		return result;
 	}
 
