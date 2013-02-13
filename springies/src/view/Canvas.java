@@ -215,7 +215,6 @@ public class Canvas extends JComponent {
         	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
             response = INPUT_CHOOSER.showOpenDialog(null);
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
-            
         }
        
     }
