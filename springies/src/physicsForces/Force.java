@@ -6,6 +6,9 @@ import simulation.Mass;
 import util.Vector;
 
 public class Force extends Vector{
+	
+	boolean isValid;
+	
 	public static final int[] DIRECTIONS = 
     	{
     		90,
@@ -32,5 +35,10 @@ public class Force extends Vector{
 		return this;
 	}
 	public void massInitialize(Mass mass){}
+	
+	public void toggleForce()
+	{
+		isValid = !isValid;
+	}
 
 }

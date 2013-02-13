@@ -69,5 +69,5 @@ public class Physics {
 		
 		return result;
 	}
-	
+
 }
