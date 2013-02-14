@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.util.List;
 import java.util.ArrayList;
 
-import controller.ButtonController;
+import controller.Controller;
 
 import physicsForces.CenterOfMass;
 import physicsForces.Force;
@@ -26,7 +26,7 @@ public class Model {
     private List<Mass> myMasses;
     private List<Spring> mySprings;
     private Physics myPhysics;
-    private ButtonController myController;
+    private Controller myController;
 
     
     /**
@@ -37,7 +37,7 @@ public class Model {
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
-        myController = new ButtonController();
+        myController = new Controller();
     }
     public void setPhysics(Physics physics)
     {

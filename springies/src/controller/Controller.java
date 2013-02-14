@@ -9,7 +9,7 @@ import javax.swing.JFileChooser;
 import simulation.Model;
 
 
-public class ButtonController {
+public class Controller {
 	 
 	private Model mySimulation;
 	private Set<Integer> myKeys;
@@ -24,8 +24,12 @@ public class ButtonController {
 	private static final int TOGGLE_WALL_TWO = KeyEvent.VK_2;
 	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
 	private static final int TOGGLE_WALL_FOUR = KeyEvent.VK_4;
+	private static final int INCREASE_UP = KeyEvent.VK_UP;
+	private static final int INCREASE_DOWN = KeyEvent.VK_DOWN;
+	private static final int INCREASE_RIGHT = KeyEvent.VK_RIGHT;
+	private static final int INCREASE_LEFT = KeyEvent.VK_LEFT;
 	
-	public ButtonController()
+	public Controller()
 	{
 		myActions = new HashMap<Integer, KeyAction>();
 	}
@@ -54,4 +58,5 @@ public class ButtonController {
 			}
 		}
 	}
+	
 }
