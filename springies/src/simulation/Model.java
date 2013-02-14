@@ -64,6 +64,16 @@ public class Model {
         
       //  myPhysics.getCenterOfMass().draw(pen);
     }
+    
+    public List<Mass> getMasses()
+    {
+    	return myMasses;
+    }
+    
+    public List<Spring> getSprings()
+    {
+    	return mySprings;
+    }
 
     /**
      * Update simulation for this moment, given the time since the last moment.

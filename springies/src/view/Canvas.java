@@ -61,7 +61,7 @@ public class Canvas extends JComponent {
     private Point myLastMousePosition;
     private Set<Integer> myKeys;
     
-    private int mouseClick = MouseEvent.BUTTON1;
+    private int mouseClick = MouseEvent.NOBUTTON;
 
 
     /**

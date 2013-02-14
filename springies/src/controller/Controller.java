@@ -1,24 +1,29 @@
 package controller;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JFileChooser;
 import simulation.Model;
+import util.Location;
 
 
 public class Controller {
 	 
 	private Model mySimulation;
 	private Set<Integer> myKeys;
-	private Map<Integer, KeyAction> myActions;
+	private Map<Integer, KeyAction> myKeyActions;
+	private Map<Integer, MouseAction> myMouseActions;
+	private int lastMouseButton;
 	
 	private static final int LOAD_ASSEMBLY = KeyEvent.VK_N;
 	private static final int CLEAR_ASSEMBLY = KeyEvent.VK_C;
 	private static final int TOGGLE_GRAVITY = KeyEvent.VK_G;
-	private static final int TOGGLE_VISCOSITYㄴ = KeyEvent.VK_V;
+	private static final int TOGGLE_VISCOSITY = KeyEvent.VK_V;
 	private static final int TOGGLE_CENTER_OF_MASS = KeyEvent.VK_M;
 	private static final int TOGGLE_WALL_ONE = KeyEvent.VK_1;
 	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
@@ -28,32 +33,45 @@ public class Controller {
 	private static final int INCREASE_RIGHT = KeyEvent.VK_RIGHT;
 	private static final int INCREASE_LEFT = KeyEvent.VK_LEFT;
 	
+	
+	
 	public Controller()
 	{
-		myActions = new HashMap<Integer, KeyAction>();
+		myKeyActions = new HashMap<Integer, KeyAction>();
+		myMouseActions = new HashMap<Integer, MouseAction>();
 	}
 	
 	public void setModel(Model model)
 	{
 		initMap(model);
 		myKeys = model.getCanvas().getKeysPressed();
+		lastMouseButton = model.getCanvas().getMouseButton();
 	}
 	
 	private void initMap(Model model)
 	{
-		myActions.put(LOAD_ASSEMBLY, new LoadAssembly(model));
-		myActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
-		myActions.put(TOGGLE_GRAVITY, new ToggleGravity(model));
-		myActions.put(TOGGLE_VISCOSITY, new ToggleViscosity(model));
-		myActions.put(TOGGLE_CENTER_OF_MASS, new ToggleCenterOfMass(model));
+		myKeyActions.put(LOAD_ASSEMBLY, new LoadAssembly(model));
+		myKeyActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
+		myKeyActions.put(TOGGLE_GRAVITY, new ToggleGravity(model));
+		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleViscosity(model));
+		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleCenterOfMass(model));
+		
+		myMouseActions.put(MouseEvent.BUTTON1, new CreateSpring(model));
+		myMouseActions.put(MouseEvent.NOBUTTON, new RemoveSpring(model));
 		
 	}
 	public void performAction()
 	{
+		if (myMouseActions.containsKey(lastMouseButton))
+		{
+			myMouseActions.get(lastMouseButton);
+		}
+		
+		
 		for(Integer key : myKeys)
 		{
-			if(myActions.containsKey(key)){
-				myActions.get(key).performAction();
+			if(myKeyActions.containsKey(key)){
+				myKeyActions.get(key).performAction();
 			}
 		}
 	}
