@@ -12,7 +12,7 @@ import util.Location;
 public abstract class MouseAction {
 
 	private Model myModel;
-	protected Spring mySpring;
+	protected Spring mySpring; //getter and setter. 
 	protected Mass myMass;
 	private Point mousePosition;
 

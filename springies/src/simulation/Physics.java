@@ -19,17 +19,10 @@ public class Physics {
 	public Physics()
 	{
 		myForces = new HashMap<String, Force>();
-		//addBounce();
 
-	}
-	private void addBounce()
-	{
-		Bounce b = new Bounce(new Vector());
-		myForces.put("bounce", b);
 	}
 	public void addForce(String forceType, Force force)
 	{
-		//if(!(force instanceof WallRepulsion)) 
 		myForces.put(forceType, force);
 	}
 
@@ -59,11 +52,6 @@ public class Physics {
 		Vector result = new Vector();
 		for(Force force : myForces.values())
 		{
-			/*if(gravityOk && force instanceof Gravity)
-			{
-
-			}*/
-
 			if(force.isValid()){
 				force.massInitialize(m);
 				result.sum(force.returnForce());

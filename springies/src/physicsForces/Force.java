@@ -17,11 +17,18 @@ public class Force extends Vector{
     		0
     	};
 	private Dimension myBounds;
-	
+	/**
+	 * 
+	 * @param vector
+	 */
 	public Force(Vector vector) {
 		super(vector);
 		myBounds = new Dimension();
 	}
+	/**
+	 * 
+	 * @param bounds
+	 */
 	public void setBounds(Dimension bounds)
 	{
 		myBounds = bounds;

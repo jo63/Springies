@@ -38,8 +38,8 @@ public class PhysicsFactory extends Factory{
     	physicsCreator.put(GRAVITY_KEYWORD, new GravityCommand());
     	physicsCreator.put(VISCOSITY_KEYWORD, new ViscosityCommand());
     	physicsCreator.put(CENTERMASS_KEYWORD, new CenterOfMassCommand());
+    	physicsCreator.put(WALL_KEYWORD, new WallRepulsionCommand(getModel()));
 	}
-    
     @Override
     public void create(Model model, Scanner line)
     {
@@ -49,23 +49,10 @@ public class PhysicsFactory extends Factory{
             {
             	model.add(type, physicsCreator.get(type).getCommand(line));
             }
-            else if(WALL_KEYWORD.equals(type))
-            {
-            	model.add(type, wallRepulsionCommand(line, model.getPhysics().getWall())); //need to fix
-            }
         }
     }
     
-    private WallRepulsion wallRepulsionCommand(Scanner line, WallRepulsion wall)
-    {
-    	int id = line.nextInt();
-    	double magnitude = line.nextDouble();
-    	double exponent = line.nextDouble();
-
-    	wall.addWall(id, magnitude, exponent);
-    	
-    	return wall;
-    }
+   
 
 	
     

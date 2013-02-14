@@ -97,14 +97,33 @@ class ToggleCenterOfMass extends KeyAction
 }
 class ToggleWallRepulsion extends KeyAction
 {
-
-	public ToggleWallRepulsion(Model model) {
+	private int myID;
+	public ToggleWallRepulsion(Model model, int id) {
 		super(model);
+		myID = id;
 	}
 	@Override
 	public void performAction() {
-		//TODO: toggle the appropriate
+		if(getForces().get("wall") != null)
+		{
+			((WallRepulsion)(getForces().get("wall"))).toggleWalls(myID);
+		}
 	}
+}
+class IncreaseDimension extends KeyAction
+{
+	private int myValue;
+	public IncreaseDimension(Model model) {
+		super(model);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void performAction() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
 
 

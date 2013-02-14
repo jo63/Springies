@@ -68,14 +68,16 @@ public class Canvas extends JComponent {
      * Create a panel so that it knows its size
      */
     public Canvas (Dimension size) {
+    	
         // set size (a bit of a pain)
         setPreferredSize(size);
         setSize(size);
         // prepare to receive input
+        
         setFocusable(true);
         requestFocus();
+        setInputListeners(); //error?
         myKeys = new HashSet<Integer>();
-        setInputListeners();
         
     }
 
@@ -172,6 +174,7 @@ public class Canvas extends JComponent {
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed (KeyEvent e) {
+            	System.out.println("key");
                 myKeys.add(e.getKeyCode());
             }
             @Override
@@ -193,6 +196,7 @@ public class Canvas extends JComponent {
         			@Override
         			public void mousePressed(MouseEvent e)
         			{
+        				System.out.println("mouse");
         				mouseClick = e.getButton();
         			}
         			

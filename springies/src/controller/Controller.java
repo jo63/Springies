@@ -26,6 +26,7 @@ public class Controller {
 	private static final int TOGGLE_VISCOSITY = KeyEvent.VK_V;
 	private static final int TOGGLE_CENTER_OF_MASS = KeyEvent.VK_M;
 	private static final int TOGGLE_WALL_ONE = KeyEvent.VK_1;
+	private static final int TOGGLE_WALL_TWO = KeyEvent.VK_2;
 	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
 	private static final int TOGGLE_WALL_FOUR = KeyEvent.VK_4;
 	private static final int INCREASE_UP = KeyEvent.VK_UP;
@@ -55,6 +56,10 @@ public class Controller {
 		myKeyActions.put(TOGGLE_GRAVITY, new ToggleGravity(model));
 		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleViscosity(model));
 		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleCenterOfMass(model));
+		myKeyActions.put(TOGGLE_WALL_ONE, new ToggleWallRepulsion(model, 1));
+		myKeyActions.put(TOGGLE_WALL_TWO, new ToggleWallRepulsion(model, 2));
+		myKeyActions.put(TOGGLE_WALL_THREE, new ToggleWallRepulsion(model, 3));
+		myKeyActions.put(TOGGLE_WALL_FOUR, new ToggleWallRepulsion(model, 4));
 		
 		myMouseActions.put(MouseEvent.BUTTON1, new CreateSpring(model));
 		myMouseActions.put(MouseEvent.NOBUTTON, new RemoveSpring(model));
@@ -64,9 +69,8 @@ public class Controller {
 	{
 		if (myMouseActions.containsKey(lastMouseButton))
 		{
-			myMouseActions.get(lastMouseButton);
+			myMouseActions.get(lastMouseButton).performAction();
 		}
-		
 		
 		for(Integer key : myKeys)
 		{

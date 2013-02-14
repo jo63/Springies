@@ -25,7 +25,7 @@ class Value
 public class WallRepulsion extends CenterOfMass {
 	
     private Map<Integer, Value> myWalls = new HashMap<Integer, Value>();
-    private List<Boolean> vaidWalls = new ArrayList<Boolean>();
+    private List<Boolean> validWalls = new ArrayList<Boolean>();
 	
 	public WallRepulsion() {
 
@@ -36,17 +36,29 @@ public class WallRepulsion extends CenterOfMass {
 		Value temp = new Value(magnitude, exponent);
 		myWalls.put(new Integer(id), temp);
 	}
-	
+	public void toggleWalls(int id)
+	{
+		Boolean temp = validWalls.get(id);
+		validWalls.set(id, !temp);
+	}
 	private void distance(Mass mass)
 	{
 		for(Integer id : myWalls.keySet())
 		{	
 			switch(id.intValue())
 			{
-				case 1: this.sum(generateVector(mass.getY(), id)); break;//top
-				case 2: this.sum(generateVector(getBounds().getWidth() - mass.getX(), id)); break;//right
-				case 3: this.sum(generateVector(getBounds().getHeight() - mass.getY(), id)); break;//bottom
-				case 4: this.sum(generateVector(mass.getX(), id)); break;//left
+				case 1: if(!validWalls.get(1)) {
+					this.sum(generateVector(mass.getY(), id));//top
+				} break;
+				case 2: if(!validWalls.get(2)){
+					this.sum(generateVector(getBounds().getWidth() - mass.getX(), id));
+				} break;//right
+				case 3: if(!validWalls.get(3)){
+					this.sum(generateVector(getBounds().getHeight() - mass.getY(), id)); //bottom
+				} break;
+				case 4: if(!validWalls.get(4)){
+					this.sum(generateVector(mass.getX(), id)); 
+				} break;//left
 				default: break;
 			}
 		}

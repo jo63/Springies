@@ -8,9 +8,14 @@ import java.util.Scanner;
 import simulation.Model;
 
 public abstract class Factory {
-
+	private Model myModel;
+	public Model getModel()
+	{
+		return myModel;
+	}
 	public void loadModel(Model model, File modelFile)
 	{
+		myModel = model;
 		initMaps();
 		try {
 			Scanner input = new Scanner(modelFile);
