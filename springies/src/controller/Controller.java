@@ -17,7 +17,7 @@ public class Controller {
 	private Model mySimulation;
 	private Set<Integer> myKeys;
 	private Map<Integer, KeyAction> myKeyActions;
-	private Map<Integer, MouseAction> myMouseActions;
+	private NewSpringHandler myMouseActions;
 	private int lastMouseButton;
 	
 	private static final int LOAD_ASSEMBLY = KeyEvent.VK_N;
@@ -29,27 +29,26 @@ public class Controller {
 	private static final int TOGGLE_WALL_TWO = KeyEvent.VK_2;
 	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
 	private static final int TOGGLE_WALL_FOUR = KeyEvent.VK_4;
-	private static final int INCREASE_UP = KeyEvent.VK_UP;
-	private static final int INCREASE_DOWN = KeyEvent.VK_DOWN;
-	private static final int INCREASE_RIGHT = KeyEvent.VK_RIGHT;
-	private static final int INCREASE_LEFT = KeyEvent.VK_LEFT;
-	
-	
+	private static final int INCREASE = KeyEvent.VK_UP;
+	private static final int DECREASE = KeyEvent.VK_DOWN;
 	
 	public Controller()
 	{
 		myKeyActions = new HashMap<Integer, KeyAction>();
-		myMouseActions = new HashMap<Integer, MouseAction>();
 	}
 	
-	public void setModel(Model model)
+	public void setActionListeners(Model model)
 	{
-		initMap(model);
 		myKeys = model.getCanvas().getKeysPressed();
 		lastMouseButton = model.getCanvas().getMouseButton();
 	}
-	
-	private void initMap(Model model)
+	public void init(Model model)
+	{
+		mySimulation = model;
+		initKeyMap(model);
+		myMouseActions = new NewSpringHandler(model);
+	}
+	private void initKeyMap(Model model)
 	{
 		myKeyActions.put(LOAD_ASSEMBLY, new LoadAssembly(model));
 		myKeyActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
@@ -60,22 +59,23 @@ public class Controller {
 		myKeyActions.put(TOGGLE_WALL_TWO, new ToggleWallRepulsion(model, 2));
 		myKeyActions.put(TOGGLE_WALL_THREE, new ToggleWallRepulsion(model, 3));
 		myKeyActions.put(TOGGLE_WALL_FOUR, new ToggleWallRepulsion(model, 4));
-		
-		myMouseActions.put(MouseEvent.BUTTON1, new CreateSpring(model));
-		myMouseActions.put(MouseEvent.NOBUTTON, new RemoveSpring(model));
-		
+		myKeyActions.put(INCREASE, new Increase(model));
+		myKeyActions.put(DECREASE, new Decrease(model));
 	}
 	public void performAction()
 	{
-		if (myMouseActions.containsKey(lastMouseButton))
-		{
-			myMouseActions.get(lastMouseButton).performAction();
-		}
-		
+		myMouseActions.setMouseButton(lastMouseButton);
+		myMouseActions.performAction();
+			
 		for(Integer key : myKeys)
 		{
 			if(myKeyActions.containsKey(key)){
+				
 				myKeyActions.get(key).performAction();
+				if(key == LOAD_ASSEMBLY)
+				{
+					mySimulation.getCanvas().clearInput();
+				}
 			}
 		}
 	}

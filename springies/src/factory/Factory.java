@@ -13,6 +13,11 @@ public abstract class Factory {
 	{
 		return myModel;
 	}
+	/**
+	 * 
+	 * @param model : this parameter is the model 
+	 * @param modelFile
+	 */
 	public void loadModel(Model model, File modelFile)
 	{
 		myModel = model;

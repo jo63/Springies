@@ -24,6 +24,7 @@ public class Force extends Vector{
 	public Force(Vector vector) {
 		super(vector);
 		myBounds = new Dimension();
+		isValid = true;
 	}
 	/**
 	 * 

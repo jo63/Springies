@@ -196,7 +196,6 @@ public class Canvas extends JComponent {
         			@Override
         			public void mousePressed(MouseEvent e)
         			{
-        				System.out.println("mouse");
         				mouseClick = e.getButton();
         			}
         			
@@ -207,6 +206,12 @@ public class Canvas extends JComponent {
         			}	
 				}
         		);
+    }
+    
+    public void clearInput ()
+    {
+        myKeys.remove(new Integer(myLastKeyPressed));
+        myLastKeyPressed = NO_KEY_PRESSED;
     }
     
     // load model from file chosen by user

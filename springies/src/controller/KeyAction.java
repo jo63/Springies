@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Dimension;
 import java.util.Map;
 
 import physicsForces.*;
@@ -9,11 +10,14 @@ import view.Canvas;
 public abstract class KeyAction {
 	private Model myModel;
 	private Map<String, Force> myForces;
+	public static final int INCREASE_FACTOR = 10;
+	private Canvas myCanvas;
 
 	public KeyAction(Model model)
 	{
 		myModel = model;
 		myForces = model.getPhysics().getForces();
+		myCanvas = model.getCanvas();
 		
 	}
 	
@@ -25,6 +29,14 @@ public abstract class KeyAction {
 	public Map<String, Force> getForces()
 	{
 		return myForces;
+	}
+	public int getIncreaseFactor()
+	{
+		return INCREASE_FACTOR;
+	}
+	public Canvas getCanvas()
+	{
+		return myCanvas;
 	}
 }
 
@@ -110,21 +122,35 @@ class ToggleWallRepulsion extends KeyAction
 		}
 	}
 }
-class IncreaseDimension extends KeyAction
+class Increase extends KeyAction
 {
-	private int myValue;
-	public IncreaseDimension(Model model) {
+	public Increase(Model model) {
 		super(model);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void performAction() {
-		// TODO Auto-generated method stub
-		
+		Dimension temp = getCanvas().getSize();
+		double width = temp.getWidth();
+		double height = temp.getHeight();
+		temp.setSize(width + getIncreaseFactor(), height + getIncreaseFactor());
 	}
-	
 }
+class Decrease extends KeyAction
+{
+	public Decrease(Model model) {
+		super(model);
+	}
+
+	@Override
+	public void performAction() {
+		Dimension temp = getCanvas().getSize();
+		double width = temp.getWidth();
+		double height = temp.getHeight();
+		temp.setSize(width - getIncreaseFactor(), height - getIncreaseFactor());
+	}
+}
+
 
 
 

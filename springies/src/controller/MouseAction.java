@@ -1,6 +1,7 @@
 package controller;
 
 import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,82 +13,97 @@ import util.Location;
 public abstract class MouseAction {
 
 	private Model myModel;
-	protected Spring mySpring; //getter and setter. 
-	protected Mass myMass;
-	private Point mousePosition;
+	private Spring mySpring; //getter and setter. 
+	private Mass myMass;
 
 	public MouseAction(Model model)
 	{
 		myModel = model;
 	}
-
+	public void setSpring(Spring spring)
+	{
+		mySpring = spring;
+	}
+	public void setMass(Mass mass)
+	{
+		myMass = mass;
+	}
 	public Model getModel()
 	{
 		return myModel;
 	}
-
-	public Point getMousePosition()
+	public Spring getSpring()
 	{
-		return mousePosition;
+		return mySpring;
 	}
-
-	public void setMousePosition(Point position)
+	public Mass getMass()
 	{
-		mousePosition = position;
+		return myMass;
 	}
 
 	public abstract void performAction();
 
 }
 
-class CreateSpring extends MouseAction {
-
-	public CreateSpring(Model model)
+class NewSpringHandler extends MouseAction {
+	private boolean isCreated;
+	private int myMouseButton;
+	
+	public NewSpringHandler(Model model)
 	{
 		super(model);
+		isCreated = false;
 	}
-
+	public void setMouseButton(int button)
+	{
+		myMouseButton = button;
+	}
 	@Override
 	public void performAction() {
+		switch(myMouseButton)
+		{
+			case MouseEvent.BUTTON1: createMassSpring(); break;
+			case MouseEvent.NOBUTTON: removeSpringMass(); break;
+			default: break;
+		}
+		 
+	}
+	
+	private void createMassSpring()
+	{
 		Point mouse = getModel().getCanvas().getMousePosition();
-		setMousePosition(mouse);
-		boolean isCreated = false;
 		if(!isCreated){
 			List<Mass> masses = getModel().getMasses();
-			Mass tempMass = new Mass(0.0,0.0,0.0); 
+			Mass tempMass = new Mass(0,0,0); 
 			Double temp = 1000.0;
 			for(Mass m : masses)
 			{
-				Double dist = getMousePosition().distance(new Location(m.getX(), m.getY()));
+				Double dist = mouse.distance(new Location(m.getX(), m.getY()));
 				if(dist < temp){
 					tempMass = m;
 					temp = dist;
 				}
 			}
-			myMass = new Mass(mouse.getX(), mouse.getY(), 0);
-			mySpring = new Spring(tempMass, myMass, temp, 0);
-			getModel().add(myMass);
-			getModel().add(mySpring);
+			setMass(new Mass(mouse.getX(), mouse.getY(), 0));
+			setSpring(new Spring(tempMass, getMass(), temp, 0));
+			getModel().add(getMass());
+			getModel().add(getSpring());
 			isCreated = true;
 		}
 		else{
-			myMass.setCenter(new Location(mouse.getX(), mouse.getY()));
+			getMass().setCenter(new Location(mouse.getX(), mouse.getY()));
 		}
-		 
-	}	
-
-}
-
-class RemoveSpring extends MouseAction {
-
-	public RemoveSpring(Model model)
+	}
+	/**
+	 * 
+	 */
+	private void removeSpringMass()
 	{
-		super(model);
+		if(isCreated){
+			getModel().getSprings().remove(getSpring());
+			getModel().getMasses().remove(getMass());
+			isCreated = false;
+		}
 	}
 
-	@Override
-	public void performAction(){
-		getModel().getSprings().remove(mySpring);
-		getModel().getMasses().remove(myMass);
-	}
 }

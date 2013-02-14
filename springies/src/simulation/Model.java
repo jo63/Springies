@@ -38,6 +38,8 @@ public class Model {
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
         myController = new Controller();
+        myController.init(this);
+       
     }
     public void setPhysics(Physics physics)
     {
@@ -81,7 +83,7 @@ public class Model {
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
         myPhysics.update(myMasses, bounds);
-        myController.setModel(this);
+        myController.setActionListeners(this);
         myController.performAction();
         
         for (Spring s : mySprings) {
@@ -92,7 +94,6 @@ public class Model {
             m.applyForce(myPhysics.getEnvironmentVector(m));
             m.update(elapsedTime, bounds);
         }
-        //key = "n" myView.newWindow();
        
     }
 
