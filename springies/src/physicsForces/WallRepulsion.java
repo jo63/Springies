@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import simulation.Mass;
@@ -24,6 +25,7 @@ class Value
 public class WallRepulsion extends CenterOfMass {
 	
     private Map<Integer, Value> myWalls = new HashMap<Integer, Value>();
+    private List<Boolean> vaidWalls = new ArrayList<Boolean>();
 	
 	public WallRepulsion() {
 
