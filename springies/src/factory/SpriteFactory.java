@@ -14,7 +14,7 @@ import simulation.Model;
 /**
  * XXX
  * 
- * @author Robert C. Duvall
+ * @author Robert C. Duvall, Ryan Fishel, and Kevin Oh
  */
 public class SpriteFactory extends Factory{
 	
@@ -32,6 +32,9 @@ public class SpriteFactory extends Factory{
 	{
 		return myMasses;
 	}
+	/**
+	 * creates a map of keywords to commands to create the specified sprite
+	 */
 	@Override
 	public void initMaps() {
 		spriteCreator.put(MASS_KEYWORD, new MassCommand(myMasses));
@@ -39,6 +42,9 @@ public class SpriteFactory extends Factory{
 		spriteCreator.put(MUSCLE_KEYWORD, new MuscleCommand(myMasses));
 	}
 	
+	/**
+	 * creates the specified sprite and adds it to the model
+	 */
 	@Override
 	public void create(Model model, Scanner line)
 	{

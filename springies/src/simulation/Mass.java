@@ -13,7 +13,7 @@ import util.Vector;
 /**
  * XXX.
  * 
- * @author Robert C. Duvall
+ * @author Robert C. Duvall, Ryan Fishel, and Kevin Oh
  */
 public class Mass extends Sprite {    
     // reasonable default values
@@ -33,10 +33,18 @@ public class Mass extends Sprite {
 
     }
 
+    /**
+     * 
+     * @return: A mass
+     */
     public double getMass()
     {
     	return myMass;
     }
+    /**
+     * 
+     * @return: a vector the is the acceleration of the mass
+     */
     public Vector getAcceleration()
     {
     	return myAcceleration;

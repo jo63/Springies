@@ -17,7 +17,7 @@ import view.Canvas;
 /**
  * XXX.
  * 
- * @author Robert C. Duvall
+ * @author Robert C. Duvall, Ryan Fishel, and Kevin Oh
  */
 public class Model {
     // bounds and input for game
@@ -41,14 +41,28 @@ public class Model {
         myController.init(this);
        
     }
+    /**
+     * 
+     * @param physics: Passes in a physics object
+     * sets the myPhysics instance variable so that the physics for the simulation
+     * are created
+     */
     public void setPhysics(Physics physics)
     {
     	myPhysics = physics;
     }
+    /**
+     * Returns the myPhysics instance variable
+     * @return the physics of the simulation
+     */
     public Physics getPhysics()
     {
     	return myPhysics;
     }
+    /**
+     * returns the instance of canvas
+     * @return the canvas that the simulation is taking place on
+     */
     public Canvas getCanvas()
     {
     	return myView;
@@ -67,11 +81,19 @@ public class Model {
       //  myPhysics.getCenterOfMass().draw(pen);
     }
     
+    /**
+     * returns the list of all the masses that exist
+     * @return the list of masses in the simulation
+     */
     public List<Mass> getMasses()
     {
     	return myMasses;
     }
     
+    /**
+     * returns the list of all the springs that exist
+     * @return the list of the springs in the simulation
+     */
     public List<Spring> getSprings()
     {
     	return mySprings;
@@ -97,6 +119,11 @@ public class Model {
        
     }
 
+    /**
+     * adds sprites to the lists of springs and masses
+     * @param sprite : takes in any type of sprite and adds it to the correct list 
+     * of spring or mass
+     */
     public void add(Sprite sprite)
     {
     	if(sprite instanceof Mass)
@@ -123,6 +150,9 @@ public class Model {
     {
     	myPhysics.addForce(type, force);
     }
+    /**
+     * clears the list of masses and the list of springs
+     */
     public void clear()
     {
     	myMasses = new ArrayList<Mass>();

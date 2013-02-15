@@ -16,9 +16,9 @@ import util.Vector;
 
 
 /**
- * XXX
+ * Reads in a data file and creates the specified forces
  * 
- * @author Junho Oh & Ryan Fishel
+ * @author Ryan Fishel and Kevin Oh
  */
 
 
@@ -32,7 +32,9 @@ public class PhysicsFactory extends Factory{
     
     private Map<String, PhysicsCommand> physicsCreator = new HashMap<String, PhysicsCommand>();
 
-    
+    /**
+     * initializes a map that maps the keyword of a force to the command that creates that force
+     */
     @Override
 	public void initMaps() {
     	physicsCreator.put(GRAVITY_KEYWORD, new GravityCommand());
@@ -40,6 +42,11 @@ public class PhysicsFactory extends Factory{
     	physicsCreator.put(CENTERMASS_KEYWORD, new CenterOfMassCommand());
     	physicsCreator.put(WALL_KEYWORD, new WallRepulsionCommand(getModel()));
 	}
+    /**
+     * creates the specified force and adds it to the model
+     * @param model: this is the model where the simulation takes place
+     * @param: line: this is a Scanner which reads in lines from a data file
+     */
     @Override
     public void create(Model model, Scanner line)
     {

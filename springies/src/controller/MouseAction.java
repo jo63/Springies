@@ -9,51 +9,96 @@ import simulation.Mass;
 import simulation.Model;
 import simulation.Spring;
 import util.Location;
-
+/**
+ * 
+ * @author Ryan Fishel and Kevin Oh
+ *
+ */
 public abstract class MouseAction {
 
 	private Model myModel;
 	private Spring mySpring; //getter and setter. 
 	private Mass myMass;
-
+	/**
+	 * creates a MouseAction object
+	 * @param model: The model where the simulation takes place
+	 */
 	public MouseAction(Model model)
 	{
 		myModel = model;
 	}
+	/**
+	 * sets a spring when the mouse is clicked
+	 * @param spring: passes in a spring to be placed
+	 */
 	public void setSpring(Spring spring)
 	{
 		mySpring = spring;
 	}
+	/**
+	 * 
+	 * @param mass: sets a mass in the position of a mouse click
+	 */
 	public void setMass(Mass mass)
 	{
 		myMass = mass;
 	}
+	/**
+	 * 
+	 * @return: the model where the simulation takes place
+	 */
 	public Model getModel()
 	{
 		return myModel;
 	}
+	/**
+	 * 
+	 * @return: the Spring that is created on a mouse click
+	 */
 	public Spring getSpring()
 	{
 		return mySpring;
 	}
+	/**
+	 * 
+	 * @return: the mass that is created when the mouse is clicked
+	 */
 	public Mass getMass()
 	{
 		return myMass;
 	}
 
+	/**
+	 * Performs the action of creating or removing a spring based on whether the mouse was clicked or released
+	 */
 	public abstract void performAction();
 
 }
 
+/**
+ * 
+ * @author Ryan Fishel and Kevin Oh
+ *Extends MouseAction
+ *Deals with adding and removing a spring and a mass when the mouse is clicked and released.  Also, if the mouse is dragged, the 
+ *mass will move to the mouse position causing the spring to rotate, extend, or contract
+ */
 class NewSpringHandler extends MouseAction {
 	private boolean isCreated;
 	private int myMouseButton;
-	
+	/**
+	 * creates a NewSpringHandler object which sets the sets the state to be that a spring and a mass have not yet been created
+	 * with a mouse click
+	 * @param model: the model where the simulation takes place
+	 */
 	public NewSpringHandler(Model model)
 	{
 		super(model);
 		isCreated = false;
 	}
+	/**
+	 * sets the mouse button to be the button that was clicked
+	 * @param button: the button that gets clicked
+	 */
 	public void setMouseButton(int button)
 	{
 		myMouseButton = button;
@@ -68,7 +113,10 @@ class NewSpringHandler extends MouseAction {
 		}
 		 
 	}
-	
+	/**
+	 * creates a mass and a spring if there is a mouse click.  If the mouse is being clicked and dragged, move the mass to the mouse
+	 * position and rotate, extend, or contract the spring to keep it connected to the two masses that it was connected to.
+	 */
 	private void createMassSpring()
 	{
 		Point mouse = getModel().getCanvas().getMousePosition();
@@ -95,7 +143,7 @@ class NewSpringHandler extends MouseAction {
 		}
 	}
 	/**
-	 * 
+	 * remove the spring and the mass from the model if the mouse is released
 	 */
 	private void removeSpringMass()
 	{

@@ -35,7 +35,7 @@ import simulation.Model;
  *   <LI>keyboard input via the KeyListener
  * </UL>
  * 
- * @author Robert C Duvall
+ * @author Robert C Duvall, Ryan Fishel, and Kevin Oh
  */
 public class Canvas extends JComponent {
     // default serialization ID
@@ -107,6 +107,11 @@ public class Canvas extends JComponent {
         return myLastKeyPressed;
     }
     
+    /**
+     * 
+     * @param key: and int representing a key press
+     * @return: returns whether the key is contained in the map of keys (whether it has been pressed or not)
+     */
     public boolean isKeyContained(int key)
     {
     	return myKeys.contains(key);
@@ -127,6 +132,10 @@ public class Canvas extends JComponent {
         return myLastMousePosition;
     }
     
+    /**
+     * 
+     * @return: returns what button has been pressed by the mouse
+     */
     public int getMouseButton()
     {
     	return mouseClick;
@@ -214,7 +223,7 @@ public class Canvas extends JComponent {
         myLastKeyPressed = NO_KEY_PRESSED;
     }
     
-    // load model from file chosen by user
+    // load model and assembly from file chosen by user 
     private void loadModel () {
         SpriteFactory factory = new SpriteFactory();
         PhysicsFactory loadPhys = new PhysicsFactory();
@@ -227,6 +236,9 @@ public class Canvas extends JComponent {
         }
        
     }
+    /**
+     * loads the assembly that is chosen by the user
+     */
 	public void loadAssembly() {
         SpriteFactory factory = new SpriteFactory();
         int response = INPUT_CHOOSER.showOpenDialog(null);
