@@ -10,11 +10,12 @@ import java.util.Set;
 import javax.swing.JFileChooser;
 import simulation.Model;
 import util.Location;
+import view.Canvas;
 
 
 public class Controller {
 	 
-	private Model mySimulation;
+	private Canvas myCanvas;
 	private Set<Integer> myKeys;
 	private Map<Integer, KeyAction> myKeyActions;
 	private NewSpringHandler myMouseActions;
@@ -32,19 +33,20 @@ public class Controller {
 	private static final int INCREASE = KeyEvent.VK_UP;
 	private static final int DECREASE = KeyEvent.VK_DOWN;
 	
-	public Controller()
+	public Controller(Model model)
 	{
-		myKeyActions = new HashMap<Integer, KeyAction>();
+		myCanvas = model.getCanvas();
+		setKeysMouse(myCanvas);
+		
 	}
 	
-	public void setActionListeners(Model model)
+	private void setKeysMouse(Canvas canvas)
 	{
-		myKeys = model.getCanvas().getKeysPressed();
-		lastMouseButton = model.getCanvas().getMouseButton();
+		myKeys = myCanvas.getKeysPressed();
+		lastMouseButton = myCanvas.getMouseButton();
 	}
-	public void init(Model model)
+	private void init(Model model)
 	{
-		mySimulation = model;
 		initKeyMap(model);
 		myMouseActions = new NewSpringHandler(model);
 	}
@@ -62,18 +64,15 @@ public class Controller {
 		myKeyActions.put(INCREASE, new Increase(model));
 		myKeyActions.put(DECREASE, new Decrease(model));
 	}
-	public void performAction()
-	{
+	public void performAction(){
 		myMouseActions.setMouseButton(lastMouseButton);
 		myMouseActions.performAction();
 			
-		for(Integer key : myKeys)
-		{
+		for(Integer key : myKeys){
 			if(myKeyActions.containsKey(key)){
 				
 				myKeyActions.get(key).performAction();
-				if(key == LOAD_ASSEMBLY)
-				{
+				if (key == LOAD_ASSEMBLY){
 					mySimulation.getCanvas().clearInput();
 				}
 			}

@@ -63,14 +63,11 @@ public class Physics {
 	 * center of mass
 	 * @param bounds: The bounds of simulation. Needed for wall repulsion
 	 */
-	public void update(List<Mass> massList, Dimension bounds)
-	{
-		if((myForces.get("centermass")) != null)
-		{
+	public void update(List<Mass> massList, Dimension bounds){
+		if((myForces.get("centermass")) != null){
 			((CenterOfMass)(myForces.get("centermass"))).setCenterMassPosition(massList);
 		}
-		if((myForces.get("wall")) != null)
-		{
+		if((myForces.get("wall")) != null){
 			((WallRepulsion)(myForces.get("wall"))).setBounds(bounds);
 		}
 	}
@@ -80,11 +77,9 @@ public class Physics {
 	 * @param m: a mass is passed in so that all the forces can correctly be applied to each mass
 	 * @return a vector that is the sum of all the forces
 	 */
-	public Vector getEnvironmentVector(Mass m)
-	{
+	public Vector getEnvironmentVector(Mass m){
 		Vector result = new Vector();
-		for(Force force : myForces.values())
-		{
+		for(Force force : myForces.values()){
 			if(force.isValid()){
 				force.massInitialize(m);
 				result.sum(force.returnForce());

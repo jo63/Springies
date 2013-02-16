@@ -37,8 +37,7 @@ public class Model {
         myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
         myPhysics = new Physics();
-        myController = new Controller();
-        myController.init(this);
+        myController = new Controller(this);
        
     }
     /**
@@ -105,7 +104,6 @@ public class Model {
     public void update (double elapsedTime) {
         Dimension bounds = myView.getSize();
         myPhysics.update(myMasses, bounds);
-        myController.setActionListeners(this);
         myController.performAction();
         
         for (Spring s : mySprings) {
@@ -118,43 +116,28 @@ public class Model {
         }
        
     }
-
-    /**
-     * adds sprites to the lists of springs and masses
-     * @param sprite : takes in any type of sprite and adds it to the correct list 
-     * of spring or mass
-     */
-    public void add(Sprite sprite)
-    {
-    	if(sprite instanceof Mass)
-    		add((Mass)sprite);
-    	else if(sprite instanceof Spring)
-    		add((Spring)sprite);
-    }
     /**
      * Add given mass to this simulation.
      */
-    private void add(Mass mass) {
+    private void add(Mass mass){
         myMasses.add(mass);
     }
     /**
      * Add given spring to this simulation.
      */
-    private void add(Spring spring) {
+    private void add(Spring spring){
         mySprings.add(spring);
     }
     /**
      * Add given force to this simulation's physics.
      */
-    public void add(String type, Force force)
-    {
+    public void add(String type, Force force){
     	myPhysics.addForce(type, force);
     }
     /**
      * clears the list of masses and the list of springs
      */
-    public void clear()
-    {
+    public void clear(){
     	myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
     }
