@@ -58,9 +58,9 @@ public class Controller {
 	{
 		myKeyActions.put(LOAD_ASSEMBLY, new LoadAssembly(model));
 		myKeyActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
-		myKeyActions.put(TOGGLE_GRAVITY, new ToggleGravity(model));
-		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleViscosity(model));
-		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleCenterOfMass(model));
+		myKeyActions.put(TOGGLE_GRAVITY, new ToggleForce(model, "gravity"));
+		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleForce(model, "viscosity"));
+		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleForce(model, "centermass"));
 		myKeyActions.put(TOGGLE_WALL_TOP, new ToggleWallRepulsion(model, TOP_WALL));
 		myKeyActions.put(TOGGLE_WALL_RIGHT, new ToggleWallRepulsion(model, RIGHT_WALL));
 		myKeyActions.put(TOGGLE_WALL_BOTTOM, new ToggleWallRepulsion(model, BOTTOM_WALL));

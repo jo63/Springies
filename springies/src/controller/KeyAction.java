@@ -109,119 +109,134 @@ class ClearAssembly extends KeyAction
 		myModel.clear();
 	}
 }
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- * Extends KeyAction
- * Toggles the gravity on or off when "g" is pressed
- *
- */
-class ToggleGravity extends KeyAction
-{
-	/**
-	 * Creates a ToggleGravity object with the model where the simulation takes place
-	 * @param model: the model where the simulation takes place
-	 */
-	public ToggleGravity(Model model) {
-		super(model);
-	}
 
-	/**
-	 * Overrides performAction from KeyAction
-	 * If the gravity is on, it is turned off
-	 * If the gravity is off, it is turned on
-	 */
-	@Override
-	public void performAction() {
-		if(getForces().get("gravity") != null)
-		{
-			((Gravity)(getForces().get("gravity"))).toggleForce();
-		}
-	}
-}
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- *Extends KeyAction
- *Toggles the viscosity on and off when "v" is pressed
- */
-class ToggleViscosity extends KeyAction
-{
-	/**
-	 * creates a ToggleViscosity object that has the model where the simulation takes place
-	 * @param model: the model where the simulation takes place
-	 */
-	public ToggleViscosity(Model model) {
-		super(model);
-	}
+class ToggleForce extends KeyAction{
 
-	/**
-	 * Overrides the performAction from KeyAction
-	 * If the viscosity is on, it is turned off
-	 * If the viscosity is off, it is turned on
-	 */
-	@Override
-	public void performAction() {
-		if(getForces().get("viscosity") != null)
-		{
-			((Viscosity)(getForces().get("viscosity"))).toggleForce();
-		}
-	}
-}
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- *Extends KeyAction
- *Toggles the center of mass on and off when "m" is pressed
- */
-class ToggleCenterOfMass extends KeyAction
-{
-	/**
-	 * creates a ToggleCenterOfMass object that has the model where the simulation takes place
-	 * @param model
-	 */
-	public ToggleCenterOfMass(Model model) {
+	private String myId;
+	public ToggleForce(Model model, String id) {
 		super(model);
-	}
-	/**
-	 * Overrides the performAction from KeyAction
-	 * If the center of mass is on, it is turned off
-	 * If the center of mass is off, it is turned on
-	 */
-	@Override
-	public void performAction() {
-		if(getForces().get("centermass") != null)
-		{
-			((CenterOfMass)(getForces().get("centermass"))).toggleForce();
-		}
-	}
-}
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- *Extends KeyAction
- *Toggles the wall repulsion on and off when "1", "2", "3", or "4" is pressed for that specific wall
- */
-class ToggleWallRepulsion extends KeyAction
-{
-	private int myID;
-	/**
-	 * creates a ToggleWallRepulsion object which knows which wall to toggle
-	 * @param model: the model where the simulation takes place
-	 * @param id: the ID of the specific wall that is being toggled
-	 */
-	public ToggleWallRepulsion(Model model, int id) {
-		super(model);
-		myID = id;
+		myId = id;
 	}
 	@Override
 	public void performAction() {
-		if(getForces().get("wall") != null)
-		{
-			((WallRepulsion)(getForces().get("wall"))).toggleWalls(myID);
-		}
+		(getForces().get("myId")).toggleForce();
+		if(getForces().get(myId) instanceof WallRepulsion)
+			((WallRepulsion)(getForces().get("wall"))).toggleWalls(myId);
 	}
 }
+///**
+// * 
+// * @author Ryan Fishel and Kevin Oh
+// * Extends KeyAction
+// * Toggles the gravity on or off when "g" is pressed
+// *
+// */
+//class ToggleGravity extends KeyAction
+//{
+//	/**
+//	 * Creates a ToggleGravity object with the model where the simulation takes place
+//	 * @param model: the model where the simulation takes place
+//	 */
+//	public ToggleGravity(Model model) {
+//		super(model);
+//	}
+//
+//	/**
+//	 * Overrides performAction from KeyAction
+//	 * If the gravity is on, it is turned off
+//	 * If the gravity is off, it is turned on
+//	 */
+//	@Override
+//	public void performAction() {
+//		if(getForces().get("gravity") != null)
+//		{
+//			((Gravity)(getForces().get("gravity"))).toggleForce();
+//		}
+//	}
+//}
+///**
+// * 
+// * @author Ryan Fishel and Kevin Oh
+// *Extends KeyAction
+// *Toggles the viscosity on and off when "v" is pressed
+// */
+//class ToggleViscosity extends KeyAction
+//{
+//	/**
+//	 * creates a ToggleViscosity object that has the model where the simulation takes place
+//	 * @param model: the model where the simulation takes place
+//	 */
+//	public ToggleViscosity(Model model) {
+//		super(model);
+//	}
+//
+//	/**
+//	 * Overrides the performAction from KeyAction
+//	 * If the viscosity is on, it is turned off
+//	 * If the viscosity is off, it is turned on
+//	 */
+//	@Override
+//	public void performAction() {
+//		if(getForces().get("viscosity") != null)
+//		{
+//			((Viscosity)(getForces().get("viscosity"))).toggleForce();
+//		}
+//	}
+//}
+///**
+// * 
+// * @author Ryan Fishel and Kevin Oh
+// *Extends KeyAction
+// *Toggles the center of mass on and off when "m" is pressed
+// */
+//class ToggleCenterOfMass extends KeyAction
+//{
+//	/**
+//	 * creates a ToggleCenterOfMass object that has the model where the simulation takes place
+//	 * @param model
+//	 */
+//	public ToggleCenterOfMass(Model model) {
+//		super(model);
+//	}
+//	/**
+//	 * Overrides the performAction from KeyAction
+//	 * If the center of mass is on, it is turned off
+//	 * If the center of mass is off, it is turned on
+//	 */
+//	@Override
+//	public void performAction() {
+//		if(getForces().get("centermass") != null)
+//		{
+//			((CenterOfMass)(getForces().get("centermass"))).toggleForce();
+//		}
+//	}
+//}
+///**
+// * 
+// * @author Ryan Fishel and Kevin Oh
+// *Extends KeyAction
+// *Toggles the wall repulsion on and off when "1", "2", "3", or "4" is pressed for that specific wall
+// */
+//class ToggleWallRepulsion extends KeyAction
+//{
+//	private int myID;
+//	/**
+//	 * creates a ToggleWallRepulsion object which knows which wall to toggle
+//	 * @param model: the model where the simulation takes place
+//	 * @param id: the ID of the specific wall that is being toggled
+//	 */
+//	public ToggleWallRepulsion(Model model, int id) {
+//		super(model);
+//		myID = id;
+//	}
+//	@Override
+//	public void performAction() {
+//		if(getForces().get("wall") != null)
+//		{
+//			((WallRepulsion)(getForces().get("wall"))).toggleWalls(myID);
+//		}
+//	}
+//}
 /**
  * 
  * @author Ryan Fishel and Kevin Oh
@@ -241,7 +256,7 @@ class changeBounds extends KeyAction
 		boundMap = new HashMap<String, Integer>();
 		initBoundMap();
 	}
-	
+
 	public void initBoundMap(){
 		boundMap.put("increase", INCREASE_FACTOR);
 		boundMap.put("decrease", -INCREASE_FACTOR);
