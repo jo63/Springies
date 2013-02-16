@@ -1,6 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
 import java.util.Map;
 
 import physicsForces.*;
@@ -13,38 +15,28 @@ import view.Canvas;
  *
  */
 public abstract class KeyAction {
-	private Model myModel;
 	private Map<String, Force> myForces;
-	public static final int INCREASE_FACTOR = 10;
 	private Canvas myCanvas;
 
 	/**
 	 * Creates a keyAction object that knows the model and the canvas where the simulation
 	 * takes place.  A map of string to Force is also created so that the keyAction has a 
-	 * map that conatains all the forces and labels for the forces.
+	 * map that contains all the forces and labels for the forces.
 	 * @param model: passes in the model where the simulation takes place
 	 */
 	public KeyAction(Model model)
 	{
-		myModel = model;
 		myForces = model.getPhysics().getForces();
 		myCanvas = model.getCanvas();
-		
+
 	}
-	
+
 	/**
 	 * This is an abstract method that is used in the subclasses to carry out the action
 	 * that happens based on a certain press of a button.
 	 */
 	public abstract void performAction();
-	/**
-	 * 
-	 * @return: the model of the simulation
-	 */
-	public Model getModel()
-	{
-		return myModel;
-	}
+
 	/**
 	 * Returns the map of strings (labels) to the corresponding force object
 	 * @return: the map of strings to forces
@@ -52,14 +44,6 @@ public abstract class KeyAction {
 	public Map<String, Force> getForces()
 	{
 		return myForces;
-	}
-	/**
-	 * 
-	 * @return: the constant that the bounds are increased by
-	 */
-	public int getIncreaseFactor()
-	{
-		return INCREASE_FACTOR;
 	}
 	/**
 	 * 
@@ -94,7 +78,7 @@ class LoadAssembly extends KeyAction
 	 */
 	@Override
 	public void performAction() {
-		getModel().getCanvas().loadAssembly();
+		getCanvas().loadAssembly();
 	}
 }
 /**
@@ -105,12 +89,14 @@ class LoadAssembly extends KeyAction
  */
 class ClearAssembly extends KeyAction
 {
+	Model myModel;
 	/**
 	 * creates a ClearAssembly that has the model where the simulation takes place
 	 * @param model: the model where the simulation takes place
 	 */
 	public ClearAssembly(Model model) {
 		super(model);
+		myModel = model;
 	}
 
 	/**
@@ -120,7 +106,7 @@ class ClearAssembly extends KeyAction
 	 */
 	@Override
 	public void performAction() {
-		getModel().clear();
+		myModel.clear();
 	}
 }
 /**
@@ -242,10 +228,23 @@ class ToggleWallRepulsion extends KeyAction
  *Extends KeyAction
  *Increases the size of the bounds if the up arrow is pressed
  */
-class Increase extends KeyAction
+class changeBounds extends KeyAction
 {
-	public Increase(Model model) {
+
+	public static final int INCREASE_FACTOR = 10;
+	private Map<String, Integer> boundMap;
+	private String myId;
+
+	public changeBounds(Model model, String id) {
 		super(model);
+		myId = id;
+		boundMap = new HashMap<String, Integer>();
+		initBoundMap();
+	}
+	
+	public void initBoundMap(){
+		boundMap.put("increase", INCREASE_FACTOR);
+		boundMap.put("decrease", -INCREASE_FACTOR);
 	}
 
 	/**
@@ -256,33 +255,10 @@ class Increase extends KeyAction
 		Dimension temp = getCanvas().getSize();
 		double width = temp.getWidth();
 		double height = temp.getHeight();
-		temp.setSize(width + getIncreaseFactor(), height + getIncreaseFactor());
+		temp.setSize(width + boundMap.get(myId), height + boundMap.get(myId));
 	}
 }
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- * Extends KeyAction
- * Decreases the size of the bounds if the down arrow is pressed
- *
- */
-class Decrease extends KeyAction
-{
-	public Decrease(Model model) {
-		super(model);
-	}
 
-	/**
-	 * if the down arrow is pressed, decrease the width and the height of the dimension of the canvas by 10
-	 */
-	@Override
-	public void performAction() {
-		Dimension temp = getCanvas().getSize();
-		double width = temp.getWidth();
-		double height = temp.getHeight();
-		temp.setSize(width - getIncreaseFactor(), height - getIncreaseFactor());
-	}
-}
 
 
 

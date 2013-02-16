@@ -26,12 +26,16 @@ public class Controller {
 	private static final int TOGGLE_GRAVITY = KeyEvent.VK_G;
 	private static final int TOGGLE_VISCOSITY = KeyEvent.VK_V;
 	private static final int TOGGLE_CENTER_OF_MASS = KeyEvent.VK_M;
-	private static final int TOGGLE_WALL_ONE = KeyEvent.VK_1;
-	private static final int TOGGLE_WALL_TWO = KeyEvent.VK_2;
-	private static final int TOGGLE_WALL_THREE = KeyEvent.VK_3;
-	private static final int TOGGLE_WALL_FOUR = KeyEvent.VK_4;
+	private static final int TOGGLE_WALL_TOP = KeyEvent.VK_1;
+	private static final int TOGGLE_WALL_RIGHT = KeyEvent.VK_2;
+	private static final int TOGGLE_WALL_BOTTOM = KeyEvent.VK_3;
+	private static final int TOGGLE_WALL_LEFT = KeyEvent.VK_4;
 	private static final int INCREASE = KeyEvent.VK_UP;
 	private static final int DECREASE = KeyEvent.VK_DOWN;
+	private static final int TOP_WALL = 1;
+	private static final int RIGHT_WALL = 2;
+	private static final int BOTTOM_WALL = 3;
+	private static final int LEFT_WALL = 4;
 	
 	public Controller(Model model)
 	{
@@ -57,12 +61,12 @@ public class Controller {
 		myKeyActions.put(TOGGLE_GRAVITY, new ToggleGravity(model));
 		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleViscosity(model));
 		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleCenterOfMass(model));
-		myKeyActions.put(TOGGLE_WALL_ONE, new ToggleWallRepulsion(model, 1));
-		myKeyActions.put(TOGGLE_WALL_TWO, new ToggleWallRepulsion(model, 2));
-		myKeyActions.put(TOGGLE_WALL_THREE, new ToggleWallRepulsion(model, 3));
-		myKeyActions.put(TOGGLE_WALL_FOUR, new ToggleWallRepulsion(model, 4));
-		myKeyActions.put(INCREASE, new Increase(model));
-		myKeyActions.put(DECREASE, new Decrease(model));
+		myKeyActions.put(TOGGLE_WALL_TOP, new ToggleWallRepulsion(model, TOP_WALL));
+		myKeyActions.put(TOGGLE_WALL_RIGHT, new ToggleWallRepulsion(model, RIGHT_WALL));
+		myKeyActions.put(TOGGLE_WALL_BOTTOM, new ToggleWallRepulsion(model, BOTTOM_WALL));
+		myKeyActions.put(TOGGLE_WALL_LEFT, new ToggleWallRepulsion(model, LEFT_WALL));
+		myKeyActions.put(INCREASE, new changeBounds(model, "increase"));
+		myKeyActions.put(DECREASE, new changeBounds(model, "decrease"));
 	}
 	public void performAction(){
 		myMouseActions.setMouseButton(lastMouseButton);
@@ -73,7 +77,7 @@ public class Controller {
 				
 				myKeyActions.get(key).performAction();
 				if (key == LOAD_ASSEMBLY){
-					mySimulation.getCanvas().clearInput();
+					myCanvas.clearInput();
 				}
 			}
 		}
