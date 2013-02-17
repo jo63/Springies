@@ -1,75 +1,70 @@
 package physicsForces;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import simulation.Mass;
-import util.Location;
 import util.Vector;
 
-class Value
-{
-	double magnitude;
-	double exponent;
-	Value(double magnitude, double exponent)
+/**
+ * 
+ * @author Ryan Fishel and Kevin Oh
+ *
+ */
+public abstract class WallRepulsion extends Force {
+	
+	private Dimension myBounds;
+	private double myMagnitude;
+	private double myExponent;
+	
+    /**
+     * creates a default wall repulsion
+     */
+	public WallRepulsion()
 	{
-		this.magnitude = magnitude;
-		this.exponent = exponent;
-	}
-	
-}
-public class WallRepulsion extends CenterOfMass {
-	
-    private Map<Integer, Value> myWalls = new HashMap<Integer, Value>();
-	
-	public WallRepulsion() {
-
-	}
-
-	public void addWall(int id, double magnitude, double exponent)
-	{
-		Value temp = new Value(magnitude, exponent);
-		myWalls.put(new Integer(id), temp);
-	}
-	
-	private void distance(Mass mass)
-	{
-		for(Integer id : myWalls.keySet())
-		{	
-			switch(id.intValue())
-			{
-				case 1: this.sum(generateVector(mass.getY(), id)); break;//top
-				case 2: this.sum(generateVector(getBounds().getWidth() - mass.getX(), id)); break;//right
-				case 3: this.sum(generateVector(getBounds().getHeight() - mass.getY(), id)); break;//bottom
-				case 4: this.sum(generateVector(mass.getX(), id)); break;//left
-				default: break;
-			}
-		}
-	}
-	
-	private Vector generateVector(double distanceFromWall, Integer id)
-	{
-		Vector result = new Vector(0,0);
-		double magnitude = myWalls.get(id).magnitude;
-		double exponent = myWalls.get(id).exponent;
-		result.setDirection(DIRECTIONS[id.intValue()-1]);
-		result.setMagnitude((magnitude)/(Math.pow(distanceFromWall, exponent)));
 		
-		return result;
 	}
+	public WallRepulsion(double magnitude, double exponent) {
+		super();
+		myMagnitude = magnitude;
+		myExponent = exponent;
+	}
+	public double getMagnitude(){
+		return myMagnitude;
+	}
+	public double getExponent(){
+		return myExponent;
+	}
+	/**
+	 * Sets the bounds for the force
+	 * @param bounds: Passes in the bounds of the simulation
+	 */
+	public void setBounds(Dimension bounds){
+		myBounds = bounds;
+	}
+	/**
+	 * returns the myBounds instance variable which is the area the 
+	 * simulation takes place in
+	 * @return: the area that the simulation is taking place in
+	 */
+	public Dimension getBounds(){
+		return myBounds;
+	}
+	/**
+	 * This method takes in the distance that a mass is from a specific wall and returns a vector
+	 * that represents the wall repulsion from that specific wall to a mass.
+	 * @param distanceFromWall: the distance between a mass and a specific wall
+	 * @param id: the specific wall that is applying the force
+	 * @return: a vector that represents the wall repulsion
+	 */
 	@Override
-	public void massInitialize(Mass mass)
-	{
-		this.reset();
-		distance(mass);
+	public void massInitialize(Mass mass) {
+			Vector result = new Vector(0,0);
+			result.setDirection(returnDirection());
+			result.setMagnitude(myMagnitude/(Math.pow(distanceFromWall(mass), myExponent)));
+			setForce(result);
 	}
 	
-	public Vector returnForce()
-	{
-		return this;
-	}
+	public abstract double returnDirection();
+	public abstract double distanceFromWall(Mass mass);
+		
 
 }

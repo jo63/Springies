@@ -1,4 +1,4 @@
-package simulation;
+package factory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import simulation.Mass;
+import simulation.Model;
+
 
 
 /**
  * XXX
  * 
- * @author Robert C. Duvall
+ * @author Robert C. Duvall, Ryan Fishel, and Kevin Oh
  */
 public class SpriteFactory extends Factory{
 	
@@ -29,13 +32,19 @@ public class SpriteFactory extends Factory{
 	{
 		return myMasses;
 	}
+	/**
+	 * creates a map of keywords to commands to create the specified sprite
+	 */
 	@Override
 	public void initMaps() {
-		spriteCreator.put(MASS_KEYWORD, new MassCommand(myMasses));
-		spriteCreator.put(SPRING_KEYWORD, new SpringCommand(myMasses));
-		spriteCreator.put(MUSCLE_KEYWORD, new MuscleCommand(myMasses));
+		spriteCreator.put(MASS_KEYWORD, new MassCommand());
+		spriteCreator.put(SPRING_KEYWORD, new SpringCommand());
+		spriteCreator.put(MUSCLE_KEYWORD, new MuscleCommand());
 	}
 	
+	/**
+	 * creates the specified sprite and adds it to the model
+	 */
 	@Override
 	public void create(Model model, Scanner line)
 	{
@@ -43,7 +52,7 @@ public class SpriteFactory extends Factory{
 			String type = line.next();
 			if(spriteCreator.containsKey(type))
 			{
-				model.add(spriteCreator.get(type).getCommand(line));
+				model.add(spriteCreator.get(type).returnSprite(line,myMasses));
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Color;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,18 +10,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
-import simulation.SpriteFactory;
-import simulation.PhysicsFactory;
+import javax.swing.event.MouseInputAdapter;
+
+import factory.*;
 import simulation.Model;
 
 
@@ -32,7 +31,7 @@ import simulation.Model;
  *   <LI>keyboard input via the KeyListener
  * </UL>
  * 
- * @author Robert C Duvall
+ * @author Robert C Duvall, Ryan Fishel, and Kevin Oh
  */
 public class Canvas extends JComponent {
     // default serialization ID
@@ -57,19 +56,25 @@ public class Canvas extends JComponent {
     private int myLastKeyPressed;
     private Point myLastMousePosition;
     private Set<Integer> myKeys;
+    
+    private int mouseClick = MouseEvent.NOBUTTON;
 
 
     /**
      * Create a panel so that it knows its size
      */
     public Canvas (Dimension size) {
+    	
         // set size (a bit of a pain)
         setPreferredSize(size);
         setSize(size);
         // prepare to receive input
+        
         setFocusable(true);
         requestFocus();
-        setInputListeners();
+        setInputListeners(); //error?
+        myKeys = new HashSet<Integer>();
+        
     }
 
     /**
@@ -90,19 +95,22 @@ public class Canvas extends JComponent {
             mySimulation.paint((Graphics2D) pen);
         }
     }
-
+    
     /**
-     * Returns last key pressed by the user or -1 if nothing is pressed.
+     * 
+     * @param key: and int representing a key press
+     * @return: returns whether the key is contained in the map of keys (whether it has been pressed or not)
      */
-    public int getLastKeyPressed () {
-        return myLastKeyPressed;
+    public boolean isKeyContained(int key){
+    	return myKeys.contains(key);
     }
+    
 
     /**
      * Returns all keys currently pressed by the user.
      */
-    public Collection<Integer> getKeysPressed () {
-        return Collections.unmodifiableSet(myKeys);
+    public Set<Integer> getKeysPressed () {
+        return myKeys;
     }
 
     /**
@@ -110,6 +118,14 @@ public class Canvas extends JComponent {
      */
     public Point getLastMousePosition () {
         return myLastMousePosition;
+    }
+    
+    /**
+     * 
+     * @return: returns what button has been pressed by the mouse
+     */
+    public int getMouseButton(){
+    	return mouseClick;
     }
 
     /**
@@ -125,6 +141,7 @@ public class Canvas extends JComponent {
             });
         // start animation
         mySimulation = new Model(this);
+        loadEnvironment();
         loadModel();
         myTimer.start();
     }
@@ -151,52 +168,59 @@ public class Canvas extends JComponent {
     private void setInputListeners () {
         // initialize input state
         myLastKeyPressed = NO_KEY_PRESSED;
-        myKeys = new TreeSet<Integer>();
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed (KeyEvent e) {
-                myLastKeyPressed = e.getKeyCode();
                 myKeys.add(e.getKeyCode());
             }
             @Override
             public void keyReleased (KeyEvent e) {
-                myLastKeyPressed = NO_KEY_PRESSED;
-                myKeys.remove((Integer)e.getKeyCode());
+                myKeys.remove(e.getKeyCode());
             }
         });
-        myLastMousePosition = NO_MOUSE_PRESSED;
+        
+        myLastMousePosition = new Point();
         addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
+        	@Override
             public void mouseDragged (MouseEvent e) {
                 myLastMousePosition = e.getPoint();
             }
         });
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed (MouseEvent e) {
-                myLastMousePosition = e.getPoint();
-            }
-            @Override
-            public void mouseReleased (MouseEvent e) {
-                myLastMousePosition = NO_MOUSE_PRESSED;
-            }
-        });
+        mouseClick = MouseEvent.NOBUTTON;
+        addMouseListener(
+        		new MouseInputAdapter() {
+        			@Override
+        			public void mousePressed(MouseEvent e){
+        				mouseClick = e.getButton();
+        				myLastMousePosition = e.getPoint();
+        			}
+        			
+        			@Override
+        			public void mouseReleased(MouseEvent e){
+        				mouseClick = e.NOBUTTON;
+        			}	
+				}
+        		);
     }
     
-    // load model from file chosen by user
-    private void loadModel () {
+    public void clearInput (){
+    	myKeys = new HashSet<Integer>();
+    }
+    
+    // load model and assembly from file chosen by user 
+    public void loadModel () {
         SpriteFactory factory = new SpriteFactory();
-        PhysicsFactory loadPhys = new PhysicsFactory();
         int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
-        	
-        	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
-            response = INPUT_CHOOSER.showOpenDialog(null);
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
-            
         }
-       
     }
-    
-    //newWindow(){ mySimulation.add(new Mass(INPUT_CHOOSER(getData)) }
+    private void loadEnvironment (){
+    	PhysicsFactory loadPhys = new PhysicsFactory();
+    	int response = INPUT_CHOOSER.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {        	
+        	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
+        }
+    }
+
 }
