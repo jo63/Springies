@@ -9,8 +9,8 @@ import util.Vector;
 
 /**
  * 
- * @author Ryan Fishelio and Kevin Oh
- *
+ * @author Ryan Fishel and Kevin Oh
+ *Center of Mass Force
  */
 public class CenterOfMass extends Force{
 
@@ -21,7 +21,7 @@ public class CenterOfMass extends Force{
 	private double COMAngle; 
 
 	/**
-	 * Creates a default center of mass with magnitude and exponent of 0
+	 * Creates a default center of mass with magnitude and exponent of 0.
 	 */
 	public CenterOfMass(){
 	}
@@ -82,7 +82,7 @@ public class CenterOfMass extends Force{
 	}
 	/**
 	 * finds the angle between a mass and the center of mass
-	 * @param mass: takes in a mass to find the angle between the mass and the center of mass 
+	 * @param mass takes in a mass to find the angle between the mass and the center of mass 
 	 */
     private void getAngleForCOM(Mass mass){
     	double xDiff = myCenterOfMass.x - mass.getX();
@@ -93,7 +93,7 @@ public class CenterOfMass extends Force{
 
     /**
      * finds the distance between the mass passed in and the center of mass
-     * @param mass: passes in a mass to find the distance between the mass and the center
+     * @param mass passes in a mass to find the distance between the mass and the center
      * of mass
      */
 	private void distance(Mass mass){

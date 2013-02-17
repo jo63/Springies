@@ -45,8 +45,8 @@ public class PhysicsFactory extends Factory{
 	}
 	/**
 	 * creates the specified force and adds it to the model
-	 * @param model: this is the model where the simulation takes place
-	 * @param: line: this is a Scanner which reads in lines from a data file
+	 * @param model this is the model where the simulation takes place
+	 * @param: line this is a Scanner which reads in lines from a data file
 	 */
 	@Override
 	public void create(Model model, Scanner line)

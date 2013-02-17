@@ -29,8 +29,8 @@ public abstract class SpriteCommand {
 	}
 	/**
 	 *
-	 * @param masses TODO
-	 * @param line: a scanner that reads a data file
+	 * @param masses a map of masses to the value of the mass
+	 * @param line a scanner that reads a data file
 	 **/
 	public abstract Sprite returnSprite(Scanner line, Map<Integer, Mass> masses);
 }
@@ -44,7 +44,7 @@ public abstract class SpriteCommand {
 class MassCommand extends SpriteCommand{
 	/**
 	 * Creates a MassCommand object
-	 * @param masses: a map of an Id of a Mass to a Mass
+	 *
 	 */
 	public MassCommand(){
 	}
@@ -86,7 +86,7 @@ class MuscleCommand extends SpriteCommand
 {
 	/**
 	 * creates a MuslceCommand object
-	 * @param masses: a map of the Id of the mass to the Mass
+	 * 
 	 */
 	public MuscleCommand()
 	{
@@ -94,8 +94,8 @@ class MuscleCommand extends SpriteCommand
 	/**
 	 * The scanner reads in two ints which refer to masses that have been created, a rest length, a k value(the springiness of the 
 	 * muscle), and an amplitude.  Using the values that were read in, a new muscle is created.
-	 * @param line: This is a Scanner which reads in lines from a data file
-	 * @return: The muscle that is created is returned
+	 * @param line This is a Scanner which reads in lines from a data file
+	 * @return The muscle that is created is returned
 	 */
 	@Override
 	public Muscle returnSprite(Scanner line, Map<Integer, Mass> masses) {
@@ -120,7 +120,7 @@ class SpringCommand extends SpriteCommand
 {
 	/**
 	 * creates a Spring object
-	 * @param masses: a map of the Id of a Mass to the Mass
+	 * 
 	 */
 	public SpringCommand()
 	{

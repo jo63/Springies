@@ -24,7 +24,7 @@ public class MouseAction {
 	private Spring mySpring;  
 	private Mass myMass;
 	/**
-	 * creates a NewSpringHandler object which sets the sets the state to be that a spring and a mass have not yet been created
+	 * creates a MouseAction object which sets the sets the state to be that a spring and a mass have not yet been created
 	 * with a mouse click
 	 * @param model: the model where the simulation takes place
 	 */

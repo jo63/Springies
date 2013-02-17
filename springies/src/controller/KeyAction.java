@@ -24,7 +24,7 @@ public abstract class KeyAction {
 	 * Creates a keyAction object that knows the model and the canvas where the simulation
 	 * takes place.  A map of string to Force is also created so that the keyAction has a 
 	 * map that contains all the forces and labels for the forces.
-	 * @param model: passes in the model where the simulation takes place
+	 * @param model is the model where the simulation takes place
 	 */
 	public KeyAction(Model model)
 	{
@@ -49,7 +49,7 @@ public abstract class KeyAction {
 	}
 	/**
 	 * 
-	 * @return: the canvas where the simulation takes place
+	 * @return the canvas where the simulation takes place
 	 */
 	public Canvas getCanvas()
 	{
@@ -67,14 +67,14 @@ class LoadAssembly extends KeyAction
 {
 	/**
 	 * creates a loadAssembly object that has the model where the simulation occurs
-	 * @param model: this is the model where the simulation occurs
+	 * @param model this is the model where the simulation occurs
 	 */
 	public LoadAssembly(Model model) {
 		super(model);
 	}
 
 	/**
-	 * Overrides the performAction from keyAction
+	 * Overrides the performAction from keyAction.
 	 * gets the canvas from the model and calls the loadAssembly method from 
 	 * the canvas to load a new assembly into the simulation
 	 */
@@ -91,10 +91,10 @@ class LoadAssembly extends KeyAction
  */
 class ClearAssembly extends KeyAction
 {
-	Model myModel;
+	private Model myModel;
 	/**
 	 * creates a ClearAssembly that has the model where the simulation takes place
-	 * @param model: the model where the simulation takes place
+	 * @param model the model where the simulation takes place
 	 */
 	public ClearAssembly(Model model) {
 		super(model);
@@ -112,9 +112,20 @@ class ClearAssembly extends KeyAction
 	}
 }
 
+/**
+ * 
+ * @author Ryan Fishel and Kevin Oh
+ *Extends KeyAction
+ *Toggles each force on or off depending on the current state of the force and which force is supposed to be toggled.
+ */
 class ToggleForce extends KeyAction{
 
 	private String myId;
+	/**
+	 * 
+	 * @param model is the model where the simulation takes place
+	 * @param id is the type of force that is being toggled
+	 */
 	public ToggleForce(Model model, String id) {
 		super(model);
 		myId = id;
@@ -129,7 +140,7 @@ class ToggleForce extends KeyAction{
  * 
  * @author Ryan Fishel and Kevin Oh
  *Extends KeyAction
- *Increases the size of the bounds if the up arrow is pressed
+ *Increases and decreases the size of the bounds if the up or down arrows are pressed
  */
 class changeBounds extends KeyAction
 {
@@ -138,7 +149,12 @@ class changeBounds extends KeyAction
 	private Map<String, Integer> boundMap;
 	private String myId;
 	private Dimension myDimension;
-
+	
+	/**
+	 * This gets the dimensions of the model and stores whether the bounds should be increased or decreased.  It also initializes a map of the bounds
+	 * @param model is the model where the simulation takes place
+	 * @param id is the label for whether the bounds should be increased or decreased
+	 */
 	public changeBounds(Model model, String id) {
 		super(model);
 		myDimension = model.getBounds();
@@ -146,14 +162,17 @@ class changeBounds extends KeyAction
 		boundMap = new HashMap<String, Integer>();
 		initBoundMap();
 	}
-
+	/**
+	 * adds the values for increases and decreasing the bounds to the map of bounds
+	 */
 	public void initBoundMap(){
 		boundMap.put("increase", INCREASE_FACTOR);
 		boundMap.put("decrease", -INCREASE_FACTOR);
 	}
 
 	/**
-	 * if the up arrow is pressed, increase the width and the height of the dimensions of the canvas by 10
+	 * if the up arrow is pressed, increase the width and the height of the dimensions of the model by 10
+	 * if the down arrow is pressed, decrease the width and the height of the dimensions of the model by 10
 	 */
 	@Override
 	public void performAction() {

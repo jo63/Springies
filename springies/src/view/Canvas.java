@@ -202,7 +202,9 @@ public class Canvas extends JComponent {
 				}
         		);
     }
-    
+    /**
+     * clears the key presses
+     */
     public void clearInput (){
     	myKeys = new HashSet<Integer>();
     }
@@ -215,6 +217,9 @@ public class Canvas extends JComponent {
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
         }
     }
+    /**
+     * loads the environment
+     */
     private void loadEnvironment (){
     	PhysicsFactory loadPhys = new PhysicsFactory();
     	int response = INPUT_CHOOSER.showOpenDialog(null);

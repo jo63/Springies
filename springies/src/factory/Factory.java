@@ -42,13 +42,13 @@ public abstract class Factory {
 	}
 	/**
 	 * initiates that maps that are used to map the keyword of what is being loaded into the assembly to 
-	 * the command that loads the specified object into the assmebly
+	 * the command that loads the specified object into the assembly
 	 */
 	public abstract void initMaps();
 	/**
 	 * creates the specified object and adds it to the model
-	 * @param model: the model where the simulation takes place
-	 * @param line: this is a Scanner which reads from the data file 
+	 * @param model the model where the simulation takes place
+	 * @param line this is a Scanner which reads from the data file 
 	 */
 	public abstract void create(Model model, Scanner line);
 	

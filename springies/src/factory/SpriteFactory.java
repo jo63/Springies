@@ -12,7 +12,7 @@ import simulation.Model;
 
 
 /**
- * XXX
+ * This class is the factory that is used to create sprites.
  * 
  * @author Robert C. Duvall, Ryan Fishel, and Kevin Oh
  */
@@ -26,7 +26,7 @@ public class SpriteFactory extends Factory{
 	Map<Integer, Mass> myMasses = new HashMap<Integer, Mass>();
 
 	/**
-	 * XXX.
+	 * @return a map of masses to the value of the masses
 	 */
 	public Map<Integer, Mass> getMasses()
 	{

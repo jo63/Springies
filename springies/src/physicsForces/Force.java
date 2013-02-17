@@ -6,20 +6,22 @@ import util.Vector;
 /**
  * 
  * @author Ryan Fishel and Kevin Oh
- *
+ *Force superclass
  */
 public class Force{
 	
 	private boolean isValid;
 	private Vector myForce;
-	
+	/**
+	 * default constructor for force.  Sets the force to be valid when it is created
+	 */
 	public Force(){
 		isValid = true;
 	}
 	/**
-	 * Creates a Force with bounds that is valid and allowed to be act
-	 * @param vector
-	 */
+	 * Creates a Force and initializes the vector for the force
+	 * @param vector is the vector that represents the force
+	 **/
 	public Force(Vector force) {
 		this();
 		myForce = force;
@@ -33,6 +35,10 @@ public class Force{
 		return myForce;
 	}
 	
+	/**
+	 * sets the force.
+	 * @param force the vector that represents the force
+	 */
 	public void setForce(Vector force){
 		myForce = force;
 	}

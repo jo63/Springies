@@ -16,7 +16,7 @@ public class Muscle extends Spring {
 	//private double myLength;
 	private double time;
 	/**
-	 * @param start: the mass at the start of the muscle
+	 * @param start the mass at the start of the muscle
 	 * @param end: the mass at the end of the muscle
 	 * @param length: the length of the muscle
 	 * @param kVal: the springiness of the muscle

@@ -35,7 +35,7 @@ public class Mass extends Sprite {
 
     /**
      * 
-     * @return: A mass
+     * @return A mass
      */
     public double getMass()
     {
@@ -43,7 +43,7 @@ public class Mass extends Sprite {
     }
     /**
      * 
-     * @return: a vector the is the acceleration of the mass
+     * @return a vector the is the acceleration of the mass
      */
     public Vector getAcceleration()
     {

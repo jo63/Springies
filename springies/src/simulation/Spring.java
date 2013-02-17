@@ -61,7 +61,7 @@ public class Spring extends Sprite {
     }
     /**
      * sets the mass at the start of the spring to be the mass that is passed in
-     * @param start: the mass at the start of the spring
+     * @param start the mass at the start of the spring
      */
     public void setStart(Mass start)
     {

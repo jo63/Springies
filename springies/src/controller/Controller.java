@@ -7,7 +7,12 @@ import java.util.Set;
 import simulation.Model;
 import view.Canvas;
 
-
+/**
+ * This controls what key presses and mouse actions do.
+ * @author Ryan Fishel and Kevin Oh
+ * 
+ *
+ */
 public class Controller {
 	 
 	private Canvas myCanvas;
@@ -28,7 +33,10 @@ public class Controller {
 	private static final int INCREASE = KeyEvent.VK_UP;
 	private static final int DECREASE = KeyEvent.VK_DOWN;
 
-	
+	/**
+	 * This creates a controller, stores an instance of canvas, and initializes the map for key presses and mouse clicks
+	 * @param model: This is the model where the simulation takes place
+	 */
 	public Controller(Model model)
 	{
 		myCanvas = model.getCanvas();
@@ -36,17 +44,28 @@ public class Controller {
 		setKeysMouse();
 	}
 	
+	/**
+	 * This stores which keys were pressed and which mouse buttons were clicked.
+	 */
 	private void setKeysMouse()
 	{
 		myKeys = myCanvas.getKeysPressed();
 		lastMouseButton = myCanvas.getMouseButton();
 	}
+	/**
+	 * This initializes the map of key presses and mouse clicks
+	 * @param model is the model where the simulation takes place
+	 */
 	private void init(Model model)
 	{
 		myKeyActions = new HashMap<Integer, KeyAction>();
 		initKeyMap(model);
 		myMouseActions = new MouseAction(model);
 	}
+	/**
+	 * adds the values to the map for key presses.
+	 * @param model is the model where the simulation takes place
+	 */
 	private void initKeyMap(Model model) {
 		myKeyActions.put(LOAD_ASSEMBLY, new LoadAssembly(model));
 		myKeyActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
@@ -60,6 +79,9 @@ public class Controller {
 		myKeyActions.put(INCREASE, new changeBounds(model, "increase"));
 		myKeyActions.put(DECREASE, new changeBounds(model, "decrease"));
 	}
+	/**
+	 * This performs the actions that are supposed to occur for a given key press or mouse click.
+	 */
 	public void performAction() {
 		setKeysMouse();
 		myMouseActions.setMouseButton(lastMouseButton);

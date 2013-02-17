@@ -7,7 +7,7 @@ import util.Vector;
 /**
  * 
  * @author Ryan Fishel and Kevin Oh
- *
+ *Wall Repulsion superclass
  */
 public abstract class WallRepulsion extends Force {
 	
@@ -22,20 +22,33 @@ public abstract class WallRepulsion extends Force {
 	{
 		
 	}
+	/**
+	 * creates WallRepulsion with a given maginitude and exponent
+	 * @param magnitude is the magnitude of the force
+	 * @param exponent is the amount by which the wall repulsion decays with distance
+	 */
 	public WallRepulsion(double magnitude, double exponent) {
 		super();
 		myMagnitude = magnitude;
 		myExponent = exponent;
 	}
+	/**
+	 * 
+	 * @return the magnitude of the wall repulsion
+	 */
 	public double getMagnitude(){
 		return myMagnitude;
 	}
+	/**
+	 * 
+	 * @return the exponent of the wall repulsion
+	 */
 	public double getExponent(){
 		return myExponent;
 	}
 	/**
 	 * Sets the bounds for the force
-	 * @param bounds: Passes in the bounds of the simulation
+	 * @param bounds passes in the bounds of the simulation
 	 */
 	public void setBounds(Dimension bounds){
 		myBounds = bounds;
@@ -51,8 +64,6 @@ public abstract class WallRepulsion extends Force {
 	/**
 	 * This method takes in the distance that a mass is from a specific wall and returns a vector
 	 * that represents the wall repulsion from that specific wall to a mass.
-	 * @param distanceFromWall: the distance between a mass and a specific wall
-	 * @param id: the specific wall that is applying the force
 	 * @return: a vector that represents the wall repulsion
 	 */
 	@Override
@@ -62,8 +73,16 @@ public abstract class WallRepulsion extends Force {
 			result.setMagnitude(myMagnitude/(Math.pow(distanceFromWall(mass), myExponent)));
 			setForce(result);
 	}
-	
+	/**
+	 * 
+	 * @return the direction of the wall's wall repulsion force
+	 */
 	public abstract double returnDirection();
+	/**
+	 * 
+	 * @param mass that is being acted on by the wall repulsion
+	 * @return the distance between the mass passed in and the wall
+	 */
 	public abstract double distanceFromWall(Mass mass);
 		
 

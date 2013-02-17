@@ -108,7 +108,7 @@ public class Model {
        
     }
     /**
-     * Add given mass to this simulation.
+     * Add given mass or spring to this simulation.
      */
     public void add(Sprite sprite){
        if(sprite instanceof Mass) myMasses.add((Mass) sprite);

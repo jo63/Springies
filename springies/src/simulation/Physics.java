@@ -29,7 +29,7 @@ public class Physics {
 	}
 	/**
 	 * adds a force and a label for that force to the map of forces
-	 * @param forceType: a string that labels the force that is added. Allows for the 
+	 * @param forceType a string that labels the force that is added. Allows for the 
 	 * forces to be accessed by entering a string that represents the force 
 	 * @param force: A Force object, which is the superclass for all the forces.  This 
 	 * allows the map to contain every type of force
