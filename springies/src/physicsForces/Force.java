@@ -1,7 +1,5 @@
 package physicsForces;
 
-import java.awt.Dimension;
-
 import simulation.Mass;
 import util.Vector;
 
@@ -10,51 +8,33 @@ import util.Vector;
  * @author Ryan Fishel and Kevin Oh
  *
  */
-public class Force extends Vector{
+public class Force{
 	
-	boolean isValid;
+	private boolean isValid;
+	private Vector myForce;
 	
-	public static final int[] DIRECTIONS = 
-    	{
-    		90,
-    		180,
-    		270,
-    		0
-    	};
-	private Dimension myBounds;
+	public Force(){
+		isValid = true;
+	}
 	/**
 	 * Creates a Force with bounds that is valid and allowed to be act
 	 * @param vector
 	 */
-	public Force(Vector vector) {
-		super(vector);
-		myBounds = new Dimension();
-		isValid = true;
+	public Force(Vector force) {
+		this();
+		myForce = force;
 	}
-	/**
-	 * Sets the bounds for the force
-	 * @param bounds: Passes in the bounds of the simulation
-	 */
-	public void setBounds(Dimension bounds)
-	{
-		myBounds = bounds;
-	}
-	/**
-	 * returns the myBounds instance variable which is the area the 
-	 * simulation takes place in
-	 * @return: the area that the simulation is taking place in
-	 */
-	public Dimension getBounds()
-	{
-		return myBounds;
-	}
+	
 	/**
 	 * returns the vector that is the sum of all the forces
 	 * @return: A vector that is the sum of all the forces
 	 */
-	public Vector returnForce()
-	{
-		return this;
+	public Vector getForce(){
+		return myForce;
+	}
+	
+	public void setForce(Vector force){
+		myForce = force;
 	}
 	/**
 	 * This method is overridden in the subclasses of force so that the forces are applied

@@ -10,14 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.Timer;
@@ -99,21 +95,13 @@ public class Canvas extends JComponent {
             mySimulation.paint((Graphics2D) pen);
         }
     }
-
-    /**
-     * Returns last key pressed by the user or -1 if nothing is pressed.
-     */
-    public int getLastKeyPressed () {
-        return myLastKeyPressed;
-    }
     
     /**
      * 
      * @param key: and int representing a key press
      * @return: returns whether the key is contained in the map of keys (whether it has been pressed or not)
      */
-    public boolean isKeyContained(int key)
-    {
+    public boolean isKeyContained(int key){
     	return myKeys.contains(key);
     }
     
@@ -136,8 +124,7 @@ public class Canvas extends JComponent {
      * 
      * @return: returns what button has been pressed by the mouse
      */
-    public int getMouseButton()
-    {
+    public int getMouseButton(){
     	return mouseClick;
     }
 
@@ -154,6 +141,7 @@ public class Canvas extends JComponent {
             });
         // start animation
         mySimulation = new Model(this);
+        loadEnvironment();
         loadModel();
         myTimer.start();
     }
@@ -183,7 +171,6 @@ public class Canvas extends JComponent {
         addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed (KeyEvent e) {
-            	System.out.println("key");
                 myKeys.add(e.getKeyCode());
             }
             @Override
@@ -194,8 +181,8 @@ public class Canvas extends JComponent {
         
         myLastMousePosition = new Point();
         addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved (MouseEvent e) {
+        	@Override
+            public void mouseDragged (MouseEvent e) {
                 myLastMousePosition = e.getPoint();
             }
         });
@@ -203,48 +190,37 @@ public class Canvas extends JComponent {
         addMouseListener(
         		new MouseInputAdapter() {
         			@Override
-        			public void mousePressed(MouseEvent e)
-        			{
+        			public void mousePressed(MouseEvent e){
         				mouseClick = e.getButton();
+        				myLastMousePosition = e.getPoint();
         			}
         			
         			@Override
-        			public void mouseReleased(MouseEvent e)
-        			{
+        			public void mouseReleased(MouseEvent e){
         				mouseClick = e.NOBUTTON;
         			}	
 				}
         		);
     }
     
-    public void clearInput ()
-    {
-        myKeys.remove(new Integer(myLastKeyPressed));
-        myLastKeyPressed = NO_KEY_PRESSED;
+    public void clearInput (){
+    	myKeys = new HashSet<Integer>();
     }
     
     // load model and assembly from file chosen by user 
-    private void loadModel () {
+    public void loadModel () {
         SpriteFactory factory = new SpriteFactory();
-        PhysicsFactory loadPhys = new PhysicsFactory();
         int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {
-        	
-        	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
-            response = INPUT_CHOOSER.showOpenDialog(null);
             factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
         }
-       
     }
-    /**
-     * loads the assembly that is chosen by the user
-     */
-	public void loadAssembly() {
-        SpriteFactory factory = new SpriteFactory();
-        int response = INPUT_CHOOSER.showOpenDialog(null);
-        if (response == JFileChooser.APPROVE_OPTION) {
-        	response = INPUT_CHOOSER.showOpenDialog(null);
-            factory.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile()); //same simulation or should be passed in?
+    private void loadEnvironment (){
+    	PhysicsFactory loadPhys = new PhysicsFactory();
+    	int response = INPUT_CHOOSER.showOpenDialog(null);
+        if (response == JFileChooser.APPROVE_OPTION) {        	
+        	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
         }
     }
+
 }

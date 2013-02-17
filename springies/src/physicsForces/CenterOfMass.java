@@ -1,18 +1,15 @@
 package physicsForces;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.List;
 
 import simulation.Mass;
 import util.Location;
 import util.Vector;
-import view.Canvas;
 
 /**
  * 
- * @author Ryan Fishel and Kevin Oh
+ * @author Ryan Fishelio and Kevin Oh
  *
  */
 public class CenterOfMass extends Force{
@@ -26,11 +23,7 @@ public class CenterOfMass extends Force{
 	/**
 	 * Creates a default center of mass with magnitude and exponent of 0
 	 */
-	public CenterOfMass()
-	{
-		super(new Vector(0,0));
-		myMagnitude = 0;
-		myExponent = 0;
+	public CenterOfMass(){
 	}
 
 	/**
@@ -40,19 +33,16 @@ public class CenterOfMass extends Force{
 	 * @param exponent: The exponent that determines how the center of mass force decays with 
 	 * distance
 	 */
-	public CenterOfMass(double magnitude, double exponent)
-	{
-		super(new Vector(0,0));
+	public CenterOfMass(double magnitude, double exponent){
+		super();
 		myMagnitude = magnitude;
 		myExponent = exponent;
 	}
-
 	/**
 	 * 
 	 * @return: The exponent that determines how the center of mass decays with distance
 	 */
-	public double getExponent()
-	{
+	public double getExponent(){
 		return myExponent;
 	}
 
@@ -61,18 +51,15 @@ public class CenterOfMass extends Force{
 	 * the position of the center of mass
 	 * @param massList: The list of all the masses in the simulation
 	 */
-	public void setCenterMassPosition(List<Mass> massList)
-	{
-		if(massList == null)
-		{
+	public void setCenterMassPosition(List<Mass> massList){
+		if(massList == null){
 			return;
 		}
 		double totalMass = 0;
 		double massXSum = 0;
 		double massYSum = 0;
 		
-		for(Mass mass : massList)
-		{
+		for(Mass mass : massList){
 			massXSum += mass.getX()*Math.abs(mass.getMass());
 			massYSum += mass.getY()*Math.abs(mass.getMass());
 			totalMass += Math.abs(mass.getMass());
@@ -87,17 +74,17 @@ public class CenterOfMass extends Force{
 	 * angle between the mass and the center of mass
 	 */
 	@Override
-	public void massInitialize(Mass mass)
-	{
+	public void massInitialize(Mass mass){
 		distance(mass);
 		getAngleForCOM(mass);
+		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass/100,myExponent);
+		setForce(new Vector(COMAngle, magnitude));
 	}
 	/**
 	 * finds the angle between a mass and the center of mass
 	 * @param mass: takes in a mass to find the angle between the mass and the center of mass 
 	 */
-    private void getAngleForCOM(Mass mass)
-    {
+    private void getAngleForCOM(Mass mass){
     	double xDiff = myCenterOfMass.x - mass.getX();
     	double yDiff = myCenterOfMass.y - mass.getY();
     		
@@ -109,16 +96,7 @@ public class CenterOfMass extends Force{
      * @param mass: passes in a mass to find the distance between the mass and the center
      * of mass
      */
-	private void distance(Mass mass)
-	{
+	private void distance(Mass mass){
 		distFromCenterOfMass = new Location(myCenterOfMass.x, myCenterOfMass.y).distance(mass.getX(), mass.getY());
-	}
-	/**
-	 * @return: returns a vector that represents the force of the center of mass
-	 */
-	public Vector returnForce()
-	{
-		double magnitude = myMagnitude/Math.pow(distFromCenterOfMass/100,myExponent);
-		return new Vector(COMAngle, magnitude);
 	}
 }

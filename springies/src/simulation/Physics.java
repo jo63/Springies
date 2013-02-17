@@ -18,7 +18,6 @@ import physicsForces.WallRepulsion;
 public class Physics {
 
 	private Map<String, Force> myForces;
-	private WallRepulsion myWall = new WallRepulsion();
 	
 	/**
 	 * creates a physics object with a map of the forces
@@ -48,15 +47,6 @@ public class Physics {
 	{
 		return myForces;
 	}
-	
-	/**
-	 * returns the instance of the WallRepulsion object
-	 * @return the wall repulsion for a given wall
-	 */
-	public WallRepulsion getWall()
-	{
-		return myWall;
-	}
 	/**
 	 * This method updates the position of the center of mass and the bounds for wall repulsion 
 	 * @param massList: A list of all the masses that exist.  Used to determine the 
@@ -64,11 +54,13 @@ public class Physics {
 	 * @param bounds: The bounds of simulation. Needed for wall repulsion
 	 */
 	public void update(List<Mass> massList, Dimension bounds){
-		if((myForces.get("centermass")) != null){
-			((CenterOfMass)(myForces.get("centermass"))).setCenterMassPosition(massList);
-		}
-		if((myForces.get("wall")) != null){
-			((WallRepulsion)(myForces.get("wall"))).setBounds(bounds);
+		for(Force force : myForces.values()){
+			if(force instanceof CenterOfMass){
+				((CenterOfMass)force).setCenterMassPosition(massList);
+			}
+			if(force instanceof WallRepulsion){
+				((WallRepulsion)(force)).setBounds(bounds);
+			}
 		}
 	}
 
@@ -79,13 +71,13 @@ public class Physics {
 	 */
 	public Vector getEnvironmentVector(Mass m){
 		Vector result = new Vector();
-		for(Force force : myForces.values()){
-			if(force.isValid()){
-				force.massInitialize(m);
-				result.sum(force.returnForce());
+		for(String id : myForces.keySet()){
+			if(myForces.get(id).isValid()){
+				myForces.get(id).massInitialize(m);
+				//System.out.println("name: " + id + " dir " + myForces.get(id).getForce().getDirection() + " mag " + myForces.get(id).getForce().getMagnitude());
+				result.sum(myForces.get(id).getForce());
 			}
 		}
-
 		return result;
 	}
 

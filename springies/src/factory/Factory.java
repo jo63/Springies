@@ -2,7 +2,6 @@ package factory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Map;
 import java.util.Scanner;
 
 import simulation.Model;
@@ -13,6 +12,7 @@ import simulation.Model;
  */
 public abstract class Factory {
 	private Model myModel;
+	
 	public Model getModel()
 	{
 		return myModel;

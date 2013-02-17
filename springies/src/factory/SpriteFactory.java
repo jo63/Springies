@@ -37,9 +37,9 @@ public class SpriteFactory extends Factory{
 	 */
 	@Override
 	public void initMaps() {
-		spriteCreator.put(MASS_KEYWORD, new MassCommand(myMasses));
-		spriteCreator.put(SPRING_KEYWORD, new SpringCommand(myMasses));
-		spriteCreator.put(MUSCLE_KEYWORD, new MuscleCommand(myMasses));
+		spriteCreator.put(MASS_KEYWORD, new MassCommand());
+		spriteCreator.put(SPRING_KEYWORD, new SpringCommand());
+		spriteCreator.put(MUSCLE_KEYWORD, new MuscleCommand());
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class SpriteFactory extends Factory{
 			String type = line.next();
 			if(spriteCreator.containsKey(type))
 			{
-				model.add(spriteCreator.get(type).getCommand(line));
+				model.add(spriteCreator.get(type).returnSprite(line,myMasses));
 			}
 		}
 	}

@@ -2,16 +2,17 @@ package factory;
 
 import java.util.Scanner;
 import physicsForces.*;
-import simulation.Model;
 import util.Vector;
 
 public abstract class PhysicsCommand {
 
-	public abstract Force getCommand(Scanner line);
+	public abstract Force returnForce(Scanner line);
+		
+	
 }
 
 class GravityCommand extends PhysicsCommand{
-	public Gravity getCommand(Scanner line)
+	public Gravity returnForce(Scanner line)
 	{
 		double direction = line.nextDouble();
         double magnitude = line.nextDouble();
@@ -21,7 +22,7 @@ class GravityCommand extends PhysicsCommand{
 
 class ViscosityCommand extends PhysicsCommand{
 	
-	public Viscosity getCommand(Scanner line)
+	public Viscosity returnForce(Scanner line)
 	{
 		return new Viscosity(new Vector(0,line.nextDouble()));
 	}
@@ -29,7 +30,7 @@ class ViscosityCommand extends PhysicsCommand{
 
 class CenterOfMassCommand extends PhysicsCommand{
 	
-	public CenterOfMass getCommand(Scanner line)
+	public CenterOfMass returnForce(Scanner line)
 	{
 		double magnitude = line.nextDouble();
     	double exponent = line.nextDouble();
@@ -38,21 +39,25 @@ class CenterOfMassCommand extends PhysicsCommand{
 }
 
 class WallRepulsionCommand extends PhysicsCommand{
-	private Model myModel;
-	public WallRepulsionCommand(Model model)
-	{
-		myModel = model;
+	public WallRepulsionCommand(){
 	}
-	public WallRepulsion getCommand(Scanner line)
+	public WallRepulsion returnForce(Scanner line, int id)
 	{
-		int id = line.nextInt();
 		double magnitude = line.nextDouble();
 		double exponent = line.nextDouble();
-		WallRepulsion temp = myModel.getPhysics().getWall();
-
-		temp.addWall(id, magnitude, exponent);
-
-		return temp;    
+		switch(id){
+			case 1: return new TopWall(magnitude, exponent);
+			case 2:	return new RightWall(magnitude, exponent);
+			case 1+2:	return new BottomWall(magnitude, exponent); 
+			case 4:	return new LeftWall(magnitude, exponent); 
+			default: break;				
+		}
+		return null;    
+	}
+	
+	@Deprecated
+	public Force returnForce(Scanner line){
+		return new Force();
 	}
 }
 	

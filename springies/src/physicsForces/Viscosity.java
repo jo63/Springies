@@ -22,8 +22,10 @@ public class Viscosity extends Force{
 	 * sets the direction of viscosity for the mass that is passed in
 	 * @param mass: a mass that is used to determine the direction for the viscosity vector
 	 */
+	@Override
 	public void massInitialize(Mass mass)
 	{
-		this.setDirection(mass.getVelocity().getDirection()+180);
+		mass.getVelocity().scale(getForce().getMagnitude());
+		getForce().setDirection((mass.getVelocity().getDirection()+180));
 	}
 }

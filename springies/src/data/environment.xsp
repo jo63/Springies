@@ -1,7 +1,7 @@
-centermass 20 2
-#gravity 90 50
-#wall 2 20 0
-#wall 3 20 0
-#wall 1 20 0
-#wall 4 20 0
-viscosity 40
+centermass 100 0
+gravity 80 50
+wall 2 20 2
+#wall 3 800 2
+#wall 1 800 2
+#wall 4 800 2
+viscosity 0.8

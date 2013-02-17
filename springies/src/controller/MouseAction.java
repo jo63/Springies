@@ -2,99 +2,39 @@ package controller;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 import simulation.Mass;
 import simulation.Model;
 import simulation.Spring;
 import util.Location;
-/**
- * 
- * @author Ryan Fishel and Kevin Oh
- *
- */
-public abstract class MouseAction {
-
-	private Model myModel;
-	private Spring mySpring; //getter and setter. 
-	private Mass myMass;
-	/**
-	 * creates a MouseAction object
-	 * @param model: The model where the simulation takes place
-	 */
-	public MouseAction(Model model)
-	{
-		myModel = model;
-	}
-	/**
-	 * sets a spring when the mouse is clicked
-	 * @param spring: passes in a spring to be placed
-	 */
-	public void setSpring(Spring spring)
-	{
-		mySpring = spring;
-	}
-	/**
-	 * 
-	 * @param mass: sets a mass in the position of a mouse click
-	 */
-	public void setMass(Mass mass)
-	{
-		myMass = mass;
-	}
-	/**
-	 * 
-	 * @return: the model where the simulation takes place
-	 */
-	public Model getModel()
-	{
-		return myModel;
-	}
-	/**
-	 * 
-	 * @return: the Spring that is created on a mouse click
-	 */
-	public Spring getSpring()
-	{
-		return mySpring;
-	}
-	/**
-	 * 
-	 * @return: the mass that is created when the mouse is clicked
-	 */
-	public Mass getMass()
-	{
-		return myMass;
-	}
-
-	/**
-	 * Performs the action of creating or removing a spring based on whether the mouse was clicked or released
-	 */
-	public abstract void performAction();
-
-}
+import view.Canvas;
 
 /**
  * 
  * @author Ryan Fishel and Kevin Oh
- *Extends MouseAction
  *Deals with adding and removing a spring and a mass when the mouse is clicked and released.  Also, if the mouse is dragged, the 
  *mass will move to the mouse position causing the spring to rotate, extend, or contract
  */
-class NewSpringHandler extends MouseAction {
+public class MouseAction {
 	private boolean isCreated;
 	private int myMouseButton;
+	private Canvas myCanvas;
+	private Model myModel;
+	private Spring mySpring;  
+	private Mass myMass;
 	/**
 	 * creates a NewSpringHandler object which sets the sets the state to be that a spring and a mass have not yet been created
 	 * with a mouse click
 	 * @param model: the model where the simulation takes place
 	 */
-	public NewSpringHandler(Model model)
+	public MouseAction(Model model)
 	{
-		super(model);
+		myModel = model;
+		myCanvas = model.getCanvas();
 		isCreated = false;
 	}
+
 	/**
 	 * sets the mouse button to be the button that was clicked
 	 * @param button: the button that gets clicked
@@ -103,7 +43,7 @@ class NewSpringHandler extends MouseAction {
 	{
 		myMouseButton = button;
 	}
-	@Override
+	
 	public void performAction() {
 		switch(myMouseButton)
 		{
@@ -119,11 +59,11 @@ class NewSpringHandler extends MouseAction {
 	 */
 	private void createMassSpring()
 	{
-		Point mouse = getModel().getCanvas().getMousePosition();
+		Point mouse = myCanvas.getLastMousePosition();
 		if(!isCreated){
-			List<Mass> masses = getModel().getMasses();
+			List<Mass> masses = myModel.getMasses();
 			Mass tempMass = new Mass(0,0,0); 
-			Double temp = 1000.0;
+			Double temp = Double.MAX_VALUE;
 			for(Mass m : masses)
 			{
 				Double dist = mouse.distance(new Location(m.getX(), m.getY()));
@@ -132,15 +72,16 @@ class NewSpringHandler extends MouseAction {
 					temp = dist;
 				}
 			}
-			setMass(new Mass(mouse.getX(), mouse.getY(), 0));
-			setSpring(new Spring(tempMass, getMass(), temp, 0));
-			getModel().add(getMass());
-			getModel().add(getSpring());
+			myMass = new Mass(mouse.getX(), mouse.getY(), 0);
+			mySpring = new Spring(tempMass, myMass, temp, 0);
+			myModel.add(myMass);
+			myModel.add(mySpring);
 			isCreated = true;
 		}
 		else{
-			getMass().setCenter(new Location(mouse.getX(), mouse.getY()));
+			myMass.setCenter(new Location(mouse.getX(), mouse.getY()));
 		}
+		
 	}
 	/**
 	 * remove the spring and the mass from the model if the mouse is released
@@ -148,8 +89,8 @@ class NewSpringHandler extends MouseAction {
 	private void removeSpringMass()
 	{
 		if(isCreated){
-			getModel().getSprings().remove(getSpring());
-			getModel().getMasses().remove(getMass());
+			myModel.getSprings().remove(mySpring);
+			myModel.getMasses().remove(myMass);
 			isCreated = false;
 		}
 	}
