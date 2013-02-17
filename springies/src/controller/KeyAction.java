@@ -1,12 +1,8 @@
 package controller;
 
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-
-import factory.SpriteFactory;
-
 import physicsForces.*;
 import simulation.Model;
 import view.Canvas;
@@ -26,8 +22,7 @@ public abstract class KeyAction {
 	 * map that contains all the forces and labels for the forces.
 	 * @param model is the model where the simulation takes place
 	 */
-	public KeyAction(Model model)
-	{
+	public KeyAction(Model model) {
 		myForces = model.getPhysics().getForces();
 		myCanvas = model.getCanvas();
 
@@ -43,16 +38,14 @@ public abstract class KeyAction {
 	 * Returns the map of strings (labels) to the corresponding force object
 	 * @return: the map of strings to forces
 	 */
-	public Map<String, Force> getForces()
-	{
+	public Map<String, Force> getForces() {
 		return myForces;
 	}
 	/**
 	 * 
 	 * @return the canvas where the simulation takes place
 	 */
-	public Canvas getCanvas()
-	{
+	public Canvas getCanvas() {
 		return myCanvas;
 	}
 }
@@ -63,8 +56,7 @@ public abstract class KeyAction {
  *Extends keyAction
  *Loads a new assembly when "n" is pressed
  */
-class LoadAssembly extends KeyAction
-{
+class LoadAssembly extends KeyAction {
 	/**
 	 * creates a loadAssembly object that has the model where the simulation occurs
 	 * @param model this is the model where the simulation occurs
@@ -89,8 +81,7 @@ class LoadAssembly extends KeyAction
  *Extends KeyAction
  *clears the assembly if "c" is pressed
  */
-class ClearAssembly extends KeyAction
-{
+class ClearAssembly extends KeyAction {
 	private Model myModel;
 	/**
 	 * creates a ClearAssembly that has the model where the simulation takes place
@@ -116,9 +107,10 @@ class ClearAssembly extends KeyAction
  * 
  * @author Ryan Fishel and Kevin Oh
  *Extends KeyAction
- *Toggles each force on or off depending on the current state of the force and which force is supposed to be toggled.
+ *Toggles each force on or off depending on the current state of the force 
+ *and which force is supposed to be toggled.
  */
-class ToggleForce extends KeyAction{
+class ToggleForce extends KeyAction {
 
 	private String myId;
 	/**
@@ -132,8 +124,9 @@ class ToggleForce extends KeyAction{
 	}
 	@Override
 	public void performAction() {
-		if(getForces().get(myId) != null)
+		if (getForces().get(myId) != null){
 			(getForces().get(myId)).toggleForce();
+		}
 	}
 }
 /**
@@ -142,8 +135,7 @@ class ToggleForce extends KeyAction{
  *Extends KeyAction
  *Increases and decreases the size of the bounds if the up or down arrows are pressed
  */
-class changeBounds extends KeyAction
-{
+class changeBounds extends KeyAction {
 
 	public static final int INCREASE_FACTOR = 10;
 	private Map<String, Integer> boundMap;
@@ -165,14 +157,15 @@ class changeBounds extends KeyAction
 	/**
 	 * adds the values for increases and decreasing the bounds to the map of bounds
 	 */
-	public void initBoundMap(){
+	public void initBoundMap() {
 		boundMap.put("increase", INCREASE_FACTOR);
 		boundMap.put("decrease", -INCREASE_FACTOR);
 	}
 
 	/**
-	 * if the up arrow is pressed, increase the width and the height of the dimensions of the model by 10
-	 * if the down arrow is pressed, decrease the width and the height of the dimensions of the model by 10
+	 * if the up arrow is pressed, increase the width and the height of the dimensions 
+	 * of the model by 10 if the down arrow is pressed, decrease the width and the height 
+	 * of the dimensions of the model by 10
 	 */
 	@Override
 	public void performAction() {

@@ -37,16 +37,14 @@ public class Mass extends Sprite {
      * 
      * @return A mass
      */
-    public double getMass()
-    {
+    public double getMass() {
     	return myMass;
     }
     /**
      * 
      * @return a vector the is the acceleration of the mass
      */
-    public Vector getAcceleration()
-    {
+    public Vector getAcceleration() {
     	return myAcceleration;
     }
     
@@ -104,7 +102,7 @@ public class Mass extends Sprite {
         
             impulse = new Vector(UP_DIRECTION, IMPULSE_MAGNITUDE);
         }
-        if (getTop() < 0) {
+        else if (getTop() < 0) {
             impulse = new Vector(DOWN_DIRECTION, IMPULSE_MAGNITUDE);
         }
         //impulse scale angle calculation is off. 

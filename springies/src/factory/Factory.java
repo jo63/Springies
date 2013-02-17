@@ -13,8 +13,7 @@ import simulation.Model;
 public abstract class Factory {
 	private Model myModel;
 	
-	public Model getModel()
-	{
+	public Model getModel() {
 		return myModel;
 	}
 	/**
@@ -22,8 +21,7 @@ public abstract class Factory {
 	 * @param model : this parameter is the model of the simulation
 	 * @param modelFile : This is the file with the data of which assemblies should be loaded into the model
 	 */
-	public void loadModel(Model model, File modelFile)
-	{
+	public void loadModel(Model model, File modelFile) {
 		myModel = model;
 		initMaps();
 		try {

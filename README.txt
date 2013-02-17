@@ -1,45 +1,14 @@
-hi
-in general
- - add names to ALL files you modified
- - use CompSci 308 formatting and clean up rules on your code
- - poor commenting and name choices in many classes
- - unneccessary "get/set" methods in many classes (like Spring, Factory, Model, etc.)
+Team Members: Kevin Oh (jo63) & Ryan Fishel (ref13)
+Date started: part 2: Jan 25 part 3: Feb 8
+Date completed: part 2: Feb 6 part 3: Feb 17 
 
-Force hierarchy is poorly designed/implemented:
- - why does Force extend Vector (instead of contain)?
- - why does Force contain bounds and directions (only used in 1 or 2 subclasses each)?
- - why does WallRepulsion extend CenterOfMass?
- - bounce as a Force and a method in Mass
- - magic numbers for WallRepulsion
- - duplicated code in constructors
- - unnecessary overriding of functions in subclasses
+Each Member role: 
+Ryan: Worked on implementing the MouseAction, WallRepulsion, Force, Viscosity, Muscle classes, modifying the Canvas class and commenting + checkstyling. 25+ hours contributed
+Kevin: Worked on implementing Controller, KeyAction, factory package, different WallRepulsion subclasses, CenterOfMass, Gravity, FixedMass, Physics and modifying the Model class and commenting + checkstyling 30+ hours contributed
 
-Factory
- - I do not understand the name "getCommand" since it does not return a command
- - it is also not properly overridden in subclasses (add @Override tag to see error)
- - in SpriteCommand, getCommand should take mass Map rather than storing it as an instance variable
-    (in addition to more understandable code, it will clean many things up)
- - why is wall not implemented as a command like the others?
+The Main.java can be found in the default package. 
+File choice order: the first file to be read is the environment.xsp (should you want a physics environment) which contains the values of the physics forces. The second file to be read is the example.xsp which holds specifications on the various sprites to be displayed on the canvas. The assembly.xsp file is for loading an additional assembly by pressing "n" once the program is running. 
 
-Physics
- - is definitely NOT closed, lots of special case code
+There is currently an issue with the getBounce() method in the mass class where the masses are having difficulty when bouncing off the walls. They are sometimes thrown off the canvas. 
 
-Model
- - add (Sprite) method is unnecessary
-
-Controller is potentially a good idea, but the code is a mess
- - not clear "order" of calls to constructor, init(), and setActionListeners() to make performAction() work
- - setActionListeners() is a poor function name for what it does
- - why store the Model in, when all you need is the Canvas
- - how about a descriptive name like TOP_WALL instead of TOGGLE_WALL_ONE
-
-KeyActions
- - hierarchy filled with duplicated code (no need for separate Force subclasses or separate Increase/Decrease)
- - superclass should not have constant INCREASE_FACTOR and definitely not getIncreaseFactor
-
-MouseActions
- - this is just terrible code :(
-
-Canvas
- - seperate, duplicated, loadModel() and loadAssembly() methods???
- - not sure why getMouseButton() method is needed
+For the future, I wish that there was a better tutorial on how to use github before we start the project as there were many hours spent on trying to resolve merge conflicts and detached heads. 

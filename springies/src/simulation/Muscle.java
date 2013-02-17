@@ -44,8 +44,7 @@ public class Muscle extends Spring {
 	 * calculates what the length of the muscle should be and returns the length
 	 * @return: returns the length of the muscle
 	 */
-	public double getLength()
-	{
+	public double getLength() {
 		 return super.getLength()+(Math.sin(time)*myAmplitude);
 	}
 

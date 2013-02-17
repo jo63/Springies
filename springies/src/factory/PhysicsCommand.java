@@ -30,8 +30,7 @@ class GravityCommand extends PhysicsCommand{
 	/**
 	 * finds the direction and magnitude of the gravity and returns the gravity
 	 */
-	public Gravity returnForce(Scanner line)
-	{
+	public Gravity returnForce(Scanner line) {
 		double direction = line.nextDouble();
         double magnitude = line.nextDouble();
         return new Gravity(new Vector(direction, magnitude));
@@ -47,8 +46,7 @@ class ViscosityCommand extends PhysicsCommand{
 	/**
 	 * returns the viscosity
 	 */
-	public Viscosity returnForce(Scanner line)
-	{
+	public Viscosity returnForce(Scanner line) {
 		return new Viscosity(new Vector(0, line.nextDouble()));
 	}
 }
@@ -63,8 +61,7 @@ class CenterOfMassCommand extends PhysicsCommand{
 	/**
 	 *reads in the magnitude and exponent for the center of mass and returns the center of mass
 	 */
-	public CenterOfMass returnForce(Scanner line)
-	{
+	public CenterOfMass returnForce(Scanner line) {
 		double magnitude = line.nextDouble();
     	double exponent = line.nextDouble();
     	return new CenterOfMass(magnitude, exponent);
@@ -76,11 +73,15 @@ class CenterOfMassCommand extends PhysicsCommand{
  * @author Ryan Fishel and Kevin Oh
  *Creates Wall Repulsion
  */
-class WallRepulsionCommand extends PhysicsCommand{
+class WallRepulsionCommand extends PhysicsCommand {
+	public static final int TOP_ID = 1;
+	public static final int RIGHT_ID = 2;
+	public static final int BOTTOM_ID = 3;
+	public static final int LEFT_ID = 4;
 	/**
 	 * defualt constructor for wallRepulsionCommand
 	 */
-	public WallRepulsionCommand(){
+	public WallRepulsionCommand() {
 	}
 	/**
 	 * Returns the correct type of wall repulsion
@@ -88,15 +89,14 @@ class WallRepulsionCommand extends PhysicsCommand{
 	 * @param id tells which wall the wall repulsion is being created for
 	 * @return returns the wall repulsion
 	 */
-	public WallRepulsion returnForce(Scanner line, int id)
-	{
+	public WallRepulsion returnForce(Scanner line, int id) {
 		double magnitude = line.nextDouble();
 		double exponent = line.nextDouble();
 		switch(id){
-			case 1: return new TopWall(magnitude, exponent);
-			case 2:	return new RightWall(magnitude, exponent);
-			case 3:	return new BottomWall(magnitude, exponent); 
-			case 4:	return new LeftWall(magnitude, exponent); 
+			case TOP_ID: return new TopWall(magnitude, exponent);
+			case RIGHT_ID:	return new RightWall(magnitude, exponent);
+			case BOTTOM_ID:	return new BottomWall(magnitude, exponent); 
+			case LEFT_ID:	return new LeftWall(magnitude, exponent); 
 			default: break;				
 		}
 		return null;    
@@ -107,7 +107,7 @@ class WallRepulsionCommand extends PhysicsCommand{
 	 * @return nothing is returned
 	 */
 	@Deprecated
-	public Force returnForce(Scanner line){
+	public Force returnForce(Scanner line) {
 		return new Force();
 	}
 }

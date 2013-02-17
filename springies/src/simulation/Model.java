@@ -4,10 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.List;
 import java.util.ArrayList;
-
 import controller.Controller;
-
-import physicsForces.CenterOfMass;
 import physicsForces.Force;
 
 import util.Sprite;
@@ -52,10 +49,10 @@ public class Model {
      * returns the instance of canvas
      * @return the canvas that the simulation is taking place on
      */
-    public Canvas getCanvas(){
+    public Canvas getCanvas() {
     	return myView;
     }
-    public Dimension getBounds(){
+    public Dimension getBounds() {
     	return myBounds;
     }
     /**
@@ -76,7 +73,7 @@ public class Model {
      * returns the list of all the masses that exist
      * @return the list of masses in the simulation
      */
-    public List<Mass> getMasses(){
+    public List<Mass> getMasses() {
     	return myMasses;
     }
     
@@ -84,7 +81,7 @@ public class Model {
      * returns the list of all the springs that exist
      * @return the list of the springs in the simulation
      */
-    public List<Spring> getSprings(){
+    public List<Spring> getSprings() {
     	return mySprings;
     }
 
@@ -110,20 +107,24 @@ public class Model {
     /**
      * Add given mass or spring to this simulation.
      */
-    public void add(Sprite sprite){
-       if(sprite instanceof Mass) myMasses.add((Mass) sprite);
-       else if (sprite instanceof Spring) mySprings.add((Spring) sprite);
+    public void add(Sprite sprite) {
+       if(sprite instanceof Mass) {
+    	   myMasses.add((Mass) sprite);
+       }
+       else if (sprite instanceof Spring) {
+    	   mySprings.add((Spring) sprite);
+       }
     }
     /**
      * Add given force to this simulation's physics.
      */
-    public void add(String type, Force force){
+    public void add(String type, Force force) {
     	myPhysics.addForce(type, force);
     }
     /**
      * clears the list of masses and the list of springs
      */
-    public void clear(){
+    public void clear() {
     	myMasses = new ArrayList<Mass>();
         mySprings = new ArrayList<Spring>();
     }

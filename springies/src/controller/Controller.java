@@ -10,7 +10,6 @@ import view.Canvas;
 /**
  * This controls what key presses and mouse actions do.
  * @author Ryan Fishel and Kevin Oh
- * 
  *
  */
 public class Controller {
@@ -34,11 +33,11 @@ public class Controller {
 	private static final int DECREASE = KeyEvent.VK_DOWN;
 
 	/**
-	 * This creates a controller, stores an instance of canvas, and initializes the map for key presses and mouse clicks
+	 * This creates a controller, stores an instance of canvas, and initializes 
+	 * the map for key presses and mouse clicks
 	 * @param model: This is the model where the simulation takes place
 	 */
-	public Controller(Model model)
-	{
+	public Controller(Model model){
 		myCanvas = model.getCanvas();
 		init(model);
 		setKeysMouse();
@@ -47,8 +46,7 @@ public class Controller {
 	/**
 	 * This stores which keys were pressed and which mouse buttons were clicked.
 	 */
-	private void setKeysMouse()
-	{
+	private void setKeysMouse(){
 		myKeys = myCanvas.getKeysPressed();
 		lastMouseButton = myCanvas.getMouseButton();
 	}
@@ -56,8 +54,7 @@ public class Controller {
 	 * This initializes the map of key presses and mouse clicks
 	 * @param model is the model where the simulation takes place
 	 */
-	private void init(Model model)
-	{
+	private void init(Model model){
 		myKeyActions = new HashMap<Integer, KeyAction>();
 		initKeyMap(model);
 		myMouseActions = new MouseAction(model);
@@ -71,7 +68,8 @@ public class Controller {
 		myKeyActions.put(CLEAR_ASSEMBLY, new ClearAssembly(model));
 		myKeyActions.put(TOGGLE_GRAVITY, new ToggleForce(model, "gravity"));
 		myKeyActions.put(TOGGLE_VISCOSITY, new ToggleForce(model, "viscosity"));
-		myKeyActions.put(TOGGLE_CENTER_OF_MASS, new ToggleForce(model, "centermass"));
+		myKeyActions.put(TOGGLE_CENTER_OF_MASS, 
+				new ToggleForce(model, "centermass"));
 		myKeyActions.put(TOGGLE_WALL_TOP, new ToggleForce(model, "top"));
 		myKeyActions.put(TOGGLE_WALL_RIGHT, new ToggleForce(model, "right"));
 		myKeyActions.put(TOGGLE_WALL_BOTTOM, new ToggleForce(model, "bottom"));
@@ -80,7 +78,8 @@ public class Controller {
 		myKeyActions.put(DECREASE, new changeBounds(model, "decrease"));
 	}
 	/**
-	 * This performs the actions that are supposed to occur for a given key press or mouse click.
+	 * This performs the actions that are supposed to occur 
+	 * for a given key press or mouse click.
 	 */
 	public void performAction() {
 		setKeysMouse();

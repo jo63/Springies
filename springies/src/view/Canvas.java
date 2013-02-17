@@ -220,11 +220,11 @@ public class Canvas extends JComponent {
     /**
      * loads the environment
      */
-    private void loadEnvironment (){
+    private void loadEnvironment () {
     	PhysicsFactory loadPhys = new PhysicsFactory();
     	int response = INPUT_CHOOSER.showOpenDialog(null);
         if (response == JFileChooser.APPROVE_OPTION) {        	
-        	loadPhys.loadModel(mySimulation,INPUT_CHOOSER.getSelectedFile());
+        	loadPhys.loadModel(mySimulation, INPUT_CHOOSER.getSelectedFile());
         }
     }
 

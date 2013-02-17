@@ -15,7 +15,7 @@ public class Force{
 	/**
 	 * default constructor for force.  Sets the force to be valid when it is created
 	 */
-	public Force(){
+	public Force() {
 		isValid = true;
 	}
 	/**
@@ -31,7 +31,7 @@ public class Force{
 	 * returns the vector that is the sum of all the forces
 	 * @return: A vector that is the sum of all the forces
 	 */
-	public Vector getForce(){
+	public Vector getForce() {
 		return myForce;
 	}
 	
@@ -39,7 +39,7 @@ public class Force{
 	 * sets the force.
 	 * @param force the vector that represents the force
 	 */
-	public void setForce(Vector force){
+	public void setForce(Vector force) {
 		myForce = force;
 	}
 	/**
@@ -48,13 +48,12 @@ public class Force{
 	 * @param mass: takes in a mass to initialize the forces so that
 	 * they can be properly applied to that mass
 	 */
-	public void massInitialize(Mass mass){}
+	public void massInitialize(Mass mass) { }
 	/**
 	 * If the force is valid, it becomes not valid
 	 * If the force is not valid, it becomes valid
 	 */
-	public void toggleForce()
-	{
+	public void toggleForce() {
 		isValid = !isValid;
 	}
 	
@@ -62,8 +61,7 @@ public class Force{
 	 * 
 	 * @return: returns whether the force should be applied or not
 	 */
-	public boolean isValid()
-	{
+	public boolean isValid() {
 		return isValid;
 	}
 

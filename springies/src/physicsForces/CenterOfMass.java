@@ -33,7 +33,7 @@ public class CenterOfMass extends Force{
 	 * @param exponent: The exponent that determines how the center of mass force decays with 
 	 * distance
 	 */
-	public CenterOfMass(double magnitude, double exponent){
+	public CenterOfMass(double magnitude, double exponent) {
 		super();
 		myMagnitude = magnitude;
 		myExponent = exponent;
@@ -42,7 +42,7 @@ public class CenterOfMass extends Force{
 	 * 
 	 * @return: The exponent that determines how the center of mass decays with distance
 	 */
-	public double getExponent(){
+	public double getExponent() {
 		return myExponent;
 	}
 
@@ -59,12 +59,13 @@ public class CenterOfMass extends Force{
 		double massXSum = 0;
 		double massYSum = 0;
 		
-		for(Mass mass : massList){
+		for (Mass mass : massList){
 			massXSum += mass.getX()*Math.abs(mass.getMass());
 			massYSum += mass.getY()*Math.abs(mass.getMass());
 			totalMass += Math.abs(mass.getMass());
 		}
-		myCenterOfMass = new Point((int)(massXSum/totalMass), (int)(massYSum/totalMass));
+		myCenterOfMass = 
+				new Point((int)(massXSum/totalMass), (int)(massYSum/totalMass));
 	}
 
 	/**
@@ -96,7 +97,8 @@ public class CenterOfMass extends Force{
      * @param mass passes in a mass to find the distance between the mass and the center
      * of mass
      */
-	private void distance(Mass mass){
-		distFromCenterOfMass = new Location(myCenterOfMass.x, myCenterOfMass.y).distance(mass.getX(), mass.getY());
+	private void distance(Mass mass) {
+		distFromCenterOfMass = new Location(myCenterOfMass.x, myCenterOfMass.y)
+			.distance(mass.getX(), mass.getY());
 	}
 }

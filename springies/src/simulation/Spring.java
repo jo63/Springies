@@ -39,48 +39,42 @@ public class Spring extends Sprite {
      * 
      * @return: The mass at the start of the spring
      */
-    public Mass getStart()
-    {
+    public Mass getStart() {
     	return myStart;
     }
     /**
      * 
      * @return: The mass on the end of the spring
      */
-    public Mass getEnd()
-    {
+    public Mass getEnd() {
     	return myEnd;
     }
     /**
      * 
      * @return: The length of the spring
      */
-    public double getLength()
-    {
+    public double getLength() {
     	return myLength;
     }
     /**
      * sets the mass at the start of the spring to be the mass that is passed in
      * @param start the mass at the start of the spring
      */
-    public void setStart(Mass start)
-    {
+    public void setStart(Mass start) {
     	myStart = start;
     }
     /**
      * sets the mass at the end of the spring to be the mass that is passed in
      * @param end: the mass at the end of the spring
      */
-    public void setEnd(Mass end)
-    {
+    public void setEnd(Mass end) {
     	myEnd = end;
     }
     /**
      * sets the length of the spring to the length passed in
      * @param length: the length to make the spring
      */
-    public void setLength(double length)
-    {
+    public void setLength(double length) {
     	myLength = length;
     }
     /**

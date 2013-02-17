@@ -22,8 +22,7 @@ public class Physics {
 	/**
 	 * creates a physics object with a map of the forces
 	 */
-	public Physics()
-	{
+	public Physics() {
 		myForces = new HashMap<String, Force>();
 
 	}
@@ -34,8 +33,7 @@ public class Physics {
 	 * @param force: A Force object, which is the superclass for all the forces.  This 
 	 * allows the map to contain every type of force
 	 */
-	public void addForce(String forceType, Force force)
-	{
+	public void addForce(String forceType, Force force) {
 		myForces.put(forceType, force);
 	}
 	
@@ -43,8 +41,7 @@ public class Physics {
 	 * returns the instance of the map of forces
 	 * @return a map of labels to forces
 	 */
-	public Map<String, Force> getForces()
-	{
+	public Map<String, Force> getForces() {
 		return myForces;
 	}
 	/**
@@ -54,11 +51,11 @@ public class Physics {
 	 * @param bounds: The bounds of simulation. Needed for wall repulsion
 	 */
 	public void update(List<Mass> massList, Dimension bounds){
-		for(Force force : myForces.values()){
-			if(force instanceof CenterOfMass){
+		for (Force force : myForces.values()) {
+			if(force instanceof CenterOfMass) {
 				((CenterOfMass)force).setCenterMassPosition(massList);
 			}
-			if(force instanceof WallRepulsion){
+			if(force instanceof WallRepulsion) {
 				((WallRepulsion)(force)).setBounds(bounds);
 			}
 		}
@@ -69,12 +66,11 @@ public class Physics {
 	 * @param m: a mass is passed in so that all the forces can correctly be applied to each mass
 	 * @return a vector that is the sum of all the forces
 	 */
-	public Vector getEnvironmentVector(Mass m){
+	public Vector getEnvironmentVector(Mass m) {
 		Vector result = new Vector();
-		for(String id : myForces.keySet()){
-			if(myForces.get(id).isValid()){
+		for (String id : myForces.keySet()) {
+			if (myForces.get(id).isValid()) {
 				myForces.get(id).massInitialize(m);
-				//System.out.println("name: " + id + " dir " + myForces.get(id).getForce().getDirection() + " mag " + myForces.get(id).getForce().getMagnitude());
 				result.sum(myForces.get(id).getForce());
 			}
 		}

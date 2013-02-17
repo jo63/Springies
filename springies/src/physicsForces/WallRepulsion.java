@@ -36,21 +36,21 @@ public abstract class WallRepulsion extends Force {
 	 * 
 	 * @return the magnitude of the wall repulsion
 	 */
-	public double getMagnitude(){
+	public double getMagnitude() {
 		return myMagnitude;
 	}
 	/**
 	 * 
 	 * @return the exponent of the wall repulsion
 	 */
-	public double getExponent(){
+	public double getExponent() {
 		return myExponent;
 	}
 	/**
 	 * Sets the bounds for the force
 	 * @param bounds passes in the bounds of the simulation
 	 */
-	public void setBounds(Dimension bounds){
+	public void setBounds(Dimension bounds) {
 		myBounds = bounds;
 	}
 	/**
@@ -58,7 +58,7 @@ public abstract class WallRepulsion extends Force {
 	 * simulation takes place in
 	 * @return: the area that the simulation is taking place in
 	 */
-	public Dimension getBounds(){
+	public Dimension getBounds() {
 		return myBounds;
 	}
 	/**
@@ -70,7 +70,8 @@ public abstract class WallRepulsion extends Force {
 	public void massInitialize(Mass mass) {
 			Vector result = new Vector(0,0);
 			result.setDirection(returnDirection());
-			result.setMagnitude(myMagnitude/(Math.pow(distanceFromWall(mass), myExponent)));
+			result.setMagnitude(myMagnitude / 
+					(Math.pow(distanceFromWall(mass), myExponent)));
 			setForce(result);
 	}
 	/**
@@ -85,5 +86,4 @@ public abstract class WallRepulsion extends Force {
 	 */
 	public abstract double distanceFromWall(Mass mass);
 		
-
 }

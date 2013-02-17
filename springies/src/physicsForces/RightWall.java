@@ -6,7 +6,7 @@ import simulation.Mass;
  * @author Ryan Fishel and Kevin Oh
  *Wall repulsion for right wall
  */
-public class RightWall extends WallRepulsion{
+public class RightWall extends WallRepulsion {
 
 	public static final int MY_DIRECTION = 180;
 	/**

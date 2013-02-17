@@ -8,14 +8,13 @@ import util.Vector;
  * Viscosity force
  *
  */
-public class Viscosity extends Force{
-	
+public class Viscosity extends Force {
+	public static final int DIRECTION_REVERSE_FACTOR = 180;
 	/**
 	 * Creates a Viscosity object
 	 * @param viscosity a vector that represents the viscosity force
 	 */
-	public Viscosity(Vector viscosity)
-	{
+	public Viscosity(Vector viscosity) { 
 		super(viscosity);
 	}
 	/**
@@ -23,9 +22,8 @@ public class Viscosity extends Force{
 	 * @param mass a mass that is used to determine the direction for the viscosity vector
 	 */
 	@Override
-	public void massInitialize(Mass mass)
-	{
+	public void massInitialize(Mass mass) {
 		mass.getVelocity().scale(getForce().getMagnitude());
-		getForce().setDirection((mass.getVelocity().getDirection()+180));
+		getForce().setDirection((mass.getVelocity().getDirection()+DIRECTION_REVERSE_FACTOR));
 	}
 }

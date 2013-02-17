@@ -15,7 +15,8 @@ import util.Sprite;
 /**
  * 
  * @author Ryan Fishel and Kevin Oh
- *An abstraCt class that can be extended to create different types of sprites depending on what is specified in a data file
+ *An abstraCt class that can be extended to create different types of 
+ *sprites depending on what is specified in a data file
  */
 public abstract class SpriteCommand {
 	
@@ -23,9 +24,7 @@ public abstract class SpriteCommand {
 	 * creates a SpriteCommand object and creates a map that maps and Integer to a Mass
 	 * @param masses: a map of Integers (the id of the mass) to Masses
 	 */
-	public SpriteCommand()
-	{
-		
+	public SpriteCommand() {
 	}
 	/**
 	 *
@@ -46,7 +45,7 @@ class MassCommand extends SpriteCommand{
 	 * Creates a MassCommand object
 	 *
 	 */
-	public MassCommand(){
+	public MassCommand() {
 	}
 	
 	/**
@@ -63,7 +62,7 @@ class MassCommand extends SpriteCommand{
 		double y = line.nextDouble();
 		double mass = line.nextDouble();
 		Mass result;
-		if(mass < 0 ){
+		if(mass < 0 ) {
 			result = new FixedMass(x,y,mass);
 		}
 		else{
@@ -82,8 +81,7 @@ class MassCommand extends SpriteCommand{
  * Contains the commands to create a muscle
  *
  */
-class MuscleCommand extends SpriteCommand
-{
+class MuscleCommand extends SpriteCommand {
 	/**
 	 * creates a MuslceCommand object
 	 * 
@@ -116,14 +114,12 @@ class MuscleCommand extends SpriteCommand
  * Contains the commands to create a Spring
  *
  */
-class SpringCommand extends SpriteCommand
-{
+class SpringCommand extends SpriteCommand {
 	/**
 	 * creates a Spring object
 	 * 
 	 */
-	public SpringCommand()
-	{
+	public SpringCommand() {
 	}
 	/**
 	 * The scanner reads in two ints that represent masses that have already been created, a rest length, and a k value

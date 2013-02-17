@@ -28,8 +28,7 @@ public class MouseAction {
 	 * with a mouse click
 	 * @param model: the model where the simulation takes place
 	 */
-	public MouseAction(Model model)
-	{
+	public MouseAction(Model model) {
 		myModel = model;
 		myCanvas = model.getCanvas();
 		isCreated = false;
@@ -39,14 +38,12 @@ public class MouseAction {
 	 * sets the mouse button to be the button that was clicked
 	 * @param button: the button that gets clicked
 	 */
-	public void setMouseButton(int button)
-	{
+	public void setMouseButton(int button) {
 		myMouseButton = button;
 	}
 	
 	public void performAction() {
-		switch(myMouseButton)
-		{
+		switch(myMouseButton) {
 			case MouseEvent.BUTTON1: createMassSpring(); break;
 			case MouseEvent.NOBUTTON: removeSpringMass(); break;
 			default: break;
@@ -54,20 +51,19 @@ public class MouseAction {
 		 
 	}
 	/**
-	 * creates a mass and a spring if there is a mouse click.  If the mouse is being clicked and dragged, move the mass to the mouse
-	 * position and rotate, extend, or contract the spring to keep it connected to the two masses that it was connected to.
+	 * creates a mass and a spring if there is a mouse click.  If the mouse is being 
+	 * clicked and dragged, move the mass to the mouse position and rotate, extend, 
+	 * or contract the spring to keep it connected to the two masses that it was connected to.
 	 */
-	private void createMassSpring()
-	{
+	private void createMassSpring() {
 		Point mouse = myCanvas.getLastMousePosition();
-		if(!isCreated){
+		if (!isCreated) {
 			List<Mass> masses = myModel.getMasses();
-			Mass tempMass = new Mass(0,0,0); 
+			Mass tempMass = new Mass(0, 0, 0); 
 			Double temp = Double.MAX_VALUE;
-			for(Mass m : masses)
-			{
+			for (Mass m : masses) {
 				Double dist = mouse.distance(new Location(m.getX(), m.getY()));
-				if(dist < temp){
+				if(dist < temp) {
 					tempMass = m;
 					temp = dist;
 				}
@@ -76,9 +72,8 @@ public class MouseAction {
 			mySpring = new Spring(tempMass, myMass, temp, 0);
 			myModel.add(myMass);
 			myModel.add(mySpring);
-			isCreated = true;
-		}
-		else{
+			isCreated = true; }
+		else {
 			myMass.setCenter(new Location(mouse.getX(), mouse.getY()));
 		}
 		
@@ -86,9 +81,8 @@ public class MouseAction {
 	/**
 	 * remove the spring and the mass from the model if the mouse is released
 	 */
-	private void removeSpringMass()
-	{
-		if(isCreated){
+	private void removeSpringMass() {
+		if (isCreated) {
 			myModel.getSprings().remove(mySpring);
 			myModel.getMasses().remove(myMass);
 			isCreated = false;
